@@ -1,25 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj": {}
+    "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj": {}
   },
   "projects": {
-    "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj": {
+    "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj",
+        "projectUniqueName": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj",
         "projectName": "Harissa.WWW",
-        "projectPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj",
-        "packagesPath": "C:\\Users\\krzys\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\obj\\",
+        "projectPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj",
+        "packagesPath": "C:\\Users\\Ja\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\krzys\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Ja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

@@ -66,7 +66,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: #000000;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -2993,6 +2993,13 @@ input[type=button].btn-block {
   border-radius: 0.25rem;
 }
 
+
+/*Dodane*/
+.featured-text {
+    padding: 2rem;
+}
+/*Dodane konic*/
+
 .dropdown-menu-left {
   right: auto;
   left: 0;
@@ -3026,6 +3033,14 @@ input[type=button].btn-block {
   }
 }
 @media (min-width: 992px) {
+
+    /*Dodane*/
+    .featured-text {
+        padding: 0 0 0 2rem;
+        border-left: 0.5rem solid #64a19d;
+    }
+    /*Dodane koniec*/
+
   .dropdown-menu-lg-left {
     right: auto;
     left: 0;
