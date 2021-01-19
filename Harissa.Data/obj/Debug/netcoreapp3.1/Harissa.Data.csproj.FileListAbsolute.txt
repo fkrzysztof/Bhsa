@@ -1,0 +1,10 @@
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.deps.json
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.runtimeconfig.json
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.runtimeconfig.dev.json
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.dll
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.pdb
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.csprojAssemblyReference.cache
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.AssemblyInfoInputs.cache
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.AssemblyInfo.cs
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.dll
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.pdb

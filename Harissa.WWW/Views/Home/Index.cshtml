@@ -1,5 +1,15 @@
-﻿@{
+﻿@using Harissa.Data.Data
+@{
     ViewData["Title"] = "Home Page";
+}
+
+@{
+    foreach (var item in ViewBag.News as List<News>)
+    {
+        <p>@item.MediaItem</p>
+        <p>@item.Message</p>
+        <p>@item.DateOfPublication.ToLongDateString()</p>
+    }
 }
 
 <section class="page-section" id="mainBody1">
@@ -7,7 +17,7 @@
     <div class="container featured-text">
         <h4 class="text-white">News</h4>
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-            <div class="col-lg-6"><img class="img-fluid" src="" alt="" /></div>
+            <div class="col-lg-6"><img class="img-fluid" src="@ViewBag.Message1" alt="" /></div>
             <div class="col-lg-6">
                 <div class="bg-black text-center h-100 project">
                     <div class="d-flex h-100">
@@ -22,7 +32,7 @@
         </div>
         <!-- Project Two Row-->
         <div class="row justify-content-center no-gutters">
-            <div class="col-lg-6"><img class="img-fluid" src="assets/img/demo-image-02.jpg" alt="" /></div>
+            <div class="col-lg-6"><img class="img-fluid" src="@ViewBag.Message2" alt="" /></div>
             <div class="col-lg-6 order-lg-first">
                 <div class="bg-black text-center h-100 project">
                     <div class="d-flex h-100">
@@ -39,7 +49,7 @@
 
 
         <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-            <div class="col-lg-6"><img class="img-fluid" src="" alt="" /></div>
+            <div class="col-lg-6">@*<img class="img-fluid" src="@ViewBag.Message3" alt="" />*@<video su="@ViewBag.Message3"></video></div>
             <div class="col-lg-6">
                 <div class="bg-black text-center h-100 project">
                     <div class="d-flex h-100">

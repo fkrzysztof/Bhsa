@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harissa.WWW", "Harissa.WWW\Harissa.WWW.csproj", "{549C8FF0-2194-4A21-8974-86A9D515D1A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harissa.WWW", "Harissa.WWW\Harissa.WWW.csproj", "{549C8FF0-2194-4A21-8974-86A9D515D1A4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harissa.Data", "Harissa.Data\Harissa.Data.csproj", "{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harissa.Intranet", "Harissa.Intranet\Harissa.Intranet.csproj", "{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{549C8FF0-2194-4A21-8974-86A9D515D1A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{549C8FF0-2194-4A21-8974-86A9D515D1A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{549C8FF0-2194-4A21-8974-86A9D515D1A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
