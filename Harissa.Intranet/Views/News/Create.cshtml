@@ -11,11 +11,12 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="MediaItem" class="control-label"></label>
-                <input asp-for="MediaItem" type="file" class="form-control" />
+                <label class="control-label"></label>
+                <img scr="" id="imgPreView" class="img-fluid" />
+                <input asp-for="MediaItem" type="file" accept="image/*"  class="form-control" />
                 <span asp-validation-for="MediaItem" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -25,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <input asp-for="Message" class="form-control" />
+                <textarea asp-for="Message" class="form-control" rows="3" cols="3"></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -43,6 +44,27 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script>
+
+    let fileinput = document.getElementById("MediaItem");
+    fileinput.addEventListener("change", function (event) {
+        console.log("dziala");
+        let input = event.target;
+        let reader = new FileReader();
+            reader.onload = function () {
+                let dataURL = reader.result;
+                let output = document.getElementById("imgPreView");
+                output.src = dataURL;
+            };
+        reader.readAsDataURL(input.files[0]);
+    });
+    
+</script>
+
+
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

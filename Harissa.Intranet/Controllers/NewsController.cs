@@ -5,8 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
 using Harissa.Data.HelperClass;
-using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
+using Microsoft.AspNetCore.Http;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -23,8 +22,8 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.News.ToListAsync());
-        }
-
+        }        
+        
         // GET: News/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -54,37 +53,23 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewsID,MediaItem,Title,Message,DateOfPublication")] News news)
+        public async Task<IActionResult> Create([Bind("NewsID,Title,Message,DateOfPublication")] News news, IFormFile MediaItem)
         {
             if (ModelState.IsValid)
             {
+                news.MediaItem = new CloudAccess().AddPic(MediaItem, "News");
+
                 _context.Add(news);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
-
-
-                //test Cloud
-
-                    Account account = new Account(
-                        //private
-
-                      );
-
-                    Cloudinary cloudinary = new Cloudinary(account);
-
-
-                    var uploadParams = new ImageUploadParams()
-                    {
-                        File = new FileDescription(news.MediaItem),
-                        PublicId = "Test/MediaItem",
-                        Overwrite = true,
-                    };
-
-                    var uploadResult = cloudinary.Upload(uploadParams);
-
             }
+
             return View(news);
         }
+
+
+
 
         // GET: News/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -107,7 +92,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication")] News news)
+        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication")] News news, IFormFile newMediaItem)
         {
             if (id != news.NewsID)
             {
@@ -118,6 +103,12 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
+                    if (newMediaItem != null)
+                    {
+                        new CloudAccess().Remove(news.MediaItem);
+                        string newMediaItemString = newMediaItem.FileName.Split('.')[0];
+                        news.MediaItem = new CloudAccess().AddPic(newMediaItem, "News");
+                    }
                     _context.Update(news);
                     await _context.SaveChangesAsync();
                 }
@@ -156,13 +147,17 @@ namespace Harissa.Intranet.Controllers
         }
 
         // POST: News/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var news = await _context.News.FindAsync(id);
+            
+            new CloudAccess().Remove(news.MediaItem);
+            
             _context.News.Remove(news);
             await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 

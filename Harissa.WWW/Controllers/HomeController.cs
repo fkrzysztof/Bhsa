@@ -10,6 +10,7 @@ using Facebook;
 using System.Text.Json;
 using Harissa.Data.HelperClass;
 using Harissa.Data;
+using Harissa.Data.Data;
 
 namespace Harissa.WWW.Controllers
 {
@@ -26,12 +27,9 @@ namespace Harissa.WWW.Controllers
 
         public IActionResult Index()
         {
-            //private 
-
-
-            //var NewsQuery = _context.News.ToList();
-            //ViewBag.News = NewsQuery;
-
+            //dodac warunek do aktualnej daty
+            List<News> newsList = _context.News.OrderBy(o => o.DateOfPublication).ToList();
+            ViewBag.News = newsList;
             return View();
         }
 

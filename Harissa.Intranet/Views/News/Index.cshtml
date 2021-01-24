@@ -1,10 +1,9 @@
 ﻿@model IEnumerable<Harissa.Data.Data.News>
-
+@using Harissa.Data.HelperClass
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <h1>Index</h1>
 
 <p>
@@ -32,7 +31,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MediaItem)
+                @{ 
+                    string getimg = new CloudAccess().GetImg(item.MediaItem);
+                 }
+                <img src="@getimg"style="max-width: 150px;" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
