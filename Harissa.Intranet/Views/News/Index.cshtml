@@ -4,53 +4,41 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MediaItem)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Message)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateOfPublication)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @{ 
-                    string getimg = new CloudAccess().GetImg(item.MediaItem);
-                 }
-                <img src="@getimg"style="max-width: 150px;" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Message)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfPublication)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.NewsID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.NewsID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.NewsID">Delete</a>
-            </td>
-        </tr>
+<div class="row">
+    <div class="col text-left">
+        <h2><i class="bi bi-chat-left-text m-2" style="font-size: 2.5rem;"></i>News</h2>
+    </div>
+    <div class="col text-right">
+        <a asp-action="Create"><i class="bi bi-plus-circle m-2" style="font-size: 2rem; color:black;"></i></a>
+    </div>
+</div>
+<div class="row">
+@foreach (var item in Model)
+{
+    <div class="card m-4 shadow-sm">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3">
+                    @{
+                        string getimg = new CloudAccess().GetImg(item.MediaItem);
+                    }
+                    <img src="@getimg" class="img-fluid rounded" />
+                </div>
+                <div class="col-md-8 col-9">
+                    <small>@item.DateOfPublication</small>
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                    <hr />
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Message)</p>
+                </div>
+                <div class="col-md-1 mt-md-0 mt-4 text-center">
+                    <a asp-action="Edit" asp-route-id="@item.NewsID"><i class="bi bi-gear m-md-2 m-5"  style="font-size: 1.5rem; color:black;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.NewsID"><i class="bi bi-x-circle m-md-2 m-5" style="font-size: 1.5rem; color:black;"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+    </div>
+
+
+

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Harissa.Data.Data
 {
@@ -14,6 +11,5 @@ namespace Harissa.Data.Data
         [DataType(DataType.Url)]
         public string Link { get; set; }        
         public string Icon { get; set; }
-
     }
 }

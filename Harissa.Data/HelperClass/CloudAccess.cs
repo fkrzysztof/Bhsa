@@ -15,21 +15,42 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = 
+            account = xxxx;
             cloudinary = new Cloudinary(account);
         }
 
-        public string AddPic(IFormFile formFile, string folderName)
+        public string AddPic(IFormFile formFile, string folderName,bool noImgPicture = false)
         {
-            string filename = formFile.FileName.Split('.')[0];
-            var uploadParams = new ImageUploadParams()
+            if(formFile == null)
             {
-                UseFilename = true,
-                UniqueFilename = true,
-                Overwrite = false,
-                File = new FileDescription(filename, formFile.OpenReadStream()),
-                Folder = folderName
-            };
+                return "PageSettings/noImg";
+            }
+
+            ImageUploadParams uploadParams;
+            if(noImgPicture == true)
+            {
+                uploadParams = new ImageUploadParams()
+                {
+                    UseFilename = true,
+                    UniqueFilename = false,
+                    Overwrite = true,
+                    File = new FileDescription("noImg", formFile.OpenReadStream()),
+                    Folder = folderName
+                };
+            }
+            else
+            {
+                string filename = formFile.FileName.Split('.')[0];
+                uploadParams = new ImageUploadParams()
+                {
+                    UseFilename = true,
+                    UniqueFilename = true,
+                    Overwrite = false,
+                    File = new FileDescription(filename, formFile.OpenReadStream()),
+                    Folder = folderName
+                };
+            }
+
             var uploadResult = cloudinary.Upload(uploadParams);
             JToken token = JObject.Parse(uploadResult.JsonObj.ToString());
             return Convert.ToString(token.SelectToken("public_id"));
@@ -39,7 +60,9 @@ namespace Harissa.Data.HelperClass
         {
             var delResParams = new DelResParams()
             {
-                PublicIds = new List<string> { id }
+                PublicIds = new List<string> { id },
+                KeepOriginal = false,
+                Invalidate = true
             };
             cloudinary.DeleteResources(delResParams);
         }
@@ -50,9 +73,9 @@ namespace Harissa.Data.HelperClass
             if (urlImg != null)
                 return urlImg;
             else
-                return "";
+                return "";//cloudinary.Api.UrlImgUp.BuildUrl("PageSettings/noImg");
         }
-
+        
     }
 }
 

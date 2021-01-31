@@ -5,20 +5,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>News</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+    <div class="col text-left">
+        <h4><i class="bi bi-chat-left-text m-2" style="font-size: 2.5rem;"></i>News/Create</h4>
+    </div>
+    <div class="col text-right">
+        <a asp-action="Index"><i class="bi bi-arrow-left-circle" style="font-size:2rem; color:black;"></i></a>
+    </div>
+    <div class="col-12">
+        <hr />
+    </div>
+</div>
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label"></label>
-                <img scr="" id="imgPreView" class="img-fluid" />
-                <input asp-for="MediaItem" type="file" accept="image/*"  class="form-control" />
+                <img scr="@ViewBag.ImgNoPhoto" class="img-fluid rounded" />
+                <img scr="@ViewBag.ImgNoPhoto" id="imgPreview" class="img-fluid rounded" />
+                <input name="MediaItem" id="newMediaItem" type="file" accept="image/*" class="form-control-file" />
                 <span asp-validation-for="MediaItem" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -35,34 +45,15 @@
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-dark" />
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-<script>
-
-    let fileinput = document.getElementById("MediaItem");
-    fileinput.addEventListener("change", function (event) {
-        console.log("dziala");
-        let input = event.target;
-        let reader = new FileReader();
-            reader.onload = function () {
-                let dataURL = reader.result;
-                let output = document.getElementById("imgPreView");
-                output.src = dataURL;
-            };
-        reader.readAsDataURL(input.files[0]);
-    });
-    
+<script src="~/js/photoPreview.js">
+    //image Preview 
 </script>
-
-
 
 
 

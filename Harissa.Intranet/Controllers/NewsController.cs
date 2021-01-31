@@ -24,27 +24,12 @@ namespace Harissa.Intranet.Controllers
             return View(await _context.News.ToListAsync());
         }        
         
-        // GET: News/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var news = await _context.News
-                .FirstOrDefaultAsync(m => m.NewsID == id);
-            if (news == null)
-            {
-                return NotFound();
-            }
-
-            return View(news);
-        }
 
         // GET: News/Create
         public IActionResult Create()
         {
+            //cloudinary.Api.UrlImgUp.BuildImageTag("Img/photo-no.jpg")
+            //ViewBag.ImgNoPhoto = new CloudAccess().GetImg("Img/photo-no_rck7yc.jpg");  
             return View();
         }
 
@@ -67,9 +52,6 @@ namespace Harissa.Intranet.Controllers
 
             return View(news);
         }
-
-
-
 
         // GET: News/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -136,28 +118,25 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
-            var news = await _context.News
-                .FirstOrDefaultAsync(m => m.NewsID == id);
+            var news = await _context.News.FirstOrDefaultAsync(m => m.NewsID == id);
             if (news == null)
             {
                 return NotFound();
             }
-
+            ViewBag.Img = new CloudAccess().GetImg(news.MediaItem);
             return View(news);
         }
 
-        // POST: News/Delete/5
+        //POST: News/Delete/5
         [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var news = await _context.News.FindAsync(id);
-            
             new CloudAccess().Remove(news.MediaItem);
-            
             _context.News.Remove(news);
             await _context.SaveChangesAsync();
-            
+
             return RedirectToAction(nameof(Index));
         }
 

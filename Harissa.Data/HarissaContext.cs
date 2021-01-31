@@ -18,6 +18,7 @@ namespace Harissa.Data
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Concerts> Concerts { get; set; }
         public DbSet<News> News { get; set; }
+        public DbSet<PageSettings> PageSettings { get; set; }
 
 
     }
