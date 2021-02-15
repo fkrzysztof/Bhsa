@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Harissa.Data.Data
 {
@@ -11,5 +12,9 @@ namespace Harissa.Data.Data
         [DataType(DataType.Url)]
         public string Link { get; set; }        
         public string Icon { get; set; }
+        
+        public int PageSettingsID { get; set; }
+        [ForeignKey("PageSettingsID")]
+        public PageSettings pageSettings { get; set; }
     }
 }

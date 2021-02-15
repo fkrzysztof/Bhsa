@@ -1,9 +1,6 @@
 ﻿
 $(document).ready(function() {
 
-
-
-
     let fileinput = document.getElementById("newMediaItem");
 
     $("form").submit(function () {
@@ -46,7 +43,6 @@ $(document).ready(function() {
             }
 
         };
-
 
         reader.readAsDataURL(input.files[0]);
     });

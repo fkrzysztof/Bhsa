@@ -144,7 +144,7 @@ namespace Harissa.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("PageSettingsID")
+                    b.Property<int>("PageSettingsID")
                         .HasColumnType("int");
 
                     b.HasKey("SocialMediaID");
@@ -156,9 +156,13 @@ namespace Harissa.Data.Migrations
 
             modelBuilder.Entity("Harissa.Data.Data.SocialMedia", b =>
                 {
-                    b.HasOne("Harissa.Data.Data.PageSettings", null)
+                    b.HasOne("Harissa.Data.Data.PageSettings", "pageSettings")
                         .WithMany("socialMedias")
-                        .HasForeignKey("PageSettingsID");
+                        .HasForeignKey("PageSettingsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("pageSettings");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>

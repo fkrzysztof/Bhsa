@@ -15,32 +15,26 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = xxxx;
+            account = xxx
             cloudinary = new Cloudinary(account);
         }
 
-        public string AddPic(IFormFile formFile, string folderName,bool noImgPicture = false)
+        public string AddPic(IFormFile formFile, string folderName, bool noImgPicture = false)
         {
-            if(formFile == null)
-            {
-                return "PageSettings/noImg";
-            }
-
             ImageUploadParams uploadParams;
-            if(noImgPicture == true)
+            string filename = formFile.FileName.Split('.')[0];
+            if (noImgPicture == true)
             {
                 uploadParams = new ImageUploadParams()
                 {
-                    UseFilename = true,
-                    UniqueFilename = false,
+                    Tags = "noPictureFile",
                     Overwrite = true,
-                    File = new FileDescription("noImg", formFile.OpenReadStream()),
+                    File = new FileDescription(filename, formFile.OpenReadStream()),
                     Folder = folderName
                 };
             }
             else
-            {
-                string filename = formFile.FileName.Split('.')[0];
+            { 
                 uploadParams = new ImageUploadParams()
                 {
                     UseFilename = true,
@@ -50,7 +44,6 @@ namespace Harissa.Data.HelperClass
                     Folder = folderName
                 };
             }
-
             var uploadResult = cloudinary.Upload(uploadParams);
             JToken token = JObject.Parse(uploadResult.JsonObj.ToString());
             return Convert.ToString(token.SelectToken("public_id"));
@@ -69,11 +62,24 @@ namespace Harissa.Data.HelperClass
 
         public string GetImg(string img)
         {
-            string urlImg = cloudinary.Api.UrlImgUp.BuildUrl(img);
-            if (urlImg != null)
-                return urlImg;
+            if (!string.IsNullOrEmpty(img))
+                return cloudinary.Api.UrlImgUp.BuildUrl(img); 
             else
-                return "";//cloudinary.Api.UrlImgUp.BuildUrl("PageSettings/noImg");
+            {
+                var listResourcesByTagParams = new ListResourcesByTagParams()
+                {
+                    Tag = " noPictureFile ",
+                    MaxResults = 1
+                };
+                var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
+                return listResourcesResult.Resources[0].Url.ToString();
+                
+
+                //zmienic reszte na takie
+
+
+            }
+
         }
         
     }
