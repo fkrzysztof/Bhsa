@@ -1,14 +1,14 @@
 ﻿
 $(document).ready(function() {
 
-    let fileinput = document.getElementById("newMediaItem");
+    let fileinput = $(".newMediaItem");
 
     $("form").submit(function () {
         $('div.progress').fadeIn("slow");
         $('button').fadeOut();
     });
 
-    fileinput.addEventListener("change", function (event) {
+    fileinput.on("change", function (event) {
         let $output = $("#imgPreview");
         $output.fadeOut("slow").hide();
         let input = event.target;

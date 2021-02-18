@@ -33,7 +33,7 @@
                                     <label asp-for="@Model.NoPicture" class="control-label">no image saved</label>
                                 }
                             }
-                            <input asp-for="@Model.NewFile" type="file" class="form-control-file" />
+                            <input asp-for="@Model.NewFile" type="file" class="form-control-file newMediaItem" />
                             <span asp-validation-for="@Model.NewFile" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -90,7 +90,7 @@
                                 <i class="@item.Icon" style="font-size:1.5rem;"></i>
                             </div>
                             <div class="col-6 text-center">
-                                @Html.DisplayFor(modelItem => item.Link)
+                                @Html.DisplayFor(modelItem => item.Name)
                             </div>
                             <div class="col-3 text-right">
                                 <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>

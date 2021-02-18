@@ -28,8 +28,6 @@ namespace Harissa.Intranet.Controllers
         // GET: News/Create
         public IActionResult Create()
         {
-            //cloudinary.Api.UrlImgUp.BuildImageTag("Img/photo-no.jpg")
-            //ViewBag.ImgNoPhoto = new CloudAccess().GetImg("Img/photo-no_rck7yc.jpg");  
             return View();
         }
 

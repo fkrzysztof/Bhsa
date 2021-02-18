@@ -89,6 +89,21 @@ namespace Harissa.Data.Migrations
                     b.ToTable("IndexPages");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.MediaPatronage", b =>
+                {
+                    b.Property<int>("MediaPatronageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MediaPatronageID");
+
+                    b.ToTable("mediaPatronages");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.News", b =>
                 {
                     b.Property<int>("NewsID")
