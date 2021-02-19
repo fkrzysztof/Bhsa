@@ -381,5 +381,3 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PageSettings\Index.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Bio\Index.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Create.cshtml.g.cs
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Edit.cshtml.g.cs

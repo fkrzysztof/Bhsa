@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
@@ -33,30 +30,6 @@ namespace Harissa.Intranet.Controllers
             return View();
         }
 
-        // GET: Contact/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.ContactID == id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
-
-            return View(contact);
-        }
-
-        // GET: Contact/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Contact/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -73,33 +46,14 @@ namespace Harissa.Intranet.Controllers
             return View(contact);
         }
 
-        // GET: Contact/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var contact = await _context.Contacts.FindAsync(id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
-            return View(contact);
-        }
 
         // POST: Contact/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ContactID,Email,Phone,Name")] Contact contact)
+        public async Task<IActionResult> Edit([Bind("ContactID,Email,Phone,Name")] Contact contact)
         {
-            if (id != contact.ContactID)
-            {
-                return NotFound();
-            }
 
             if (ModelState.IsValid)
             {
@@ -124,22 +78,40 @@ namespace Harissa.Intranet.Controllers
             return View(contact);
         }
 
-        // GET: Contact/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+
+        public async Task<ActionResult> ListJS([Bind("ContactID,Email,Phone,Name")] Contact contact)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            var query = await _context.Contacts
+                .Select(s => new { contactID = s.ContactID, email = s.Email, phone = s.Phone, name = s.Name }).ToListAsync();
+            return Json(query);
+        }
 
-            var contact = await _context.Contacts
-                .FirstOrDefaultAsync(m => m.ContactID == id);
-            if (contact == null)
-            {
-                return NotFound();
-            }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<bool> EditJS([Bind("ContactID,Email,Phone,Name")] Contact contact)
+        {
 
-            return View(contact);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(contact);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContactExists(contact.ContactID))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         // POST: Contact/Delete/5

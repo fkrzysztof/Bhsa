@@ -1,21 +1,21 @@
 ﻿@model Harissa.Data.Data.Contact
-
+@using Harissa.Data.Data
 
 @await Html.PartialAsync("TopNavi")
-<div class="row">
-    @foreach (var item in ViewBag.ContactList)
+<div class="row" id="contactList">
+    @*@foreach (var item in ViewBag.ContactList as List<Contact> )
     {
 
         <div class="col-sm-6">
-            <div class="card">
+            <div class="card toHide">
                 <div class="card-body">
                     <div class="row">
                         <div class="col-8 text-left">
-                            <h5 class="card-title">Menager / Koncert</h5>
+                            <h5 class="card-title">@item.Name</h5>
                         </div>
                         <div class="col-4 text-right">
                             <a asp-action="DeleteSocialMedias" asp-route-id=""><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
-                            <a href="#" class="editDialog" data-id="" data-icon="" data-name="" data-link=""><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
+                            <a href="#" class="editButton" data-id="@item.ContactID" data-email="@item.Email" data-name="@item.Name" data-phone="@item.Phone"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
                         </div>
                     </div>
                     <div class="row">
@@ -27,13 +27,13 @@
                 </div>
             </div>
         </div>
-    }
+    }*@
 </div>
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <div class="card">
-            <div class="card-header"><h5>Create Contact</h5></div>
+        <div class="card toHide shadow">
+            <div class="card-header"><h5 class="align-items-center"><i class="bi bi-plus-circle m-2" style="font-size: 1.5rem; color:black;"></i>Create Contact</h5></div>
             <div class="card-body">
                 <form asp-action="Create">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -60,37 +60,126 @@
         </div>
     </div>
 
-    <div class="col-md-6 disabledElement" style="opacity:0.2">
-        <div class="card">
-            <div class="card-header"><h5>Edit Contact</h5></div>
+    <div class="col-md-6 disabledElement editContact" style="opacity:0.2;">
+        <div class="card shadow">
+            <div class="card-header"><h5><i class="bi bi-gear m-2" style="font-size: 1.5rem; color:black;"></i>Edit Contact</h5></div>
             <div class="card-body">
-                <form asp-action="Edit">
+                <form asp-action="Edit" class="formEdit">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="ContactID" />
+                    <input type="hidden" asp-for="ContactID" class="idEdit"/>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" class="form-control" />
+                        <input asp-for="Email" class="form-control emailEdit" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Phone" class="control-label"></label>
-                        <input asp-for="Phone" class="form-control" />
+                        <input asp-for="Phone" class="form-control phoneEdit" />
                         <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
+                        <input asp-for="Name" class="form-control nameEdit" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" id="sendForm" value="Save" class="btn btn-primary" />
+                        <button id="cancelEdit" class="btn btn-primary">Anuluj</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
 </div>
+
+<script>
+
+    contactList();
+
+    $(".editButton").on("click", function (event) {
+        event.preventDefault();
+        let dataFormButton = $(this);
+        let toHide = $(".toHide");
+        toHide.addClass("disabledElement").animate({ opacity: 0.2 }, 600);
+
+        $(".editContact").animate({ opacity: 1 }, 600, function () {
+            $(".idEdit").attr("value", dataFormButton.data("id"));
+            $(".emailEdit").attr("value", dataFormButton.data("email"));
+            $(".nameEdit").attr("value", dataFormButton.data("name"));
+            $(".phoneEdit").attr("value", dataFormButton.data("phone"));
+
+        }).removeClass("disabledElement");
+    });
+
+
+    function editOut() {
+        $(".editContact").animate({ opacity: 0.2 }, 600, function () {
+            $(".toHide").animate({ opacity: 1 }, 600).removeClass("disabledElement");
+        });
+    }
+
+
+    function contactList() {
+        $.getJSON("/Contact/ListJS", function (data) {
+            let htmlToFor = "";
+            for (var i = 0; i < data.length; i++) {
+
+                htmlToFor += "" +
+                    "<div class=\"col-sm-6\">" +
+                    " <div class=\"card toHide\">" +
+                    "<div class=\"card-body\">" +
+                    "<div class=\"row\">" +
+                    "<div class=\"col-8 text-left\">" +
+                    "<h5 class=\"card-title\">" + data[i].name + "</h5>" +
+                    "</div>" +
+                    "<div class=\"col-4 text-right\">" +
+                    "<a asp-action=\"DeleteSocialMedias\" asp-route-id=\"\"><i class=\"bi bi-x-circle\" style=\"font-size: 1rem; color:black;\"></i></a>" +
+                    "<a href=\"#\" class=\"editButton\" data-id=\"" + data[i].contactID + "\" data-email=\"" + data[i].email + "\" data-name=\"" + data[i].name + "\" data-phone=\"" + data[i].phone + "\"><i class=\"bi bi-gear\" style=\"font-size: 1rem; color:black;\"></i></a>" +
+                    "</div>" +
+                    "</div>" +
+                    "<div class=\"row\">" +
+                    "<div class=\"col-12\">" +
+                    "<p class=\"card-text\">" + data[i].email + "</p>" +
+                    "<p class=\"card-text\">" + data[i].phone + "</p>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</div>";
+
+            }
+             $("#contactList").html(htmlToFor);
+    });
+    }
+
+
+    $("#cancelEdit").click(function (event) {
+        event.preventDefault();
+        editOut();
+    });
+
+    $(".formEdit").submit(function (e) {
+        e.preventDefault();
+
+        var formValues = $(this).serialize();
+ 
+        $.post("/Contact/EditJS", formValues, function(data){
+            if (data == true) {
+                editOut();
+                
+
+                contactList();
+
+               
+                //location.reload();
+            }
+            else {
+                alert("Wystąpił problem..");
+            }
+        });
+    });
+
+</script>
 
 
 
