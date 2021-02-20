@@ -3,7 +3,7 @@
 
 @await Html.PartialAsync("TopNavi")
 <div class="row" id="contactList">
-    @*@foreach (var item in ViewBag.ContactList as List<Contact> )
+    @foreach (var item in ViewBag.ContactList as List<Contact> )
     {
 
         <div class="col-sm-6">
@@ -14,7 +14,7 @@
                             <h5 class="card-title">@item.Name</h5>
                         </div>
                         <div class="col-4 text-right">
-                            <a asp-action="DeleteSocialMedias" asp-route-id=""><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
+                            <a asp-action="Deletesocial" class="removeButton" data-id="@item.ContactID" ><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
                             <a href="#" class="editButton" data-id="@item.ContactID" data-email="@item.Email" data-name="@item.Name" data-phone="@item.Phone"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-    }*@
+    }
 </div>
 <hr />
 <div class="row">
@@ -94,91 +94,104 @@
 
 <script>
 
-    contactList();
+    $(document).ready(function () { 
 
-    $(".editButton").on("click", function (event) {
-        event.preventDefault();
-        let dataFormButton = $(this);
-        let toHide = $(".toHide");
-        toHide.addClass("disabledElement").animate({ opacity: 0.2 }, 600);
+        //contactList();
 
-        $(".editContact").animate({ opacity: 1 }, 600, function () {
-            $(".idEdit").attr("value", dataFormButton.data("id"));
-            $(".emailEdit").attr("value", dataFormButton.data("email"));
-            $(".nameEdit").attr("value", dataFormButton.data("name"));
-            $(".phoneEdit").attr("value", dataFormButton.data("phone"));
-
-        }).removeClass("disabledElement");
-    });
-
-
-    function editOut() {
-        $(".editContact").animate({ opacity: 0.2 }, 600, function () {
-            $(".toHide").animate({ opacity: 1 }, 600).removeClass("disabledElement");
+        $("body").on("click", ".removeButton", function (event) {
+            event.preventDefault();
+            let send = $(this).data("id");
+            console.log("mamy takie dane id=" + send);
+            $.post("/Contact/RemoveJS", { id: send }, function (data) {
+                if (data == true) {
+                    contactList();
+                }
+                else {
+                    alert("Wystąpił problem..");
+                }
+            });
         });
-    }
 
 
-    function contactList() {
-        $.getJSON("/Contact/ListJS", function (data) {
-            let htmlToFor = "";
-            for (var i = 0; i < data.length; i++) {
+        $("body").on("click", ".editButton" , function (event) {
+            event.preventDefault();
+            let dataFormButton = $(this);
+            let toHide = $(".toHide");
+            toHide.addClass("disabledElement").animate({ opacity: 0.2 }, 600);
 
-                htmlToFor += "" +
-                    "<div class=\"col-sm-6\">" +
-                    " <div class=\"card toHide\">" +
-                    "<div class=\"card-body\">" +
-                    "<div class=\"row\">" +
-                    "<div class=\"col-8 text-left\">" +
-                    "<h5 class=\"card-title\">" + data[i].name + "</h5>" +
-                    "</div>" +
-                    "<div class=\"col-4 text-right\">" +
-                    "<a asp-action=\"DeleteSocialMedias\" asp-route-id=\"\"><i class=\"bi bi-x-circle\" style=\"font-size: 1rem; color:black;\"></i></a>" +
-                    "<a href=\"#\" class=\"editButton\" data-id=\"" + data[i].contactID + "\" data-email=\"" + data[i].email + "\" data-name=\"" + data[i].name + "\" data-phone=\"" + data[i].phone + "\"><i class=\"bi bi-gear\" style=\"font-size: 1rem; color:black;\"></i></a>" +
-                    "</div>" +
-                    "</div>" +
-                    "<div class=\"row\">" +
-                    "<div class=\"col-12\">" +
-                    "<p class=\"card-text\">" + data[i].email + "</p>" +
-                    "<p class=\"card-text\">" + data[i].phone + "</p>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>" +
-                    "</div>";
+            $(".editContact").animate({ opacity: 1 }, 600, function () {
+                $(".idEdit").attr("value", dataFormButton.data("id"));
+                $(".emailEdit").attr("value", dataFormButton.data("email"));
+                $(".nameEdit").attr("value", dataFormButton.data("name"));
+                $(".phoneEdit").attr("value", dataFormButton.data("phone"));
 
-            }
-             $("#contactList").html(htmlToFor);
-    });
-    }
-
-
-    $("#cancelEdit").click(function (event) {
-        event.preventDefault();
-        editOut();
-    });
-
-    $(".formEdit").submit(function (e) {
-        e.preventDefault();
-
-        var formValues = $(this).serialize();
- 
-        $.post("/Contact/EditJS", formValues, function(data){
-            if (data == true) {
-                editOut();
-                
-
-                contactList();
-
-               
-                //location.reload();
-            }
-            else {
-                alert("Wystąpił problem..");
-            }
+            }).removeClass("disabledElement");
         });
-    });
 
+
+        function editOut() {
+            $(".editContact").animate({ opacity: 0.2 }, 600, function () {
+                $(".toHide").animate({ opacity: 1 }, 600).removeClass("disabledElement");
+            });
+        }
+
+
+        function contactList() {
+            $.getJSON("/Contact/ListJS", function (data) {
+                let htmlToFor = "";
+                for (var i = 0; i < data.length; i++) {
+
+                    htmlToFor += "" +
+                        "<div class=\"col-sm-6\">" +
+                        "<div class=\"card toHide\">" +
+                        "<div class=\"card-body\">" +
+                        "<div class=\"row\">" +
+                        "<div class=\"col-8 text-left\">" +
+                        "<h5 class=\"card-title\">" + data[i].name + "</h5>" +
+                        "</div>" +
+                        "<div class=\"col-4 text-right\">" +
+                        "<a href=\"Contact/DeleteSocialMedias\" data-id=\"" + data[i].contactID + "\"><i class=\"bi bi-x-circle\" style=\"font-size: 1rem; color:black;\"></i></a>" +
+                        "<a href=\"#\" class=\"editButton\" data-id=\"" + data[i].contactID + "\" data-email=\"" + data[i].email + "\" data-name=\"" + data[i].name + "\" data-phone=\"" + data[i].phone + "\"><i class=\"bi bi-gear\" style=\"font-size: 1rem; color:black;\"></i></a>" +
+                        "</div>" +
+                        "</div>" +
+                        "<div class=\"row\">" +
+                        "<div class=\"col-12\">" +
+                        "<p class=\"card-text\">" + data[i].email + "</p>" +
+                        "<p class=\"card-text\">" + data[i].phone + "</p>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>" +
+                        "</div>";
+
+                }
+                $("#contactList").html(htmlToFor);
+            });
+        }
+
+
+        $("#cancelEdit").click(function (event) {
+            event.preventDefault();
+            editOut();
+        });
+
+        $(".formEdit").submit(function (e) {
+            e.preventDefault();
+
+            var formValues = $(this).serialize();
+
+            $.post("/Contact/EditJS", formValues, function (data) {
+                if (data == true) {
+                    editOut();
+                    contactList();
+                }
+                else {
+                    alert("Wystąpił problem..");
+                }
+            });
+        });
+
+    });
 </script>
 
 

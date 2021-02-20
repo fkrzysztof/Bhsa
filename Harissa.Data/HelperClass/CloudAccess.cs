@@ -34,7 +34,7 @@ namespace Harissa.Data.HelperClass
                 };
             }
             else
-            { 
+            {
                 uploadParams = new ImageUploadParams()
                 {
                     UseFilename = true,
@@ -63,7 +63,7 @@ namespace Harissa.Data.HelperClass
         public string GetImg(string img)
         {
             if (!string.IsNullOrEmpty(img))
-                return cloudinary.Api.UrlImgUp.BuildUrl(img); 
+                return cloudinary.Api.UrlImgUp.BuildUrl(img);
             else
             {
                 var listResourcesByTagParams = new ListResourcesByTagParams()
@@ -73,7 +73,7 @@ namespace Harissa.Data.HelperClass
                 };
                 var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
                 return listResourcesResult.Resources[0].Url.ToString();
-                
+
 
                 //zmienic reszte na takie
 
@@ -81,7 +81,7 @@ namespace Harissa.Data.HelperClass
             }
 
         }
-        
+
     }
 }
 

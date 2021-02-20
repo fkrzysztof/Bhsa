@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
+using System;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -123,6 +124,27 @@ namespace Harissa.Intranet.Controllers
             _context.Contacts.Remove(contact);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+
+        // POST: Contact/Delete/5
+        [HttpPost]
+      //[ValidateAntiForgeryToken]
+        //public async Task<bool> RemoveJS([Bind("id")] int id)
+        public async Task<bool> RemoveJS(string id)
+        {
+            if (id == null || id == "0")
+                return false;
+            int key = Convert.ToInt32(id);
+            var contact = await _context.Contacts.FindAsync(key);
+            var query = _context.Contacts.Remove(contact).State.ToString();
+            if ( query != "Deleted")
+            {
+                return false;
+            }
+            else
+            await _context.SaveChangesAsync();
+            return  true;
         }
 
         private bool ContactExists(int id)
