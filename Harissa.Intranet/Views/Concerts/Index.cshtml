@@ -6,7 +6,13 @@
     <form asp-action="Create" enctype="multipart/form-data">
         <div class="row align-items-end">
 
-            <div class="col-md-4">
+            <div class="col-12 text-right">
+                <a href="#" id="hideCreate"><i class="bi bi-arrow-bar-down  m-2" style="font-size: 1.5rem; color:black;"></i></a>
+            </div>
+
+            <div class="col-md-4 formCreate">
+                
+
                 <div class="form-group">
                     @{
                         string getimg = new CloudAccess().GetImg(null);
@@ -16,7 +22,7 @@
                     <span asp-validation-for="FormFileItem" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4  formCreate">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-group">
@@ -36,7 +42,7 @@
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4  formCreate">
                 <div class="form-group">
                     <label asp-for="Link" class="control-label"></label>
                     <input asp-for="Link" class="form-control" />
@@ -53,7 +59,7 @@
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
             </div>
-            <div class="col-12">
+            <div class="col-12  formCreate">
                 <div class="form-group text-right">
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
@@ -70,9 +76,9 @@
 
             <div class="card">
                 @{
-                    string getimg = new CloudAccess().GetImg(item.MediaItem);
+                    string getCloudimg = new CloudAccess().GetImg(item.MediaItem);
                 }
-                <img src="@getimg" class="card-img-top rounded" />
+                <img src="@getCloudimg" class="card-img-top rounded" />
                 @*<img src="..." class="card-img-top" alt="...">*@
                 <div class="card-body">
                     <p class="card-text">@item.Date</p>
@@ -89,6 +95,14 @@
     </div>
 </div>
 
+<script>
+    $(".formCreate").hide();
+    $("#hideCreate").on("click", function () {
+        $(".formCreate").slideToggle();
+       // $(this).ani(transform: rotate(180deg););
+        $(this).css("transform: rotate(180deg);");
+    });
+</script>
 
 <script src="~/js/photoPreview.js"></script>
 
