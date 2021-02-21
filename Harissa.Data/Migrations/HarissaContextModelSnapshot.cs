@@ -15,16 +15,16 @@ namespace Harissa.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Harissa.Data.Data.Bio", b =>
                 {
                     b.Property<int>("BioID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
@@ -34,12 +34,12 @@ namespace Harissa.Data.Migrations
                     b.ToTable("Bio");
                 });
 
-            modelBuilder.Entity("Harissa.Data.Data.Concerts", b =>
+            modelBuilder.Entity("Harissa.Data.Data.Concert", b =>
                 {
-                    b.Property<int>("ConcertsID")
+                    b.Property<int>("ConcertID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -50,7 +50,19 @@ namespace Harissa.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ConcertsID");
+                    b.Property<string>("Link")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MediaItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
+
+                    b.HasKey("ConcertID");
 
                     b.ToTable("Concerts");
                 });
@@ -60,7 +72,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("ContactID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -82,7 +94,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("IndexPageID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.HasKey("IndexPageID");
 
@@ -94,7 +106,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("MediaPatronageID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
@@ -109,7 +121,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("NewsID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfPublication")
                         .HasColumnType("datetime2");
@@ -133,7 +145,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("PageSettingsID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("NoPicture")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +160,7 @@ namespace Harissa.Data.Migrations
                     b.Property<int>("SocialMediaID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Icon")
                         .HasColumnType("nvarchar(max)");

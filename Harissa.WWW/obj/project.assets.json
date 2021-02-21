@@ -8639,10 +8639,12 @@
       "Facebook >= 7.0.6",
       "Harissa.Data >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 5.0.3",
+      "Microsoft.EntityFrameworkCore.Analyzers >= 5.0.3",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.3",
       "Microsoft.EntityFrameworkCore.Relational >= 5.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 5.0.3",
       "Microsoft.EntityFrameworkCore.Sqlite >= 5.0.3",
+      "Microsoft.EntityFrameworkCore.Sqlite.Core >= 5.0.3",
       "Microsoft.EntityFrameworkCore.Tools >= 5.0.3",
       "System.Collections >= 4.3.0"
     ]
@@ -8704,6 +8706,10 @@
             "target": "Package",
             "version": "[5.0.3, )"
           },
+          "Microsoft.EntityFrameworkCore.Analyzers": {
+            "target": "Package",
+            "version": "[5.0.3, )"
+          },
           "Microsoft.EntityFrameworkCore.Design": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
             "suppressParent": "All",
@@ -8719,6 +8725,10 @@
             "version": "[5.0.3, )"
           },
           "Microsoft.EntityFrameworkCore.Sqlite": {
+            "target": "Package",
+            "version": "[5.0.3, )"
+          },
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": {
             "target": "Package",
             "version": "[5.0.3, )"
           },

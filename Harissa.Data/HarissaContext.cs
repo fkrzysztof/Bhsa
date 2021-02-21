@@ -16,7 +16,7 @@ namespace Harissa.Data
         public DbSet<Bio> Bio { get; set; }
         public DbSet<IndexPage> IndexPages { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
-        public DbSet<Concerts> Concerts { get; set; }
+        public DbSet<Concert> Concerts { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<PageSettings> PageSettings { get; set; }
         public DbSet<MediaPatronage> mediaPatronages { get; set; }

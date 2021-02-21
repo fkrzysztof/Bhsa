@@ -1,0 +1,95 @@
+﻿@model Harissa.Data.Data.Concert
+@using Harissa.Data.HelperClass
+
+@await Html.PartialAsync("TopNavi")
+@*CREATE*@
+    <form asp-action="Create" enctype="multipart/form-data">
+        <div class="row align-items-end">
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    @{
+                        string getimg = new CloudAccess().GetImg(null);
+                    }
+                    <img src="@getimg" id="imgPreview" class="w-75 rounded mb-3 img-thumbnail" />
+                    <input asp-for="FormFileItem" class="form-control newMediaItem" />
+                    <span asp-validation-for="FormFileItem" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address" class="control-label"></label>
+                    <input asp-for="Address" class="form-control" />
+                    <span asp-validation-for="Address" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    @*Opis doschowania...*@
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Link" class="control-label"></label>
+                    <input asp-for="Link" class="form-control" />
+                    <span asp-validation-for="Link" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Date" class="control-label"></label>
+                    <input asp-for="Date" class="form-control" />
+                    <span asp-validation-for="Date" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group text-right">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+<hr />
+@*List*@
+<div class="row">
+    <div class="col-sm-8">
+        @foreach (var item in ViewBag.ConcertList)
+        {
+
+            <div class="card">
+                @{
+                    string getimg = new CloudAccess().GetImg(item.MediaItem);
+                }
+                <img src="@getimg" class="card-img-top rounded" />
+                @*<img src="..." class="card-img-top" alt="...">*@
+                <div class="card-body">
+                    <p class="card-text">@item.Date</p>
+                    <p class="card-text">@item.Name</p>
+                    <p class="card-text">@item.Address</p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text">@item.Link</p>
+                    <p class="card-text">@item.Price</p>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+
+<script src="~/js/photoPreview.js"></script>
+
+

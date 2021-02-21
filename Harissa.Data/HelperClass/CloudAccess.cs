@@ -15,7 +15,7 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = xxx
+            account =xx
             cloudinary = new Cloudinary(account);
         }
 
@@ -74,10 +74,7 @@ namespace Harissa.Data.HelperClass
                 var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
                 return listResourcesResult.Resources[0].Url.ToString();
 
-
                 //zmienic reszte na takie
-
-
             }
 
         }
