@@ -195,7 +195,6 @@ C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\xx\Create.cshtml.g.cs
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\xx\Index.cshtml.g.cs
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Concerts\Index.cshtml.g.cs
-C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Concerts\Create.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\libman.json
@@ -394,3 +393,4 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.csproj.CopyComplete
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.pdb
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Concerts\Edit.cshtml.g.cs

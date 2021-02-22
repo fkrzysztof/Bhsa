@@ -8650,25 +8650,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\krzys\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Ja\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj",
+      "projectUniqueName": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj",
       "projectName": "Harissa.WWW",
-      "projectPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\Harissa.WWW.csproj",
-      "packagesPath": "C:\\Users\\krzys\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.WWW\\obj\\",
+      "projectPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\Harissa.WWW.csproj",
+      "packagesPath": "C:\\Users\\Ja\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.WWW\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\krzys\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Ja\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -8680,8 +8679,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.Data\\Harissa.Data.csproj": {
-              "projectPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.Data\\Harissa.Data.csproj"
+            "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.Data\\Harissa.Data.csproj": {
+              "projectPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.Data\\Harissa.Data.csproj"
             }
           }
         }
@@ -8771,7 +8770,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Facebook 7.0.6' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework '.NETCoreApp,Version=v3.1'. This package may not be fully compatible with your project.",
+      "message": "Pakiet „Facebook 7.0.6” został przywrócony przy użyciu elementu „.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8” zamiast platformy docelowej projektu „.NETCoreApp,Version=v3.1”. Ten pakiet może nie być w pełni kompatybilny z Twoim projektem.",
       "libraryId": "Facebook",
       "targetGraphs": [
         ".NETCoreApp,Version=v3.1"

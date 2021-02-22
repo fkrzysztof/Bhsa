@@ -31,26 +31,9 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
+            ViewBag.Action = "List";
             ViewBag.ConcertList = await _context.Concerts.ToListAsync();
             return View();
-        }
-
-        // GET: Concerts/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var concert = await _context.Concerts
-                .FirstOrDefaultAsync(m => m.ConcertID == id);
-            if (concert == null)
-            {
-                return NotFound();
-            }
-
-            return View(concert);
         }
 
         // GET: Concerts/Create
@@ -84,6 +67,9 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
+            naviPack();
+            ViewBag.Action = "Edit";
+
             var concert = await _context.Concerts.FindAsync(id);
             if (concert == null)
             {
@@ -97,7 +83,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem")] Concert concert)
+        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date")] Concert concert, IFormFile FormFileItem)
         {
             if (id != concert.ConcertID)
             {
@@ -108,7 +94,15 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
+                    string oldMediaItem = _context.Concerts.Find(concert.ConcertID).MediaItem;
+                    if (!string.IsNullOrEmpty(oldMediaItem) && FormFileItem != null)
+                    {
+                        new CloudAccess().Remove(oldMediaItem);
+                        concert.MediaItem = new CloudAccess().AddPic(FormFileItem, "Concerts");
+                    }
+                        
                     _context.Update(concert);
+
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
