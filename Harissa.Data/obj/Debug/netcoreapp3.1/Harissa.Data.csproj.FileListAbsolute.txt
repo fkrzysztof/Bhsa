@@ -13,7 +13,6 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debu
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.runtimeconfig.dev.json
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.pdb
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.csprojAssemblyReference.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.AssemblyInfoInputs.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.AssemblyInfo.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.dll

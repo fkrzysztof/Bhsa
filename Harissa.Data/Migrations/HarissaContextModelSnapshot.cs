@@ -59,7 +59,7 @@ namespace Harissa.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal?>("Price")
                         .HasColumnType("money");
 
                     b.HasKey("ConcertID");

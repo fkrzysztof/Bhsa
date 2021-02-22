@@ -30,6 +30,7 @@ namespace Harissa.Intranet.Controllers
         // GET: Concerts
         public async Task<IActionResult> Index()
         {
+            naviPack();
             ViewBag.ConcertList = await _context.Concerts.ToListAsync();
             return View();
         }

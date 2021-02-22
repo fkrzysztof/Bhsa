@@ -8582,24 +8582,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ja\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\krzys\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.Data\\Harissa.Data.csproj",
+      "projectUniqueName": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.Data\\Harissa.Data.csproj",
       "projectName": "Harissa.Data",
-      "projectPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.Data\\Harissa.Data.csproj",
-      "packagesPath": "C:\\Users\\Ja\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ja\\Documents\\Programowanie\\Harissa WWW\\Bhsa\\Harissa.Data\\obj\\",
+      "projectPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.Data\\Harissa.Data.csproj",
+      "packagesPath": "C:\\Users\\krzys\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\krzys\\Documents\\Programowanie\\Harissa WWW\\Harissa\\Harissa.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ja\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\krzys\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"

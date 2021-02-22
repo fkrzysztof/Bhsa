@@ -15,7 +15,7 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = xxx
+            account = 
             cloudinary = new Cloudinary(account);
         }
 

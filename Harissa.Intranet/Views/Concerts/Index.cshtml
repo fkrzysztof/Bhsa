@@ -7,11 +7,19 @@
         <div class="row align-items-end">
 
             <div class="col-12 text-right">
-                <a href="#" id="hideCreate"><i class="bi bi-arrow-bar-down  m-2" style="font-size: 1.5rem; color:black;"></i></a>
+                <div class="row">
+                    <div class="col-6 text-left">
+                        <h5><i class="bi bi-plus-circle m-2" style="font-size: 1.5rem; color:black;"></i>Create</h5>
+                    </div>
+                    <div class="col-6 text-right">
+                        <a href="#" id="hideCreate"><i class="bi bi-arrows-expand m-2 rotatedElement" style="font-size: 1.5rem; color:black;"></i></a>
+                    </div>
+                </div>
             </div>
+            <hr />
 
             <div class="col-md-4 formCreate">
-                
+
 
                 <div class="form-group">
                     @{
@@ -67,19 +75,18 @@
 
         </div>
     </form>
+<h5>Lista koncertów</h5>
 <hr />
 @*List*@
-<div class="row">
-    <div class="col-sm-8">
-        @foreach (var item in ViewBag.ConcertList)
-        {
-
-            <div class="card">
+<div class="row text-center">
+    @foreach (var item in ViewBag.ConcertList)
+    {
+        <div class="col-sm-3 mb-5">
+            <div class="card h-100 w-100 shadow">
                 @{
                     string getCloudimg = new CloudAccess().GetImg(item.MediaItem);
                 }
                 <img src="@getCloudimg" class="card-img-top rounded" />
-                @*<img src="..." class="card-img-top" alt="...">*@
                 <div class="card-body">
                     <p class="card-text">@item.Date</p>
                     <p class="card-text">@item.Name</p>
@@ -89,18 +96,14 @@
                     <p class="card-text">@item.Price</p>
                 </div>
             </div>
-
-
-        }
-    </div>
+        </div>
+    }
 </div>
 
 <script>
     $(".formCreate").hide();
     $("#hideCreate").on("click", function () {
         $(".formCreate").slideToggle();
-       // $(this).ani(transform: rotate(180deg););
-        $(this).css("transform: rotate(180deg);");
     });
 </script>
 
