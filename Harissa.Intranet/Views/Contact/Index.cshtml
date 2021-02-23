@@ -14,7 +14,7 @@
                             <h5 class="card-title">@item.Name</h5>
                         </div>
                         <div class="col-4 text-right">
-                            <a asp-action="Deletesocial" class="removeButton" data-id="@item.ContactID" ><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
+                            <a asp-action="Deletesocial" class="removeButton" data-id="@item.ContactID"><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
                             <a href="#" class="editButton" data-id="@item.ContactID" data-email="@item.Email" data-name="@item.Name" data-phone="@item.Phone"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
                         </div>
                     </div>
@@ -132,6 +132,10 @@
         function editOut() {
             $(".editContact").animate({ opacity: 0.2 }, 600, function () {
                 $(".toHide").animate({ opacity: 1 }, 600).removeClass("disabledElement");
+                $(this).addClass("disabledElement");
+                $(".formEdit")[0].reset();
+
+
             });
         }
 
@@ -150,7 +154,7 @@
                         "<h5 class=\"card-title\">" + data[i].name + "</h5>" +
                         "</div>" +
                         "<div class=\"col-4 text-right\">" +
-                        "<a href=\"Contact/DeleteSocialMedias\" data-id=\"" + data[i].contactID + "\"><i class=\"bi bi-x-circle\" style=\"font-size: 1rem; color:black;\"></i></a>" +
+                        "<a href=\"Contact/DeleteSocialMedias\" class=\"removeButton\" data-id=\"" + data[i].contactID + "\"><i class=\"bi bi-x-circle mr-1\" style=\"font-size: 1rem; color:black;\"></i></a>" +
                         "<a href=\"#\" class=\"editButton\" data-id=\"" + data[i].contactID + "\" data-email=\"" + data[i].email + "\" data-name=\"" + data[i].name + "\" data-phone=\"" + data[i].phone + "\"><i class=\"bi bi-gear\" style=\"font-size: 1rem; color:black;\"></i></a>" +
                         "</div>" +
                         "</div>" +
@@ -177,7 +181,6 @@
 
         $(".formEdit").submit(function (e) {
             e.preventDefault();
-
             var formValues = $(this).serialize();
 
             $.post("/Contact/EditJS", formValues, function (data) {

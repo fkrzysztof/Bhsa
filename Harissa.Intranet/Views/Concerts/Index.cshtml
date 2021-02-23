@@ -3,18 +3,18 @@
 
 
 @await Html.PartialAsync("TopNavi")
-    <div class="row">
-        <div class="col-12 text-right">
-            <div class="row mb-4">
-                <div class="col-6 text-left">
-                    <h5><i class="bi bi-plus-circle m-2" style="font-size: 1.5rem; color:black;"></i>Create</h5>
-                </div>
-                <div class="col-6 text-right">
-                    <a href="#" id="hideCreate"><i class="bi bi-arrows-expand m-2" style="font-size: 1.0rem; color:black;"></i></a>
-                </div>
+<div class="row">
+    <div class="col-12 text-right">
+        <div class="row mb-4">
+            <div class="col-6 text-left">
+                <h5><i class="bi bi-plus-circle m-2" style="font-size: 1.5rem; color:black;"></i>Create</h5>
+            </div>
+            <div class="col-6 text-right">
+                <a href="#" id="hideCreate"><i class="bi bi-arrows-expand m-2" style="font-size: 1.0rem; color:black;"></i></a>
             </div>
         </div>
     </div>
+</div>
 @*CREATE*@
 <form asp-action="Create" enctype="multipart/form-data">
     <div class="row align-items-end">
@@ -76,12 +76,12 @@
 
     </div>
 </form>
+@*List*@
 <div class="row">
     <div class="col-12 text-left">
         <h5>Lista koncertów</h5>
         <hr />
     </div>
-    @*List*@
 
     @foreach (var item in ViewBag.ConcertList)
     {
@@ -113,6 +113,7 @@
 </div>
 
 <script>
+    //create
     $(".formCreate").hide();
     $("#createButton").on("click", function (e) {
         e.preventDefault();
@@ -121,6 +122,22 @@
     $("#hideCreate").on("click", function () {
         $(".formCreate").slideToggle();
     });
+    //delete
+    //$(".deleteButton").on("click", function (e) {
+    //    e.preventDefault();    
+    //    let data = $(this).data("id");
+    //    console.log("data =" + data);
+    //let rezult = confirm("delete item?");
+    //    if (rezult == true) {
+            
+    //        $.post("/Concerts/DeleteJS", { id: data }, function () {
+    //            location.reload(true);
+    //        });
+            
+    //}
+    //});
+
+
 </script>
 
 <script src="~/js/photoPreview.js"></script>

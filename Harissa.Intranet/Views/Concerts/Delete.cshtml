@@ -1,0 +1,36 @@
+﻿
+@model Harissa.Data.Data.Concert
+@using Harissa.Data.HelperClass
+
+@await Html.PartialAsync("TopNavi")
+
+<div class="row align-items-end">
+    <div class="col-lg-6">
+        @{
+            string getimg = new CloudAccess().GetImg(Model.MediaItem);
+        }
+        <img src="@getimg" id="imgPreview" class="rounded img-thumbnail" />
+    </div>
+
+    <div class="col-lg-6">
+        <h5 class="mt-lg-0 mt-md-2">@Model.Name</h5>
+        <p>@Model.Address</p>
+        <p>@Model.Date</p>
+        <p>@Model.Price</p>
+        <p>@Model.Description</p>
+        <p>@Model.Link</p>
+    </div>
+    <div class="col-12 text-right">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="ConcertID" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </form>
+    </div>
+</div>
+
+
+
+
+
+
+

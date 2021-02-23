@@ -15,7 +15,7 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = xxx
+            account = 
             cloudinary = new Cloudinary(account);
         }
 
@@ -76,9 +76,22 @@ namespace Harissa.Data.HelperClass
 
                 //zmienic reszte na takie
             }
-
         }
 
+        public string ChangeItem(string oldItem, IFormFile newItem, string folderName)
+        {
+
+            if (newItem == null)
+                return oldItem;
+            
+            if(!string.IsNullOrEmpty(oldItem))
+            {
+                Remove(oldItem);
+                return AddPic(newItem, folderName);
+            }
+            else
+                return AddPic(newItem, folderName);
+        }
     }
 }
 

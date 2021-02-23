@@ -23,7 +23,6 @@ namespace Harissa.Intranet.Controllers
 
         private void naviPack()
         {
-            ViewBag.Path = "Concerts";
             ViewBag.Icon = "bi bi-calendar-event";
         }
 
@@ -83,7 +82,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date")] Concert concert, IFormFile FormFileItem)
+        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem")] Concert concert, IFormFile FormFileItem)
         {
             if (id != concert.ConcertID)
             {
@@ -94,15 +93,8 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
-                    string oldMediaItem = _context.Concerts.Find(concert.ConcertID).MediaItem;
-                    if (!string.IsNullOrEmpty(oldMediaItem) && FormFileItem != null)
-                    {
-                        new CloudAccess().Remove(oldMediaItem);
-                        concert.MediaItem = new CloudAccess().AddPic(FormFileItem, "Concerts");
-                    }
-                        
+                    concert.MediaItem = new CloudAccess().ChangeItem(concert.MediaItem, FormFileItem, "Concerts");                        
                     _context.Update(concert);
-
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -124,10 +116,16 @@ namespace Harissa.Intranet.Controllers
         // GET: Concerts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            naviPack();
+            ViewBag.Path = "Concerts / Delete";
+            ViewBag.Action = "Back";
             if (id == null)
             {
                 return NotFound();
             }
+
+            naviPack();
+
 
             var concert = await _context.Concerts
                 .FirstOrDefaultAsync(m => m.ConcertID == id);

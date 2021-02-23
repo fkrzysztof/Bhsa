@@ -3,11 +3,12 @@
 
 @await Html.PartialAsync("TopNavi")
 
-<form asp-action="Edit">
+<form asp-action="Edit" enctype="multipart/form-data">
     <div class="row align-items-end">
         <div class="col-lg-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input type="hidden" asp-for="ConcertID" />
+            <input type="hidden" asp-for="MediaItem" />
             <div class="form-group">
                 @{
                     string getimg = new CloudAccess().GetImg(Model.MediaItem);
@@ -16,7 +17,7 @@
                 <input asp-for="FormFileItem" class="form-control newMediaItem" />
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
-            <input type="hidden" asp-for="ConcertID" />
+
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

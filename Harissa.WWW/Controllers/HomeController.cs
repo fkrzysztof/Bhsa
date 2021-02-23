@@ -28,7 +28,7 @@ namespace Harissa.WWW.Controllers
         public IActionResult Index()
         {
             //dodac warunek do aktualnej daty
-            List<News> newsList = _context.News.OrderBy(o => o.DateOfPublication).ToList();
+            List<News> newsList = _context.News.ToList();
             ViewBag.News = newsList;
             return View();
         }

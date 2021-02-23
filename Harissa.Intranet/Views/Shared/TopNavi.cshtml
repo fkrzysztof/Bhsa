@@ -4,17 +4,12 @@
     </div>
     <div class="col text-right">
         @{
-            if (ViewBag.Action == "Create") 
+            if (ViewBag.Action == "Create")
             {
                 <a href="#"><i id="createButton" class="bi bi-arrows-expand" style="font-size:2rem; color:black;"></i></a>
             }
-            else if (ViewBag.Action == "Edit")
+            else if (ViewBag.Action == "Back")
             {
-                <a asp-action="Index"><i class="bi bi-gear" style="font-size:2rem; color:black;"></i></a>
-            }
-            else if (ViewBag.Action == "List")
-            {
-                //back
                 <a asp-action="Index"><i class="bi bi-arrow-left-circle" style="font-size:2rem; color:black;"></i></a>
             }
         }

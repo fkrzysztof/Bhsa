@@ -31,6 +31,9 @@ namespace Harissa.Intranet.Controllers
             return View();
         }
 
+                                                     //po cacel edit widac c bylo edytowane orazdiv nie jest wylaczony
+
+
         // POST: Contact/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -131,12 +134,12 @@ namespace Harissa.Intranet.Controllers
         [HttpPost]
       //[ValidateAntiForgeryToken]
         //public async Task<bool> RemoveJS([Bind("id")] int id)
-        public async Task<bool> RemoveJS(string id)
+        public async Task<bool> RemoveJS(int id)
         {
-            if (id == null || id == "0")
+            if ( id < 0)
                 return false;
-            int key = Convert.ToInt32(id);
-            var contact = await _context.Contacts.FindAsync(key);
+            //int key = Convert.ToInt32(id);
+            var contact = await _context.Contacts.FindAsync(id);
             var query = _context.Contacts.Remove(contact).State.ToString();
             if ( query != "Deleted")
             {
