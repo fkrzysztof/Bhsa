@@ -113,7 +113,7 @@ namespace Harissa.Data.Migrations
 
                     b.HasKey("MediaPatronageID");
 
-                    b.ToTable("mediaPatronages");
+                    b.ToTable("MediaPatronages");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.News", b =>
@@ -155,6 +155,27 @@ namespace Harissa.Data.Migrations
                     b.ToTable("PageSettings");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.PrivacyPolicy", b =>
+                {
+                    b.Property<int>("PrivacyPolicyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("PageSettingsID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PrivacyPolicyID");
+
+                    b.HasIndex("PageSettingsID")
+                        .IsUnique();
+
+                    b.ToTable("PrivacyPolicies");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.SocialMedia", b =>
                 {
                     b.Property<int>("SocialMediaID")
@@ -181,6 +202,17 @@ namespace Harissa.Data.Migrations
                     b.ToTable("SocialMedias");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.PrivacyPolicy", b =>
+                {
+                    b.HasOne("Harissa.Data.Data.PageSettings", "pageSettings")
+                        .WithOne("privacyPolicy")
+                        .HasForeignKey("Harissa.Data.Data.PrivacyPolicy", "PageSettingsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("pageSettings");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.SocialMedia", b =>
                 {
                     b.HasOne("Harissa.Data.Data.PageSettings", "pageSettings")
@@ -194,6 +226,8 @@ namespace Harissa.Data.Migrations
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
                 {
+                    b.Navigation("privacyPolicy");
+
                     b.Navigation("socialMedias");
                 });
 #pragma warning restore 612, 618

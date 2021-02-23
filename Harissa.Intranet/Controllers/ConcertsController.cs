@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
@@ -30,16 +27,12 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
-            ViewBag.Action = "List";
+            ViewBag.Action = "";
+            ViewBag.Path = "Concerts";
             ViewBag.ConcertList = await _context.Concerts.ToListAsync();
             return View();
         }
 
-        // GET: Concerts/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         // POST: Concerts/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
@@ -67,7 +60,8 @@ namespace Harissa.Intranet.Controllers
             }
 
             naviPack();
-            ViewBag.Action = "Edit";
+            ViewBag.Action = "Back";
+            ViewBag.Path = "Concerts / Edit";
 
             var concert = await _context.Concerts.FindAsync(id);
             if (concert == null)

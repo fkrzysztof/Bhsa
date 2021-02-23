@@ -31,7 +31,7 @@ namespace Harissa.Intranet.Controllers
             return View();
         }
 
-                                                     //po cacel edit widac c bylo edytowane orazdiv nie jest wylaczony
+                                                     //po cacel edit widac co bylo edytowane orazdiv nie jest wylaczony
 
 
         // POST: Contact/Create
@@ -100,6 +100,34 @@ namespace Harissa.Intranet.Controllers
                 try
                 {
                     _context.Update(contact);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ContactExists(contact.ContactID))
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return true;
+            }
+            return false;
+        }
+        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<bool> CreateJS([Bind("ContactID,Email,Phone,Name")] Contact contact)
+        {
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Add(contact);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harissa.WWW", "Harissa.WWW\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harissa.Data", "Harissa.Data\Harissa.Data.csproj", "{5963A3B4-C1F1-490C-A656-BF4BE4D0988D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Harissa.Intranet", "Harissa.Intranet\Harissa.Intranet.csproj", "{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Harissa.Intranet", "Harissa.Intranet\Harissa.Intranet.csproj", "{C6D225AC-47BD-4C66-98B2-7C2AC1E81FCA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{15E5A719-D4A4-4F11-8153-581C30411006}"
+	ProjectSection(SolutionItems) = preProject
+		info.txt = info.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

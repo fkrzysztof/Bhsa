@@ -19,7 +19,8 @@ namespace Harissa.Data
         public DbSet<Concert> Concerts { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<PageSettings> PageSettings { get; set; }
-        public DbSet<MediaPatronage> mediaPatronages { get; set; }
+        public DbSet<MediaPatronage> MediaPatronages { get; set; }
+        public DbSet<PrivacyPolicy> PrivacyPolicies { get; set; }
 
 
     }

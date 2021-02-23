@@ -50,7 +50,7 @@
                     <h5 id="formTitle">Add social media</h5>
                 </div>
                 <div class="card-body">
-                    <form asp-action="CreateSocialMedias"  id="editOrCreateSM">
+                    <form asp-action="CreateSocialMedias" id="editOrCreateSM">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input asp-for="@Model.socialMedias.FirstOrDefault().SocialMediaID" id="modalID" type="hidden" value="" />
                         <div class="form-group">
@@ -82,60 +82,76 @@
                     <h5>Social media</h5>
                 </div>
                 <div class="card-body">
-                    @if(Model != null && Model.socialMedias != null)
-                    @foreach (var item in Model.socialMedias)
-                    {
-                        <div class="row align-items-center">
-                            <div class="col-3 text-left">
-                                <i class="@item.Icon" style="font-size:1.5rem;"></i>
+                    @if (Model != null && Model.socialMedias != null)
+                        @foreach (var item in Model.socialMedias)
+                        {
+                            <div class="row align-items-center">
+                                <div class="col-3 text-left">
+                                    <i class="@item.Icon" style="font-size:1.5rem;"></i>
+                                </div>
+                                <div class="col-6 text-center">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </div>
+                                <div class="col-3 text-right">
+                                    <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
+                                    <a href="#" class="editDialog" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
+                                </div>
                             </div>
-                            <div class="col-6 text-center">
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </div>
-                            <div class="col-3 text-right">
-                                <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
-                                <a href="#" class="editDialog" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                    <p>Lista nie zawiera elementów..</p>
-                    }
+                        }
+                        else
+                        {
+                            <p>Lista nie zawiera elementów..</p>
+                        }
 
                 </div>
             </div>
         </div>
+
+        <div class="col-12 mt-3 mb-3">
+            <div class="card shadow toHide">
+                <div class="card-header">
+                    <h5>Privacy Policy</h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="PrivacyPolicyEdit" method="post">
+                        <input type="hidden" name="id" value="@Model.privacyPolicy.PrivacyPolicyID" />
+                        <textarea type="text"  class="form-control" rows="10" value="@Model.privacyPolicy.Text"></textarea>
+                    </form>
+                </div>
+                    <div class="form-group">
+                        <input id="submit" type="submit" value="save" class="btn btn-primary" />
+                    </div>
+            </div>
+        </div>
     </div>
 
-<div class="text-secondary"></div>
-<script>
-    let editDialog = $(".editDialog");
-    let form = $("#editOrCreateSM");
-    let createSM = form.clone();
+        <script>
+            let editDialog = $(".editDialog");
+            let form = $("#editOrCreateSM");
+            let createSM = form.clone();
 
-    editDialog.on("click", function (e) {
-        e.preventDefault();
-        form.attr("action", "/PageSettings/EditSocialMedias");
-        $("#formTitle").text("Edit social media item").addClass("text-success");
-        $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
-        let thisEditDialog = $(this);
-        $("#modalName").attr("value", thisEditDialog.data("name"));
-        $("#modalLink").attr("value", thisEditDialog.data("link"));
-        $("#modalIcon").attr("value", thisEditDialog.data("icon"));
-        $("#modalID").attr("value", thisEditDialog.data("id"));
-        $("#submit").attr("value", "Edytuj");
-        $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
-    });
+            editDialog.on("click", function (e) {
+                e.preventDefault();
+                form.attr("action", "/PageSettings/EditSocialMedias");
+                $("#formTitle").text("Edit social media item").addClass("text-success");
+                $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
+                let thisEditDialog = $(this);
+                $("#modalName").attr("value", thisEditDialog.data("name"));
+                $("#modalLink").attr("value", thisEditDialog.data("link"));
+                $("#modalIcon").attr("value", thisEditDialog.data("icon"));
+                $("#modalID").attr("value", thisEditDialog.data("id"));
+                $("#submit").attr("value", "Edytuj");
+                $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
+            });
 
-    $("#exitButton").on("click", function (e) {
-        e.preventDefault();
-        $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
-        
-    });
+            $("#exitButton").on("click", function (e) {
+                e.preventDefault();
+                $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
 
+            });
 
 
-</script>  
 
-<script src="~/js/photoPreview.js"></script>
+        </script>
+
+        <script src="~/js/photoPreview.js"></script>

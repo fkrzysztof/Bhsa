@@ -18,8 +18,8 @@ namespace Harissa.Intranet.Controllers
 
         private void naviPack()
         {
-            ViewBag.Path = "Bio";
             ViewBag.Icon = "bi bi-book";
+            ViewBag.Path = "Bio";
         }
 
         public async Task<IActionResult> Index()

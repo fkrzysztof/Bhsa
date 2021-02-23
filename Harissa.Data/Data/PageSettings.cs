@@ -18,5 +18,6 @@ namespace Harissa.Data.Data
         [Required(ErrorMessage = "Pick an Image")]
        // [FileExtensions("jpg",ErrorMessage = "dodaj plik")]
         public IFormFile NewFile { get; set; }
+        public PrivacyPolicy privacyPolicy { get; set; }
     }
 }

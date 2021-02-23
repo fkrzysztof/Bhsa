@@ -29,7 +29,13 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
-            return View(await _context.PageSettings.Include(i => i.socialMedias).FirstOrDefaultAsync());
+            var rezult = await _context.PageSettings.Include(i => i.socialMedias).Include(i => i.privacyPolicy).FirstOrDefaultAsync();
+            if (rezult.privacyPolicy == null)
+            {
+                _context.PrivacyPolicies.Add(new PrivacyPolicy() { PageSettingsID = rezult.PageSettingsID, Text = "Napisz.." });
+                _context.SaveChanges();
+            }
+            return View(rezult);
         }
 
 
@@ -156,6 +162,16 @@ namespace Harissa.Intranet.Controllers
         {
             var socialMedia = await _context.SocialMedias.FindAsync(id);
             _context.SocialMedias.Remove(socialMedia);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> PrivacyPolicyEdit([Bind("id","text")]PrivacyPolicy pp)
+        {
+            _context.PrivacyPolicies.Update(pp);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
