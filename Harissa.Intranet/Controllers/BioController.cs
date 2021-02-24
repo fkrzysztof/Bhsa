@@ -18,7 +18,7 @@ namespace Harissa.Intranet.Controllers
 
         private void naviPack()
         {
-            ViewBag.Icon = "bi bi-book";
+            ViewBag.Icon = "fas fa-book-open";
             ViewBag.Path = "Bio";
         }
 

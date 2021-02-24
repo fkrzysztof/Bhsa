@@ -33,8 +33,8 @@
                                     <label asp-for="@Model.NoPicture" class="control-label">no image saved</label>
                                 }
                             }
-                            <input asp-for="@Model.NewFile" type="file" class="form-control-file newMediaItem" />
-                            <span asp-validation-for="@Model.NewFile" class="text-danger"></span>
+                            <input asp-for="@Model.NoPictureNewFile" type="file" class="form-control-file newMediaItem" />
+                            <span asp-validation-for="@Model.NoPictureNewFile" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Save" class="btn btn-primary" />
@@ -93,8 +93,8 @@
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </div>
                                 <div class="col-3 text-right">
-                                    <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="bi bi-x-circle" style="font-size: 1rem; color:black;"></i></a>
-                                    <a href="#" class="editDialog" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="bi bi-gear" style="font-size: 1rem; color:black;"></i></a>
+                                    <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
+                                    <a href="#" class="editDialog" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
                                 </div>
                             </div>
                         }
@@ -106,21 +106,56 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-12 mt-3 mb-3">
+        @*Privacy Policy*@
+        <div class="col-8 mt-3 mb-3">
             <div class="card shadow toHide">
                 <div class="card-header">
                     <h5>Privacy Policy</h5>
                 </div>
                 <div class="card-body">
                     <form asp-action="PrivacyPolicyEdit" method="post">
-                        <input type="hidden" name="id" value="@Model.privacyPolicy.PrivacyPolicyID" />
-                        <textarea type="text"  class="form-control" rows="10" value="@Model.privacyPolicy.Text"></textarea>
+                        <input type="hidden" asp-for="@Model.privacyPolicy.PageSettingsID" />
+                        <input type="hidden" asp-for="@Model.privacyPolicy.PrivacyPolicyID" />
+                        <textarea class="form-control" asp-for="@Model.privacyPolicy.Text"></textarea>
+                        <div class="form-group text-right bt-3">
+                            <input id="submit" type="submit" value="save" class="btn btn-primary" />
+                        </div>
                     </form>
                 </div>
-                    <div class="form-group">
-                        <input id="submit" type="submit" value="save" class="btn btn-primary" />
-                    </div>
+
+            </div>
+        </div>
+        @*Logo*@
+        <div class="col-lg-4 col-md-6 align-items-end">
+            <div class="card shadow toHide h-100">
+                <div class="card-header">
+                    <h5>Background when no picture</h5>
+                </div>
+                <div class="card-body" id="NoPicture">
+                    <form asp-action="ChangeLogo" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="@Model.Logo" />
+                        <div class="form-group">
+                            @{
+                                if (Model != null)
+                                {
+                                    @*<label class="control-label">@ps.NoPicture</label>*@
+                                    string getimg = new CloudAccess().GetImg(@Model.Logo);
+                                    @:<img src="@getimg" id="imgPreview" class="img-fluid img-thumbnail" />
+                                }
+                                else
+                                {
+                                    <label asp-for="@Model.Logo" class="control-label">no image saved</label>
+                                }
+                            }
+                            <input asp-for="@Model.LogoNewFile" type="file" class="form-control-file newMediaItem" />
+                            <span asp-validation-for="@Model.LogoNewFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

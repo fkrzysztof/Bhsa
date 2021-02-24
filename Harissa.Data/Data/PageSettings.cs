@@ -11,13 +11,20 @@ namespace Harissa.Data.Data
     {
         [Key]
         public int PageSettingsID { get; set; }
-        public string NoPicture { get; set; }
         public ICollection<SocialMedia> socialMedias { get; set; }
+        public string NoPicture { get; set; }
         [NotMapped]
         [Display(Name = "Image")]
-        [Required(ErrorMessage = "Pick an Image")]
-       // [FileExtensions("jpg",ErrorMessage = "dodaj plik")]
-        public IFormFile NewFile { get; set; }
+        [Required]
+        public IFormFile NoPictureNewFile { get; set; }
         public PrivacyPolicy privacyPolicy { get; set; }
+        public string Logo { get; set; }
+        [NotMapped]
+        [Display(Name = "Image")]
+        [Required]
+        public IFormFile LogoNewFile { get; set; }
+
+
+
     }
 }

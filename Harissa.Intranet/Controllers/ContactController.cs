@@ -20,7 +20,7 @@ namespace Harissa.Intranet.Controllers
         private void naviPack()
         {
             ViewBag.Path = "Contact";
-            ViewBag.Icon = "bi bi-telephone-inbound";
+            ViewBag.Icon = "fas fa-phone-alt";
         }
 
         // GET: Contact

@@ -20,7 +20,7 @@ namespace Harissa.Intranet.Controllers
 
         private void naviPack()
         {
-            ViewBag.Icon = "bi bi-calendar-event";
+            ViewBag.Icon = "far fa-calendar-alt";
         }
 
         // GET: Concerts

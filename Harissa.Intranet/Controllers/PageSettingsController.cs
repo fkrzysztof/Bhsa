@@ -22,14 +22,17 @@ namespace Harissa.Intranet.Controllers
         private void naviPack()
         {
             ViewBag.Path = "Page Settings";
-            ViewBag.Icon = "bi bi-sliders";
+            ViewBag.Icon = "fas fa-cogs";
         }
 
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
             naviPack();
-            var rezult = await _context.PageSettings.Include(i => i.socialMedias).Include(i => i.privacyPolicy).FirstOrDefaultAsync();
+            var rezult = await _context.PageSettings
+                .Include(i => i.socialMedias)
+                .Include(i => i.privacyPolicy)
+                .FirstOrDefaultAsync();
             if (rezult.privacyPolicy == null)
             {
                 _context.PrivacyPolicies.Add(new PrivacyPolicy() { PageSettingsID = rezult.PageSettingsID, Text = "Napisz.." });
@@ -42,7 +45,7 @@ namespace Harissa.Intranet.Controllers
         //Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("NewFile")] PageSettings ps)
+        public async Task<IActionResult> Index([Bind("NoPictureNewFile")] PageSettings ps)
         {
             if (ModelState.IsValid)
             {
@@ -53,7 +56,7 @@ namespace Harissa.Intranet.Controllers
                     if (pageSettings == null)
                     {
                            //dodanie
-                           ps.NoPicture = new CloudAccess().AddPic(ps.NewFile, "PageSettings", true);
+                           ps.NoPicture = new CloudAccess().AddPic(ps.NoPictureNewFile, "PageSettings", true);
                            _context.Add(ps);
                     }
                     else
@@ -65,7 +68,7 @@ namespace Harissa.Intranet.Controllers
                             new CloudAccess().Remove(pageSettings.NoPicture);
                         }
                         
-                        pageSettings.NoPicture = new CloudAccess().AddPic(ps.NewFile, "PageSettings", true);
+                        pageSettings.NoPicture = new CloudAccess().AddPic(ps.NoPictureNewFile, "PageSettings", true);
                         _context.Update(pageSettings);
                     }
                     await _context.SaveChangesAsync();
@@ -154,6 +157,14 @@ namespace Harissa.Intranet.Controllers
             }
             return View(); // nie wraca sm
         }
+        public async Task<IActionResult> ChangeLogo([Bind("logo,LogoNewFile")] PageSettings logo)
+        {
+            var pageSettings = _context.PageSettings.First();
+            pageSettings.Logo = new CloudAccess().ChangeItem(pageSettings.Logo, logo.LogoNewFile, "Logo");
+            _context.PageSettings.Update(pageSettings);
+            await _context.SaveChangesAsync();
+            return View("Index");
+        }
 
 
         //[HttpGet, ActionName("Delete")]
@@ -169,11 +180,34 @@ namespace Harissa.Intranet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> PrivacyPolicyEdit([Bind("id","text")]PrivacyPolicy pp)
+        public async Task<IActionResult> PrivacyPolicyEdit([Bind("PrivacyPolicyID,PageSettingsID,Text")] PrivacyPolicy privacyPolicy)
         {
-            _context.PrivacyPolicies.Update(pp);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //if (id != privacyPolicy.PrivacyPolicyID)
+            //{
+            //    return NotFound();
+            //}
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(privacyPolicy);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PrivacyPolicyExists(privacyPolicy.PrivacyPolicyID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
 
@@ -185,6 +219,10 @@ namespace Harissa.Intranet.Controllers
         private bool PageSettingsExists(int id)
         {
             return _context.PageSettings.Any(e => e.PageSettingsID == id);
+        }
+        private bool PrivacyPolicyExists(int id)
+        {
+            return _context.PrivacyPolicies.Any(e => e.PageSettingsID == id);
         }
     }
 }

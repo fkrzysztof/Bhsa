@@ -21,6 +21,7 @@ namespace Harissa.Intranet.Controllers
         // GET: News
         public async Task<IActionResult> Index()
         {
+            //<i class="far fa-comment-alt"></i>
             return View(await _context.News.ToListAsync());
         }        
         
