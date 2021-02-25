@@ -1,30 +1,32 @@
 ﻿
+//".newMediaItem"
+
+
 $(document).ready(function() {
 
     let fileinput = $(".newMediaItem");
-
-    $("form").submit(function () {
-        $('div.progress').fadeIn("slow");
-        $('button').fadeOut();
-    });
+    let form = fileinput.parent("form");
+    //form[0].submit(function () {
+    //    e.preventDefault();
+    //    console.log(form);
+    //    $('div.progress').fadeIn("slow");
+    //    $('button').fadeOut();
+    //});
 
     fileinput.on("change", function (event) {
-        let $output = $("#imgPreview");
+        let $output = fileinput.siblings(".imgPreview");
         $output.fadeOut("slow").hide();
         let input = event.target;
         let reader = new FileReader();
         reader.onload = function () {
 
-
-            $("input[type=submit]").before(""
+            $output.before(""
             + "<div class=\"progress\">"
             + "<div class=\"progress-bar progress-bar-striped progress-bar-animated\" role=\"progressbar\" "
             + "aria-valuenow=\"0\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: \"0%\ id=\"progressView\"></div>"
             + "</div >");
 
-
             let dataURL = reader.result;
-            //let output = document.getElementById("imgPreview");
             $output.attr("src", dataURL);
             $output.fadeIn("slow");
         };

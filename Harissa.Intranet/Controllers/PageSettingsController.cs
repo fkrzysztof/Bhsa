@@ -23,6 +23,7 @@ namespace Harissa.Intranet.Controllers
         {
             ViewBag.Path = "Page Settings";
             ViewBag.Icon = "fas fa-cogs";
+            ViewBag.Logo = _context.PageSettings.First().Logo;
         }
 
         // GET: PageSettings
@@ -130,7 +131,8 @@ namespace Harissa.Intranet.Controllers
             return View(); //nie wraca sm
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSocialMedias([Bind("Name,Link,Icon")] SocialMedia sm)
         {
             if (ModelState.IsValid)
@@ -157,13 +159,16 @@ namespace Harissa.Intranet.Controllers
             }
             return View(); // nie wraca sm
         }
-        public async Task<IActionResult> ChangeLogo([Bind("logo,LogoNewFile")] PageSettings logo)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> EditLogo([Bind("logo,LogoNewFile")] PageSettings l)
         {
             var pageSettings = _context.PageSettings.First();
-            pageSettings.Logo = new CloudAccess().ChangeItem(pageSettings.Logo, logo.LogoNewFile, "Logo");
+            pageSettings.Logo = new CloudAccess().ChangeItem(pageSettings.Logo, l.LogoNewFile, "Logo");
             _context.PageSettings.Update(pageSettings);
             await _context.SaveChangesAsync();
-            return View("Index");
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -175,6 +180,7 @@ namespace Harissa.Intranet.Controllers
             _context.SocialMedias.Remove(socialMedia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+           // return View("Index");
         }
 
 

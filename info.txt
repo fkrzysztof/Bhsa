@@ -6,6 +6,11 @@ x2. polityke prywatnosci
 
 4 podstrona muzyka
 
+5 automatyzacja syli..
+
+6 poprawa Layoutu
+
+7 zmiana w JSpreview (multi)
 
 <i class="fas fa-tools"></i> edit nowe
 <i class="fas fa-trash"></i> delete nowy

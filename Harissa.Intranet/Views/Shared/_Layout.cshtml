@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Harissa.Data.HelperClass
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,7 +20,22 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Harissa.Intranet</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+
+                    @{
+                        if (Model != null)
+                        {
+                            string getimg = new CloudAccess().GetImg(ViewBag.Logo);
+                            @:<img src="@getimg" style="max-height:80px;"/>
+                        }
+                        else
+                        {
+                            @:HARISSA
+                        }
+                    }
+
+
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

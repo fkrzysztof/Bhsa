@@ -9,11 +9,12 @@
 
 
     <div class="row">
+
         @*NoPicture*@
-        <div class="col-lg-4 col-md-6 align-items-end">
-            <div class="card shadow toHide h-100">
-                <div class="card-header">
-                    <h5>Background when no picture</h5>
+             <div class="col-lg-4 col-md-6 mt-2 mb-2 align-items-end">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white">
+                    <h6>Background when no picture</h6>
                 </div>
                 <div class="card-body" id="NoPicture">
                     <form asp-action="Index" enctype="multipart/form-data">
@@ -36,50 +37,123 @@
                             <input asp-for="@Model.NoPictureNewFile" type="file" class="form-control-file newMediaItem" />
                             <span asp-validation-for="@Model.NoPictureNewFile" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
+                        <div class="form-group text-right align-items-end">
+                            <input type="submit" value="Save" class="btn btn-primary btn-sm" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-        @*Add/Edit socialMedias*@
-        <div class="col-lg-4 col-md-6 mt-md-0 mt-sm-3 align-items-end">
+          
+
+        @*Logo*@
+        <div class="col-lg-4 col-md-6 mt-2 mb-2  align-items-end">
             <div class="card shadow h-100">
-                <div class="card-header">
-                    <h5 id="formTitle">Add social media</h5>
+                <div class="card-header bg-white">
+                    <h6>Edit Logo</h6>
+                </div>
+                <div class="card-body" id="NoPicture">
+                    <form asp-action="EditLogo" asp-controller="PageSettings" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="@Model.Logo" />
+                        <div class="form-group">
+                            @{
+                                if (Model != null)
+                                {
+                                    @*<label class="control-label">@ps.NoPicture</label>*@
+                                    string getimg = new CloudAccess().GetImg(@Model.Logo);
+                                    @:<img src="@getimg" class="img-fluid img-thumbnail imgPreview" />
+                                }
+                                else
+                                {
+                                    <label asp-for="@Model.Logo" class="control-label">no image saved</label>
+                                }
+                            }
+                            <input asp-for="@Model.LogoNewFile" type="file" class="form-control-file newMediaItem" />
+                            <span asp-validation-for="@Model.LogoNewFile" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Save" class="btn btn-primary btn-sm" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <h5 class="mt-5">Social media</h5>
+        <hr />
+        @*Add socialMedias*@
+        <div class="col-lg-4 col-md-6 mt-2 mb-2  align-items-end">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white">
+                    <h6>Add</h6>
                 </div>
                 <div class="card-body">
-                    <form asp-action="CreateSocialMedias" id="editOrCreateSM">
+                    <form asp-action="CreateSocialMedias">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input asp-for="@Model.socialMedias.FirstOrDefault().SocialMediaID" id="modalID" type="hidden" value="" />
                         <div class="form-group">
                             <label asp-for="@Model.socialMedias.FirstOrDefault().Name" class="control-label"></label>
-                            <input asp-for="@Model.socialMedias.FirstOrDefault().Name" value="" id="modalName" class="form-control" />
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Name" value="" class="form-control" />
                             <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.socialMedias.FirstOrDefault().Link" class="control-label"></label>
-                            <input asp-for="@Model.socialMedias.FirstOrDefault().Link" value="" id="modalLink" class="form-control" />
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Link" value="" class="form-control" />
                             <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Link" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="@Model.socialMedias.FirstOrDefault().Icon" class="control-label"></label>
-                            <input asp-for="@Model.socialMedias.FirstOrDefault().Icon" value="" id="modalIcon" class="form-control" />
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Icon" value="" class="form-control" />
                             <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Icon" class="text-danger"></span>
                         </div>
-                        <div class="form-group">
-                            <input id="submit" type="submit" value="Create" class="btn btn-primary" />
+                        <div class="form-group text-right">
+                            <input type="submit" value="Create" class="btn btn-primary btn-sm" />
                         </div>
                     </form>
                 </div>
             </div>
         </div>
+
+        @*Edit socialMedias*@
+        <div class="col-lg-4 col-md-6 mt-2 mb-2 align-items-end">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white">
+                    <h6>Edit</h6>
+                </div>
+                <div class="card-body">
+                    <form asp-action="EditSocialMedias">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input asp-for="@Model.socialMedias.FirstOrDefault().SocialMediaID" type="hidden" value="" />
+                        <div class="form-group">
+                            <label asp-for="@Model.socialMedias.FirstOrDefault().Name" class="control-label"></label>
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Name" value="" class="form-control" />
+                            <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.socialMedias.FirstOrDefault().Link" class="control-label"></label>
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Link" value="" class="form-control" />
+                            <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Link" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="@Model.socialMedias.FirstOrDefault().Icon" class="control-label"></label>
+                            <input asp-for="@Model.socialMedias.FirstOrDefault().Icon" value="" class="form-control" />
+                            <span asp-validation-for="@Model.socialMedias.FirstOrDefault().Icon" class="text-danger"></span>
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Create" class="btn btn-primary btn-sm" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         @*socialMedias list*@
-        <div class="col-lg-4 mt-sm-3 mt-md-3 mt-lg-0 align-items-stretch">
-            <div class="card shadow toHide h-100">
-                <div class="card-header">
-                    <h5>Social media</h5>
+        <div class="col-lg-4 mt-sm-3 mt-2 mb-2  align-items-stretch">
+            <div class="card shadow h-100">
+                <div class="card-header bg-white">
+                    <h6>List</h6>
                 </div>
                 <div class="card-body">
                     @if (Model != null && Model.socialMedias != null)
@@ -87,14 +161,14 @@
                         {
                             <div class="row align-items-center">
                                 <div class="col-3 text-left">
-                                    <i class="@item.Icon" style="font-size:1.5rem;"></i>
+                                    <i class="@item.Icon" style="font-size:2rem;"></i>
                                 </div>
                                 <div class="col-6 text-center">
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </div>
                                 <div class="col-3 text-right">
                                     <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
-                                    <a href="#" class="editDialog" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
+                                    <a href="#" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
                                 </div>
                             </div>
                         }
@@ -106,84 +180,56 @@
                 </div>
             </div>
         </div>
+
+        <h5 class="mt-5">Privacy Policy</h5>
+        <hr />
         @*Privacy Policy*@
-        <div class="col-8 mt-3 mb-3">
-            <div class="card shadow toHide">
-                <div class="card-header">
-                    <h5>Privacy Policy</h5>
-                </div>
+        <div class="col-12 mt-2 mb-2">
+            <div class="card shadow">
+                @*<div class="card-header">
+                    <h6>Privacy Policy</h6>
+                </div>*@
                 <div class="card-body">
                     <form asp-action="PrivacyPolicyEdit" method="post">
                         <input type="hidden" asp-for="@Model.privacyPolicy.PageSettingsID" />
                         <input type="hidden" asp-for="@Model.privacyPolicy.PrivacyPolicyID" />
-                        <textarea class="form-control" asp-for="@Model.privacyPolicy.Text"></textarea>
+                        <textarea class="form-control" rows="13" asp-for="@Model.privacyPolicy.Text"></textarea>
                         <div class="form-group text-right bt-3">
-                            <input id="submit" type="submit" value="save" class="btn btn-primary" />
+                            <input type="submit" value="save" class="btn btn-primary btn-sm" />
                         </div>
                     </form>
                 </div>
 
             </div>
         </div>
-        @*Logo*@
-        <div class="col-lg-4 col-md-6 align-items-end">
-            <div class="card shadow toHide h-100">
-                <div class="card-header">
-                    <h5>Background when no picture</h5>
-                </div>
-                <div class="card-body" id="NoPicture">
-                    <form asp-action="ChangeLogo" enctype="multipart/form-data">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="@Model.Logo" />
-                        <div class="form-group">
-                            @{
-                                if (Model != null)
-                                {
-                                    @*<label class="control-label">@ps.NoPicture</label>*@
-                                    string getimg = new CloudAccess().GetImg(@Model.Logo);
-                                    @:<img src="@getimg" id="imgPreview" class="img-fluid img-thumbnail" />
-                                }
-                                else
-                                {
-                                    <label asp-for="@Model.Logo" class="control-label">no image saved</label>
-                                }
-                            }
-                            <input asp-for="@Model.LogoNewFile" type="file" class="form-control-file newMediaItem" />
-                            <span asp-validation-for="@Model.LogoNewFile" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Save" class="btn btn-primary" />
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+
+
     </div>
-
         <script>
-            let editDialog = $(".editDialog");
-            let form = $("#editOrCreateSM");
-            let createSM = form.clone();
 
-            editDialog.on("click", function (e) {
-                e.preventDefault();
-                form.attr("action", "/PageSettings/EditSocialMedias");
-                $("#formTitle").text("Edit social media item").addClass("text-success");
-                $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
-                let thisEditDialog = $(this);
-                $("#modalName").attr("value", thisEditDialog.data("name"));
-                $("#modalLink").attr("value", thisEditDialog.data("link"));
-                $("#modalIcon").attr("value", thisEditDialog.data("icon"));
-                $("#modalID").attr("value", thisEditDialog.data("id"));
-                $("#submit").attr("value", "Edytuj");
-                $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
-            });
+            //let editDialog = $(".editDialog");
+            //let form = $("#editOrCreateSM");
+            //let createSM = form.clone();
 
-            $("#exitButton").on("click", function (e) {
-                e.preventDefault();
-                $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
+            //editDialog.on("click", function (e) {
+            //    e.preventDefault();
+            //    form.attr("action", "/PageSettings/EditSocialMedias");
+            //    $("#formTitle").text("Edit social media item").addClass("text-success");
+            //    $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
+            //    let thisEditDialog = $(this);
+            //    $("#modalName").attr("value", thisEditDialog.data("name"));
+            //    $("#modalLink").attr("value", thisEditDialog.data("link"));
+            //    $("#modalIcon").attr("value", thisEditDialog.data("icon"));
+            //    $("#modalID").attr("value", thisEditDialog.data("id"));
+            //    $("#submit").attr("value", "Edytuj");
+            //    $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
+            //});
 
-            });
+            //$("#exitButton").on("click", function (e) {
+            //    e.preventDefault();
+            //    $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
+
+            //});
 
 
 
