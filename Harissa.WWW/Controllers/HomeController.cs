@@ -30,6 +30,7 @@ namespace Harissa.WWW.Controllers
             //dodac warunek do aktualnej daty
             List<News> newsList = _context.News.ToList();
             ViewBag.News = newsList;
+            ViewBag.SocialMedia = _context.SocialMedias.ToList();
             return View();
         }
 

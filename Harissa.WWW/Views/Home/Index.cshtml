@@ -7,16 +7,17 @@
         <div class="container featured-text">
             @foreach (var item in ViewBag.News as List<Harissa.Data.Data.News>)
             {
+                
+                string getimg = new CloudAccess().GetImg(item.MediaItem);
+                
                 if (sideLR == true)
                 {
                     <!-- Project One Row-->
                     <h4 class="text-white">News</h4>
                     <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                        @{
-                            string getimg = new CloudAccess().GetImg(item.MediaItem);
-                        }
+
                         <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 p-4">
                             <div class="bg-black text-center h-100 project">
                                 <div class="d-flex h-100">
                                     <div class="project-text w-100 my-auto text-center text-lg-left">
@@ -34,8 +35,8 @@
                 {
                     <!-- Project Two Row-->
                     <div class="row justify-content-center no-gutters">
-                        <div class="col-lg-6"><img class="img-fluid" src="@item.MediaItem" alt="" /></div>
-                        <div class="col-lg-6 order-lg-first">
+                        <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
+                        <div class="col-lg-6 p-4 order-lg-first">
                             <div class="bg-black text-center h-100 project">
                                 <div class="d-flex h-100">
                                     <div class="project-text w-100 my-auto text-center text-lg-right">
@@ -49,7 +50,7 @@
                     </div>
                 }
                 sideLR = !sideLR;
-            } 
+            }
 
         </div>
     </section>
