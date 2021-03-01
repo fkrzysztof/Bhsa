@@ -11,12 +11,12 @@
     <div class="row">
 
         @*NoPicture*@
-             <div class="col-lg-4 col-md-6 mt-2 mb-2 align-items-end">
+        <div class="col-lg-4 col-md-6 mt-2 mb-2 align-items-end">
             <div class="card shadow h-100">
                 <div class="card-header bg-white">
                     <h6>Background when no picture</h6>
                 </div>
-                <div class="card-body" id="NoPicture">
+                <div class="card-body" @*id="NoPicture"*@>
                     <form asp-action="Index" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="@Model.NoPicture" />
@@ -27,7 +27,7 @@
                                 {
                                     @*<label class="control-label">@ps.NoPicture</label>*@
                                     string getimg = new CloudAccess().GetImg(@Model.NoPicture);
-                                    @:<img src="@getimg" id="imgPreview" class="img-fluid img-thumbnail" />
+                                    @:<img src="@getimg" class="img-fluid img-thumbnail imgPreview" />
                                 }
                                 else
                                 {
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-          
+
 
         @*Logo*@
         <div class="col-lg-4 col-md-6 mt-2 mb-2  align-items-end">
@@ -52,7 +52,7 @@
                 <div class="card-header bg-white">
                     <h6>Edit Logo</h6>
                 </div>
-                <div class="card-body" id="NoPicture">
+                <div class="card-body" @*id="NoPicture"*@>
                     <form asp-action="EditLogo" asp-controller="PageSettings" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="@Model.Logo" />
@@ -80,10 +80,12 @@
             </div>
         </div>
 
+        <div class="col-12">
+            <h5 class="mt-5">Social media</h5>
+            <hr />
+        </div>
 
 
-        <h5 class="mt-5">Social media</h5>
-        <hr />
         @*Add socialMedias*@
         <div class="col-lg-4 col-md-6 mt-2 mb-2  align-items-end">
             <div class="card shadow h-100">
@@ -181,8 +183,11 @@
             </div>
         </div>
 
-        <h5 class="mt-5">Privacy Policy</h5>
-        <hr />
+        <div class="col-12">
+            <h5 class="mt-5">Privacy Policy</h5>
+            <hr />
+        </div>
+
         @*Privacy Policy*@
         <div class="col-12 mt-2 mb-2">
             <div class="card shadow">
@@ -202,37 +207,37 @@
 
             </div>
         </div>
-
-
     </div>
-        <script>
-
-            //let editDialog = $(".editDialog");
-            //let form = $("#editOrCreateSM");
-            //let createSM = form.clone();
-
-            //editDialog.on("click", function (e) {
-            //    e.preventDefault();
-            //    form.attr("action", "/PageSettings/EditSocialMedias");
-            //    $("#formTitle").text("Edit social media item").addClass("text-success");
-            //    $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
-            //    let thisEditDialog = $(this);
-            //    $("#modalName").attr("value", thisEditDialog.data("name"));
-            //    $("#modalLink").attr("value", thisEditDialog.data("link"));
-            //    $("#modalIcon").attr("value", thisEditDialog.data("icon"));
-            //    $("#modalID").attr("value", thisEditDialog.data("id"));
-            //    $("#submit").attr("value", "Edytuj");
-            //    $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
-            //});
-
-            //$("#exitButton").on("click", function (e) {
-            //    e.preventDefault();
-            //    $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
-
-            //});
 
 
+    <script>
 
-        </script>
+                //let editDialog = $(".editDialog");
+                //let form = $("#editOrCreateSM");
+                //let createSM = form.clone();
 
-        <script src="~/js/photoPreview.js"></script>
+                //editDialog.on("click", function (e) {
+                //    e.preventDefault();
+                //    form.attr("action", "/PageSettings/EditSocialMedias");
+                //    $("#formTitle").text("Edit social media item").addClass("text-success");
+                //    $(".toHide").animate({ opacity: 0.1 }, 800).addClass("disabledElement");
+                //    let thisEditDialog = $(this);
+                //    $("#modalName").attr("value", thisEditDialog.data("name"));
+                //    $("#modalLink").attr("value", thisEditDialog.data("link"));
+                //    $("#modalIcon").attr("value", thisEditDialog.data("icon"));
+                //    $("#modalID").attr("value", thisEditDialog.data("id"));
+                //    $("#submit").attr("value", "Edytuj");
+                //    $("#submit").parent().append("<button id=\"exitButton\">wyjdz</button>")
+                //});
+
+                //$("#exitButton").on("click", function (e) {
+                //    e.preventDefault();
+                //    $(".toHide").animate({ opacity: 1 }, 800).removeClass("disabledElement");
+
+                //});
+
+
+
+    </script>
+
+    <script src="~/js/photoPreview.js"></script>

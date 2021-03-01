@@ -6,21 +6,22 @@ using Harissa.Data;
 using Harissa.Data.Data;
 using Microsoft.AspNetCore.Http;
 using Harissa.Data.HelperClass;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class ConcertsController : Controller
+    public class ConcertsController : BaseClassController
     {
-        private readonly HarissaContext _context;
-
-        public ConcertsController(HarissaContext context)
+        public ConcertsController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
         }
 
         private void naviPack()
         {
             ViewBag.Icon = "far fa-calendar-alt";
+            logo();
         }
 
         // GET: Concerts

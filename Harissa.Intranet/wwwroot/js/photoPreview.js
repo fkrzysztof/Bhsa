@@ -1,8 +1,10 @@
 ﻿
 //".newMediaItem"
-
+// .imgPreview
 
 $(document).ready(function() {
+
+    $(".imgPreview").addClass("bg-dark");
 
     let fileinput = $(".newMediaItem");
     let form = fileinput.parent("form");
@@ -14,7 +16,8 @@ $(document).ready(function() {
     //});
 
     fileinput.on("change", function (event) {
-        let $output = fileinput.siblings(".imgPreview");
+        let $output = $(this).siblings(".imgPreview");
+      //  let $output = fileinput.siblings(".imgPreview");
         $output.fadeOut("slow").hide();
         let input = event.target;
         let reader = new FileReader();

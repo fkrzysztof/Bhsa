@@ -5,22 +5,24 @@ using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
 using System;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class ContactController : Controller
+    public class ContactController : BaseClassController
     {
-        private readonly HarissaContext _context;
 
-        public ContactController(HarissaContext context)
+        public ContactController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
         }
 
         private void naviPack()
         {
             ViewBag.Path = "Contact";
             ViewBag.Icon = "fas fa-phone-alt";
+            logo();
         }
 
         // GET: Contact

@@ -4,22 +4,23 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class BioController : Controller
+    public class BioController : BaseClassController
     {
-        private readonly HarissaContext _context;
-
-        public BioController(HarissaContext context)
+        public BioController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
         }
 
         private void naviPack()
         {
             ViewBag.Icon = "fas fa-book-open";
             ViewBag.Path = "Bio";
+            logo();
         }
 
         public async Task<IActionResult> Index()

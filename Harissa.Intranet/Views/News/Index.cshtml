@@ -4,41 +4,42 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="row">
+@*<div class="row">
     <div class="col text-left">
         <h2><i class="bi bi-chat-left-text m-2" style="font-size: 2.5rem;"></i>News</h2>
     </div>
     <div class="col text-right">
         <a asp-action="Create"><i class="bi bi-plus-circle m-2" style="font-size: 2rem; color:black;"></i></a>
     </div>
-</div>
+</div>*@
+@await Html.PartialAsync("TopNavi")
 <div class="row">
-@foreach (var item in Model)
-{
-    <div class="card m-4 shadow-sm">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-3">
-                    @{
-                        string getimg = new CloudAccess().GetImg(item.MediaItem);
-                    }
-                    <img src="@getimg" class="img-fluid rounded" />
-                </div>
-                <div class="col-md-8 col-9">
-                    <small>@item.DateOfPublication</small>
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
-                    <hr />
-                    <p class="card-text">@Html.DisplayFor(modelItem => item.Message)</p>
-                </div>
-                <div class="col-md-1 mt-md-0 mt-4 text-center">
-                    <a asp-action="Edit" asp-route-id="@item.NewsID"><i class="fas fa-tools m-md-2 m-5"  style="font-size: 1.5rem; color:black;"></i></a>
-                    <a asp-action="Delete" asp-route-id="@item.NewsID"><i class="fas fa-trash m-md-2 m-5" style="font-size: 1.5rem; color:black;"></i></a>
+    @foreach (var item in Model)
+    {
+        <div class="card m-4 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        @{
+                            string getimg = new CloudAccess().GetImg(item.MediaItem);
+                        }
+                        <img src="@getimg" class="img-fluid rounded" />
+                    </div>
+                    <div class="col-md-8 col-9">
+                        <small>@item.DateOfPublication</small>
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <hr />
+                        <p class="card-text">@Html.DisplayFor(modelItem => item.Message)</p>
+                    </div>
+                    <div class="col-md-1 mt-md-0 mt-4 text-center">
+                        <a asp-action="Edit" asp-route-id="@item.NewsID"><i class="fas fa-tools m-md-2 m-5" style="font-size: 1.5rem; color:black;"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.NewsID"><i class="fas fa-trash m-md-2 m-5" style="font-size: 1.5rem; color:black;"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}
-    </div>
+    }
+</div>
 
 
 

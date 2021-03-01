@@ -6,22 +6,29 @@ using Harissa.Data;
 using Harissa.Data.Data;
 using Harissa.Data.HelperClass;
 using Microsoft.AspNetCore.Http;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class NewsController : Controller
+    public class NewsController : BaseClassController
     {
-        private readonly HarissaContext _context;
-
-        public NewsController(HarissaContext context)
+        public NewsController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
+        }
+
+        private void naviPack()
+        {
+            ViewBag.Path = "News";
+            ViewBag.Icon = "far fa-comment-alt";
+            logo();
         }
 
         // GET: News
         public async Task<IActionResult> Index()
         {
-            //<i class="far fa-comment-alt"></i>
+            naviPack();
             return View(await _context.News.ToListAsync());
         }        
         

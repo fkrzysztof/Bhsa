@@ -2,16 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Harissa.Intranet.Models;
+using Harissa.Intranet.Controllers.Abstract;
+using Harissa.Data;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseClassController
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        
+        public HomeController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _logger = logger;
         }
 
         public IActionResult Index()

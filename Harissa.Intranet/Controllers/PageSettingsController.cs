@@ -7,23 +7,24 @@ using Harissa.Data.Data;
 using Microsoft.AspNetCore.Http;
 using Harissa.Data.HelperClass;
 using System.Collections.Generic;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class PageSettingsController : Controller
+    public class PageSettingsController : BaseClassController
     {
-        private readonly HarissaContext _context;
 
-        public PageSettingsController(HarissaContext context)
+        public PageSettingsController(ILogger<HomeController> logger, HarissaContext context)
+        :base(logger, context)
         {
-            _context = context;
         }
 
         private void naviPack()
         {
             ViewBag.Path = "Page Settings";
             ViewBag.Icon = "fas fa-cogs";
-            ViewBag.Logo = _context.PageSettings.First().Logo;
+            logo();
         }
 
         // GET: PageSettings
@@ -46,19 +47,20 @@ namespace Harissa.Intranet.Controllers
         //Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index([Bind("NoPictureNewFile")] PageSettings ps)
+        //public async Task<IActionResult> Index([Bind("NoPictureNewFile")] IFormFile ps)
+        public async Task<IActionResult> Index(IFormFile NoPictureNewFile)
         {
             if (ModelState.IsValid)
             {
+                var pageSettings = await _context.PageSettings.FirstOrDefaultAsync();
                 try
                 {
-                    var pageSettings = await _context.PageSettings.FirstOrDefaultAsync();
                     //nie istnieje
                     if (pageSettings == null)
                     {
-                           //dodanie
-                           ps.NoPicture = new CloudAccess().AddPic(ps.NoPictureNewFile, "PageSettings", true);
-                           _context.Add(ps);
+                        //dodanie
+                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "PageSettings", true);
+                           _context.Add(pageSettings);
                     }
                     else
                     //istnieje
@@ -69,7 +71,7 @@ namespace Harissa.Intranet.Controllers
                             new CloudAccess().Remove(pageSettings.NoPicture);
                         }
                         
-                        pageSettings.NoPicture = new CloudAccess().AddPic(ps.NoPictureNewFile, "PageSettings", true);
+                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "PageSettings", true);
                         _context.Update(pageSettings);
                     }
                     await _context.SaveChangesAsync();
@@ -78,7 +80,7 @@ namespace Harissa.Intranet.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PageSettingsExists(ps.PageSettingsID))
+                    if (!PageSettingsExists(pageSettings.PageSettingsID))
                     {
                         return NotFound();
                     }
@@ -89,7 +91,7 @@ namespace Harissa.Intranet.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(ps);
+            return RedirectToAction(nameof(Index));
         }
 
         [HttpPost]
