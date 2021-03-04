@@ -16,3 +16,5 @@ x2. polityke prywatnosci
 <i class="fas fa-trash"></i> delete nowy
 
 - dodac row w pagesettings 
+
+dalej ViewBag.SelectListSocialMediaEdit 

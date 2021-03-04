@@ -9,6 +9,7 @@ using Harissa.Data.HelperClass;
 using System.Collections.Generic;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -30,6 +31,7 @@ namespace Harissa.Intranet.Controllers
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
+            ViewBag.SelectListSocialMediaEdit = new SelectList(_context.SocialMedias.Select(s => s.Name).ToList(), "SocialMediaID");
             naviPack();
             var rezult = await _context.PageSettings
                 .Include(i => i.socialMedias)
