@@ -29,6 +29,7 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
+            ViewBag.Action = "Create";
             return View(await _context.News.ToListAsync());
         }        
         
@@ -36,6 +37,8 @@ namespace Harissa.Intranet.Controllers
         // GET: News/Create
         public IActionResult Create()
         {
+            naviPack();
+            ViewBag.Action = "Back";
             return View();
         }
 

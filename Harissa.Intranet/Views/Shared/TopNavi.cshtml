@@ -6,7 +6,7 @@
         @{
             if (ViewBag.Action == "Create")
             {
-                <a href="#"><i id="createButton" class="fas fa-plus-circle" style="font-size:2rem; color:black;"></i></a>
+                <a asp-action="Create"><i id="createButton" class="fas fa-plus-circle" style="font-size:2rem; color:black;"></i></a>
             }
             else if (ViewBag.Action == "Back")
             {

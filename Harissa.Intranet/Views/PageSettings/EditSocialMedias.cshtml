@@ -1,0 +1,58 @@
+﻿@model Harissa.Data.Data.SocialMedia
+
+@{
+    ViewData["Title"] = "EditSocialMedias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("TopNavi")
+
+<form asp-action="EditSocialMedias">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="SocialMediaID" />
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icon" class="control-label"></label>
+                <input asp-for="Icon" class="form-control" />
+                <span asp-validation-for="Icon" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-center justify-content-center">
+            <i class="@Model.Icon" style="font-size:6rem; color:black; vertical-align:central;" id="iconPreview"></i>
+        </div>
+        <div class="col-12">
+            <div class="form-group text-right">
+                <input type="submit" value="Save" class="btn btn-primary btn-sm" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let iPreview = document.getElementById("iconPreview");
+    let iEdit = document.getElementById("Icon");
+    iEdit.addEventListener("change", function () {
+        iPreview.className = iEdit.value;
+        //  iPreview.innerHTML("<i class=\"" + iPreview.className + "\" style=\"font-size:6rem; color:black;\" id=\"iconPreview\"></i>");
+    });
+
+</script>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

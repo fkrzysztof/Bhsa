@@ -52,7 +52,7 @@
             <div class="card-header bg-white">
                 <h6>Edit Logo</h6>
             </div>
-            <div class="card-body" @*id="NoPicture"*@>
+            <div class="card-body d-flex align-items-end" @*id="NoPicture"*@>
                 <form asp-action="EditLogo" asp-controller="PageSettings" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="@Model.Logo" />
@@ -122,18 +122,22 @@
     </div>
 
     @*Edit socialMedias*@
+    <!--
     <div class="col-lg-4 col-md-6 mt-2 mb-2">
         <div class="card shadow h-100">
             <div class="card-header bg-white">
                 <h6>Edit</h6>
             </div>
             <div class="card-body">
-
-
-                <select asp-items="ViewBag.SelectListSocialMediaEdit">
-                    <option value="value">text</option>
-                </select>
-
+               
+                @*<form asp-action="EditSocialMedias" method="get" class="h-100">
+                    <select name="id" asp-items="ViewBag.SelectListSocialMediaEdit" class="custom-select h-75" multiple>
+                        <option selected>Open this select menu</option>
+                    </select>
+                    <div class="form-group h-25 d-flex align-items-end">
+                        <input type="submit" value="Edit" class="btn btn-primary btn-sm" />
+                    </div>
+                </form>*@
 
                 @*<form asp-action="EditSocialMedias">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -160,9 +164,9 @@
             </div>
         </div>
     </div>
-
+    -->
     @*socialMedias list*@
-    <div class="col-lg-4 mt-2 mb-2">
+    <div class="col-lg-8 mt-2 mb-2">
         <div class="card shadow h-100">
             <div class="card-header bg-white">
                 <h6>List</h6>
@@ -171,16 +175,18 @@
                 @if (Model != null && Model.socialMedias != null)
                     @foreach (var item in Model.socialMedias)
                     {
-                        <div class="row align-items-center mt-1 mb-1">
+                        <div class="row align-items-center mt-2 mb-2">
                             <div class="col-3 text-left">
                                 <i class="@item.Icon" style="font-size:2rem;"></i>
                             </div>
                             <div class="col-6 text-center">
                                 @Html.DisplayFor(modelItem => item.Name)
+                                <small>@Html.DisplayFor(modelItem => item.Link)</small>
+                               
                             </div>
                             <div class="col-3 text-right">
                                 <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
-                                <a href="#" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
+                                <a asp-action="EditSocialMedias" asp-route-id="@item.SocialMediaID" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
                             </div>
                         </div>
                     }

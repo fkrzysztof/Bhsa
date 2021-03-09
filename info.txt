@@ -18,3 +18,7 @@ x2. polityke prywatnosci
 - dodac row w pagesettings 
 
 dalej ViewBag.SelectListSocialMediaEdit 
+
+social media zmiana na cloud
+
+poprawic newsy - brak zdjecia blad..

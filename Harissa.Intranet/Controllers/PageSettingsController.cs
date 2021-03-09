@@ -31,7 +31,7 @@ namespace Harissa.Intranet.Controllers
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
-            ViewBag.SelectListSocialMediaEdit = new SelectList(_context.SocialMedias.Select(s => s.Name).ToList(), "SocialMediaID");
+            ViewBag.SelectListSocialMediaEdit = new SelectList(_context.SocialMedias.ToList(), "SocialMediaID","Name");
             naviPack();
             var rezult = await _context.PageSettings
                 .Include(i => i.socialMedias)
@@ -52,8 +52,8 @@ namespace Harissa.Intranet.Controllers
         //public async Task<IActionResult> Index([Bind("NoPictureNewFile")] IFormFile ps)
         public async Task<IActionResult> Index(IFormFile NoPictureNewFile)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 var pageSettings = await _context.PageSettings.FirstOrDefaultAsync();
                 try
                 {
@@ -92,8 +92,15 @@ namespace Harissa.Intranet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
-            return RedirectToAction(nameof(Index));
+            //}
+            //return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> EditSocialMedias(int id)
+        {
+            naviPack();
+            ViewBag.Path += " / Edit";
+            return View(await _context.SocialMedias.FirstOrDefaultAsync(f => f.SocialMediaID == id));
         }
 
         [HttpPost]
@@ -233,6 +240,6 @@ namespace Harissa.Intranet.Controllers
         private bool PrivacyPolicyExists(int id)
         {
             return _context.PrivacyPolicies.Any(e => e.PageSettingsID == id);
-        }
+        }        
     }
 }
