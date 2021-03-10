@@ -33,6 +33,14 @@ namespace Harissa.WWW.Controllers
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             return View();
         }
+        public IActionResult Video()
+        {
+            //dodac warunek do aktualnej daty
+            List<News> newsList = _context.News.ToList();
+            ViewBag.News = newsList;
+            ViewBag.SocialMedia = _context.SocialMedias.ToList();
+            return View();
+        }
 
         public IActionResult Privacy()
         {

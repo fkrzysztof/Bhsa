@@ -38,6 +38,7 @@ namespace Harissa.Intranet.Controllers
         public IActionResult Create()
         {
             naviPack();
+            ViewBag.Path += "/ Create";
             ViewBag.Action = "Back";
             return View();
         }
@@ -70,6 +71,10 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
+            naviPack();
+            ViewBag.Path += "/ Edit";
+            ViewBag.Action = "Back";
+
             var news = await _context.News.FindAsync(id);
             if (news == null)
             {
@@ -96,9 +101,7 @@ namespace Harissa.Intranet.Controllers
                 {
                     if (newMediaItem != null)
                     {
-                        new CloudAccess().Remove(news.MediaItem);
-                        string newMediaItemString = newMediaItem.FileName.Split('.')[0];
-                        news.MediaItem = new CloudAccess().AddPic(newMediaItem, "News");
+                        news.MediaItem = new CloudAccess().ChangeItem(news.MediaItem, newMediaItem, "News");
                     }
                     _context.Update(news);
                     await _context.SaveChangesAsync();
@@ -126,6 +129,12 @@ namespace Harissa.Intranet.Controllers
             {
                 return NotFound();
             }
+            
+            naviPack();
+            ViewBag.Path += "/ Edit";
+            ViewBag.Action = "Back";
+            ViewBag.Message = "Are you sure you want to delete this ?";
+
 
             var news = await _context.News.FirstOrDefaultAsync(m => m.NewsID == id);
             if (news == null)

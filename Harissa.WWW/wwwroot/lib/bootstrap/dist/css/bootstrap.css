@@ -1924,7 +1924,7 @@ select.form-control:focus::-ms-value {
   background-color: #fff;
 }
 
-.form-control-file,
+.form-control,
 .form-control-range {
   display: block;
   width: 100%;
@@ -2119,9 +2119,9 @@ textarea.form-control {
   display: block;
 }
 
-.was-validated .form-control-file:valid ~ .valid-feedback,
-.was-validated .form-control-file:valid ~ .valid-tooltip, .form-control-file.is-valid ~ .valid-feedback,
-.form-control-file.is-valid ~ .valid-tooltip {
+.was-validated .form-control:valid ~ .valid-feedback,
+.was-validated .form-control:valid ~ .valid-tooltip, .form-control.is-valid ~ .valid-feedback,
+.form-control.is-valid ~ .valid-tooltip {
   display: block;
 }
 
@@ -2242,9 +2242,9 @@ textarea.form-control {
   display: block;
 }
 
-.was-validated .form-control-file:invalid ~ .invalid-feedback,
-.was-validated .form-control-file:invalid ~ .invalid-tooltip, .form-control-file.is-invalid ~ .invalid-feedback,
-.form-control-file.is-invalid ~ .invalid-tooltip {
+.was-validated .form-control:invalid ~ .invalid-feedback,
+.was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback,
+.form-control.is-invalid ~ .invalid-tooltip {
   display: block;
 }
 

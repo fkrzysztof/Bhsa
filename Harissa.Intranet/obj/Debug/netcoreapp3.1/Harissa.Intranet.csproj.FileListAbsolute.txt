@@ -359,7 +359,6 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.csprojAssemblyReference.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\staticwebassets\Harissa.Intranet.StaticWebAssets.Manifest.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\staticwebassets\Harissa.Intranet.StaticWebAssets.xml
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.RazorAssemblyInfo.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.RazorAssemblyInfo.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.AssemblyInfoInputs.cache
@@ -393,3 +392,4 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.pdb
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PageSettings\EditSocialMedias.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cache

@@ -4,11 +4,12 @@
 
 $(document).ready(function() {
 
-    $(".imgPreview").addClass("bg-dark");
-
+    $(".imgPreview").addClass("bg-light");
     let fileinput = $(".newMediaItem");
-    let form = fileinput.parent("form");
-    //form[0].submit(function () {
+    
+    //let form = fileinput.parent("form");
+
+    //$form.submit(function () {
     //    e.preventDefault();
     //    console.log(form);
     //    $('div.progress').fadeIn("slow");
@@ -16,8 +17,8 @@ $(document).ready(function() {
     //});
 
     fileinput.on("change", function (event) {
-        let $output = $(this).siblings(".imgPreview");
-      //  let $output = fileinput.siblings(".imgPreview");
+        //let $form = $(this).closest("form");
+        let $output = $(this).closest("form").find(".imgPreview");
         $output.fadeOut("slow").hide();
         let input = event.target;
         let reader = new FileReader();
@@ -53,5 +54,3 @@ $(document).ready(function() {
     });
 
 });
-
-

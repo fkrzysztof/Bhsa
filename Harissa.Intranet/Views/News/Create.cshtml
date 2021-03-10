@@ -1,5 +1,5 @@
 ﻿@model Harissa.Data.Data.News
-
+@using Harissa.Data.HelperClass
 @{
     //ViewData["Title"] = "test";
     //Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,9 +12,10 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label"></label>
-                <img scr="@ViewBag.ImgNoPhoto" class="img-fluid rounded" />
-                <img scr="@ViewBag.ImgNoPhoto" id="imgPreview" class="img-fluid rounded" />
-                <input name="MediaItem" type="file" accept="image/*" class="form-control-file newMediaItem" />
+               
+                @{ string img = new CloudAccess().GetImg(null);}
+                <img src="@img" class="form-control rounded imgPreview img-thumbnail" />
+                <input name="MediaItem" type="file" class="form-control newMediaItem" />
                 <span asp-validation-for="MediaItem" class="text-danger"></span>
             </div>
         </div>

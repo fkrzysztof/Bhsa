@@ -2029,7 +2029,7 @@ select.form-control:focus::-ms-value {
   background-color: #fff;
 }
 
-.form-control-file,
+.form-control,
 .form-control-range {
   display: block;
   width: 100%;

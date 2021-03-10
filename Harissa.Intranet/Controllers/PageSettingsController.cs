@@ -11,6 +11,7 @@ using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace Harissa.Intranet.Controllers
 {
     public class PageSettingsController : BaseClassController
@@ -105,26 +106,23 @@ namespace Harissa.Intranet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditSocialMedias([Bind("SocialMediaID,Name,Link,Icon")] SocialMedia sm)
+        public async Task<IActionResult> EditSocialMedias([Bind("SocialMediaID,PageSettingsID,Name,Link,Icon,NewIcon")] SocialMedia sm)
         {
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var dbSm = _context.SocialMedias.FirstOrDefault(f => f.SocialMediaID == sm.SocialMediaID);
-                    if (dbSm != null)
+                    if(string.IsNullOrEmpty(sm.Icon))
                     {
-                        dbSm.Name = sm.Name;
-                        dbSm.Link = sm.Link;
-                        dbSm.Icon = sm.Icon;
-                        _context.Update(dbSm);
-                        await _context.SaveChangesAsync();
+                        sm.Icon = new CloudAccess().AddPic(sm.NewIcon, "SocialMedia");
                     }
                     else
                     {
-                        return NotFound();
+                        sm.Icon = new CloudAccess().ChangeItem(sm.Icon, sm.NewIcon, "SocialMedia");
                     }
+                    _context.SocialMedias.Update(sm);
+                    await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -144,14 +142,16 @@ namespace Harissa.Intranet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSocialMedias([Bind("Name,Link,Icon")] SocialMedia sm)
+        public async Task<IActionResult> CreateSocialMedias([Bind("Name,Link,NewIcon")] SocialMedia sm)
         {
+            sm.Icon = new CloudAccess().AddPic(sm.NewIcon, "SocialMedia");
             if (ModelState.IsValid)
             {
                 PageSettings pageSettingsItem = await _context.PageSettings.FirstOrDefaultAsync();
                 if (pageSettingsItem != null)
                 //istnieje juz pagesettings
                 {
+                    
                     sm.PageSettingsID = pageSettingsItem.PageSettingsID;
                     _context.SocialMedias.Add(sm);
                 }
@@ -188,10 +188,10 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> DeleteSocialMedias(int id)
         {
             var socialMedia = await _context.SocialMedias.FindAsync(id);
+            new CloudAccess().Remove(socialMedia.Icon);
             _context.SocialMedias.Remove(socialMedia);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-           // return View("Index");
         }
 
 
