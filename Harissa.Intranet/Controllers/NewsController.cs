@@ -52,6 +52,7 @@ namespace Harissa.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (MediaItem != null)
                 news.MediaItem = new CloudAccess().AddPic(MediaItem, "News");
 
                 _context.Add(news);

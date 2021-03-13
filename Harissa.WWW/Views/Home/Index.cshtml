@@ -7,9 +7,8 @@
         <div class="container featured-text">
             @foreach (var item in ViewBag.News as List<Harissa.Data.Data.News>)
             {
-                
                 string getimg = new CloudAccess().GetImg(item.MediaItem);
-                
+
                 if (sideLR == true)
                 {
                     <!-- Project One Row-->

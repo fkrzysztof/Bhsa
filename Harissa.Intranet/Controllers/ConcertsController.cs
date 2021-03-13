@@ -77,8 +77,9 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem")] Concert concert, IFormFile FormFileItem)
+        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem,FormFileItem")] Concert concert, IFormFile newMediaItem)
         {
+
             if (id != concert.ConcertID)
             {
                 return NotFound();
@@ -88,7 +89,7 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
-                    concert.MediaItem = new CloudAccess().ChangeItem(concert.MediaItem, FormFileItem, "Concerts");                        
+                    concert.MediaItem = new CloudAccess().ChangeItem(concert.MediaItem, newMediaItem, "Concerts");                        
                     _context.Update(concert);
                     await _context.SaveChangesAsync();
                 }

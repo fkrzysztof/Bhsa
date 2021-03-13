@@ -23,8 +23,5 @@ namespace Harissa.Data.Data
         [Display(Name = "Image")]
         [Required]
         public IFormFile LogoNewFile { get; set; }
-
-
-
     }
 }
