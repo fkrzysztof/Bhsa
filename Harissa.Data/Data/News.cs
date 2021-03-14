@@ -13,5 +13,7 @@ namespace Harissa.Data.Data
         public string Title { get; set; }
         public string Message { get; set; }
         public DateTime DateOfPublication { get; set; }
+        [NotMapped]
+        public IFormFile FormFileItem { get; set; }
     }
 }

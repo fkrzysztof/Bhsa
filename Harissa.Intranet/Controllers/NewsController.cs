@@ -48,13 +48,11 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewsID,Title,Message,DateOfPublication")] News news, IFormFile MediaItem)
+        public async Task<IActionResult> Create([Bind("NewsID,Title,Message,DateOfPublication,FormFileItem")] News news)
         {
             if (ModelState.IsValid)
             {
-                if (MediaItem != null)
-                news.MediaItem = new CloudAccess().AddPic(MediaItem, "News");
-
+                news.MediaItem = new CloudAccess().AddPic(news.FormFileItem, "News");
                 _context.Add(news);
                 await _context.SaveChangesAsync();
 

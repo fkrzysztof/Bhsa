@@ -18,7 +18,6 @@ namespace Harissa.Data.Data
         public decimal Price { get; set; }
         public DateTime Date { get; set; }
         [NotMapped]
-        [Required]
         public IFormFile FormFileItem { get; set; }
         public string MediaItem { get; set; }
     }

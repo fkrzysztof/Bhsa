@@ -40,11 +40,11 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem")] Concert concert, IFormFile FormFileItem )
+        public async Task<IActionResult> Create([Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem,FormFileItem")] Concert concert )
         {
             if (ModelState.IsValid)
             {
-                concert.MediaItem = new CloudAccess().AddPic(FormFileItem, "Concerts");
+                concert.MediaItem = new CloudAccess().AddPic(concert.FormFileItem, "Concerts");
                 _context.Add(concert);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -64,7 +64,8 @@ namespace Harissa.Intranet.Controllers
             ViewBag.Action = "Back";
             ViewBag.Path = "Concerts / Edit";
 
-            var concert = await _context.Concerts.FindAsync(id);
+            var concert =  await _context.Concerts.FindAsync(id);
+
             if (concert == null)
             {
                 return NotFound();
@@ -77,7 +78,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem,FormFileItem")] Concert concert, IFormFile newMediaItem)
+        public async Task<IActionResult> Edit(int id, [Bind("ConcertID,Name,Address,Description,Link,Price,Date,MediaItem,FormFileItem")] Concert concert)
         {
 
             if (id != concert.ConcertID)
@@ -89,7 +90,8 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
-                    concert.MediaItem = new CloudAccess().ChangeItem(concert.MediaItem, newMediaItem, "Concerts");                        
+                    if(concert.MediaItem != null)
+                        concert.MediaItem = new CloudAccess().ChangeItem(concert.MediaItem, concert.FormFileItem, "Concerts");                        
                     _context.Update(concert);
                     await _context.SaveChangesAsync();
                 }

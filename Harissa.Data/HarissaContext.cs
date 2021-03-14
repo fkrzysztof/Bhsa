@@ -22,6 +22,5 @@ namespace Harissa.Data
         public DbSet<MediaPatronage> MediaPatronages { get; set; }
         public DbSet<PrivacyPolicy> PrivacyPolicies { get; set; }
 
-
     }
 }
