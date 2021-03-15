@@ -1,16 +1,51 @@
-﻿@model IEnumerable<Harissa.Data.Data.Video>
+﻿@model Harissa.Data.Data.Video
 
 @await Html.PartialAsync("TopNavi")
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-12">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/@item.Link.Substring(16)" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
-        }
 
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
     </div>
+</div>
+
+
+@foreach (var item in ViewBag.VideoList)
+{
+    <div class="row my-4">
+
+        <div class="col-sm-5 d-flex justify-content-around justify-sm-content-strat">
+            <iframe src="https://www.youtube.com/embed/@item.Link.Substring(16)" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen style="height:100%;">
+            </iframe>
+        </div>
+        <div class="col-sm-5 d-flex justify-content-around">
+            <a href="@item.Link"><small>@item.Link</small></a>
+        </div>
+        <div class="col-sm-2 d-flex justify-content-around justify-sm-content-end">
+            <div class="row">
+                <div class="col">
+                    <a asp-action="Delete" asp-route-id="@item.VideoID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
+                </div>
+                <div class="col">
+                    <i class="fas fa-chevron-up" style="font-size: 1rem; color:black;"></i>
+                </div>
+                <div class="col">
+                    <i class="fas fa-chevron-down" style="font-size: 1rem; color:black;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
 

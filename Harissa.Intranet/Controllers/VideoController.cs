@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
@@ -29,47 +26,26 @@ namespace Harissa.Intranet.Controllers
         // GET: Video
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Videos.ToListAsync());
-        }
-
-        // GET: Video/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var video = await _context.Videos
-                .FirstOrDefaultAsync(m => m.VideoID == id);
-            if (video == null)
-            {
-                return NotFound();
-            }
-
-            return View(video);
-        }
-
-        // GET: Video/Create
-        public IActionResult Create()
-        {
+            naviPack();
+            ViewBag.VideoList = await _context.Videos.ToListAsync();
             return View();
         }
 
+
         // POST: Video/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VideoID,Link")] Video video)
         {
             if (ModelState.IsValid)
             {
+                int length = _context.Videos.Count() + 1;
                 _context.Add(video);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(video);
+            ViewBag.Message = "Bad link to the video";
+            return View("Index");
         }
 
         // GET: Video/Edit/5
@@ -123,28 +99,9 @@ namespace Harissa.Intranet.Controllers
             return View(video);
         }
 
-        // GET: Video/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var video = await _context.Videos
-                .FirstOrDefaultAsync(m => m.VideoID == id);
-            if (video == null)
-            {
-                return NotFound();
-            }
-
-            return View(video);
-        }
 
         // POST: Video/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var video = await _context.Videos.FindAsync(id);
             _context.Videos.Remove(video);

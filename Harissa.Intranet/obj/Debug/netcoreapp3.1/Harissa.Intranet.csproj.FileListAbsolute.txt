@@ -394,3 +394,4 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PageSettings\EditSocialMedias.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PageSettings\EditSocialMedias.cshtml.g.cs
+C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Video\Index.cshtml.g.cs
