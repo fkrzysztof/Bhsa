@@ -10,8 +10,11 @@ namespace Harissa.Data.Data
         [Key]
         public int NewsID { get; set; }
         public string MediaItem { get; set; }
+        [Required]
         public string Title { get; set; }
+        [Required]
         public string Message { get; set; }
+        [Required]
         public DateTime DateOfPublication { get; set; }
         [NotMapped]
         public IFormFile FormFileItem { get; set; }

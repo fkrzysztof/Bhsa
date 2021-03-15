@@ -60,8 +60,8 @@ namespace Harissa.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("money");
+                    b.Property<string>("Price")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ConcertID");
 
@@ -131,9 +131,11 @@ namespace Harissa.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Message")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("NewsID");
@@ -204,6 +206,22 @@ namespace Harissa.Data.Migrations
                     b.HasIndex("PageSettingsID");
 
                     b.ToTable("SocialMedias");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.Video", b =>
+                {
+                    b.Property<int>("VideoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("VideoID");
+
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.PrivacyPolicy", b =>

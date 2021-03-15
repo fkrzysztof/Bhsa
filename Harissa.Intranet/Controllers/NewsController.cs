@@ -55,7 +55,6 @@ namespace Harissa.Intranet.Controllers
                 news.MediaItem = new CloudAccess().AddPic(news.FormFileItem, "News");
                 _context.Add(news);
                 await _context.SaveChangesAsync();
-
                 return RedirectToAction(nameof(Index));
             }
 
@@ -79,6 +78,7 @@ namespace Harissa.Intranet.Controllers
             {
                 return NotFound();
             }
+
             return View(news);
         }
 
@@ -87,7 +87,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication")] News news, IFormFile newMediaItem)
+        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication,FormFileItem")] News news)
         {
             if (id != news.NewsID)
             {
@@ -98,9 +98,9 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
-                    if (newMediaItem != null)
+                    if (news.FormFileItem != null)
                     {
-                        news.MediaItem = new CloudAccess().ChangeItem(news.MediaItem, newMediaItem, "News");
+                        news.MediaItem = new CloudAccess().ChangeItem(news.MediaItem, news.FormFileItem, "News");
                     }
                     _context.Update(news);
                     await _context.SaveChangesAsync();
@@ -134,13 +134,12 @@ namespace Harissa.Intranet.Controllers
             ViewBag.Action = "Back";
             ViewBag.Message = "Are you sure you want to delete this ?";
 
-
             var news = await _context.News.FirstOrDefaultAsync(m => m.NewsID == id);
             if (news == null)
             {
                 return NotFound();
             }
-            ViewBag.Img = new CloudAccess().GetImg(news.MediaItem);
+            //ViewBag.Img = new CloudAccess().GetImg(news.MediaItem);
             return View(news);
         }
 

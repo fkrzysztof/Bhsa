@@ -21,6 +21,7 @@ namespace Harissa.Data
         public DbSet<PageSettings> PageSettings { get; set; }
         public DbSet<MediaPatronage> MediaPatronages { get; set; }
         public DbSet<PrivacyPolicy> PrivacyPolicies { get; set; }
+        public DbSet<Video> Videos { get; set; }
 
     }
 }

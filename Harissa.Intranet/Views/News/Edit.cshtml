@@ -14,9 +14,9 @@
             <input type="hidden" asp-for="MediaItem" />
             <div class="form-group">
                 @{ string img = new CloudAccess().GetImg(null);}
-                <img src="@img" class="form-control rounded imgPreview img-thumbnail" />
-                <input name="NewMediaItem" type="file" accept="image/*" class="form-control newMediaItem" />
-                <span asp-validation-for="MediaItem" class="text-danger"></span>
+                <img src="@img" class="imgPreview img-thumbnail" />
+                <input asp-for="FormFileItem" type="file" accept="image/*" class="form-control newMediaItem" />
+                <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
         </div>
 

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
-using Microsoft.AspNetCore.Http;
 using Harissa.Data.HelperClass;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
@@ -49,7 +48,7 @@ namespace Harissa.Intranet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(concert);
+            return View("Index",concert);
         }
 
         // GET: Concerts/Edit/5

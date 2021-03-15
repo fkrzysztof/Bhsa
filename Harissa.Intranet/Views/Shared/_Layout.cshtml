@@ -40,14 +40,14 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <!-- MENU        ****************************************************** -->
+                <!-- MENU        ************************************************************************************ -->
                 <ul class="navbar-nav ml-auto">
                     @*<li class="nav-item active">
-                            <a class="nav-link" href="#">
+            <a class="nav-link" href="#">
 
-                                <span class="sr-only">(current)</span>
-                            </a>
-                        </li>*@
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>*@
                     <li class="nav-item active">
                         <a class="nav-link" asp-controller="News" asp-action="Index">
                             <i class="far fa-comment-alt m-2" style="font-size: 1rem;"></i>News
@@ -73,6 +73,11 @@
                     <li class="nav-item">
                         <a class="nav-link" asp-controller="Concerts" asp-action="Index">
                             <i class="far fa-calendar-alt m-2" style="font-size: 1rem;"></i>Concerts/Events
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Video" asp-action="Index">
+                            <i class="fab fa-youtube m-2" style="font-size: 1rem;"></i>Video
                         </a>
                     </li>
                 </ul>

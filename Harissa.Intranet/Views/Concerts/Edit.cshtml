@@ -14,7 +14,7 @@
                 @{
                     string getimg = new CloudAccess().GetImg(Model.MediaItem);
                 }
-                <img src="@getimg" id="imgPreview" class="rounded img-thumbnail" />
+                <img src="@getimg" class="imgPreview rounded img-thumbnail" />
                 <input asp-for="FormFileItem" class="form-control newMediaItem" />
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>

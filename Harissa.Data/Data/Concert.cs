@@ -14,8 +14,7 @@ namespace Harissa.Data.Data
         public string Address { get; set; }
         public string Description { get; set; }
         public string Link { get; set; }
-        [Column(TypeName = "money")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
         public DateTime Date { get; set; }
         [NotMapped]
         public IFormFile FormFileItem { get; set; }

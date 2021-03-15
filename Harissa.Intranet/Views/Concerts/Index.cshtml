@@ -19,19 +19,16 @@
 <form asp-action="Create" enctype="multipart/form-data">
     <div class="row align-items-end">
         <div class="col-md-4 formCreate">
-
-
-
             <div class="form-group">
                 @{
                     string getimg = new CloudAccess().GetImg(null);
                 }
-                <img src="@getimg" id="imgPreview" class="w-75 rounded mb-3 img-thumbnail" />
+                <img src="@getimg" class="imgPreview w-75 rounded mb-3 img-thumbnail" />
                 <input asp-for="FormFileItem" class="form-control newMediaItem" />
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
         </div>
-        <div class="col-md-4  formCreate">
+        <div class="col-md-4 formCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <div class="form-group">
@@ -47,7 +44,6 @@
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
-                @*Opis doschowania...*@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
         </div>

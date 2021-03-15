@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Harissa.Data.Data.Video>
+
+@await Html.PartialAsync("TopNavi")
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/@item.Link.Substring(16)" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        }
+
+    </div>
+
