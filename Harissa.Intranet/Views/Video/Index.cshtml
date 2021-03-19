@@ -1,7 +1,7 @@
 ﻿@model Harissa.Data.Data.Video
 
 @await Html.PartialAsync("TopNavi")
-
+@using Harissa.Data.Data
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
@@ -19,30 +19,46 @@
 </div>
 
 
-@foreach (var item in ViewBag.VideoList)
+@foreach (var item in ViewBag.VideoList as List<Video>)
 {
     <div class="row my-4">
 
         <div class="col-sm-5 d-flex justify-content-around justify-sm-content-strat">
-            <iframe src="https://www.youtube.com/embed/@item.Link.Substring(16)" frameborder="0"
+            <iframe src="https://www.youtube.com/embed/@item.Link" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen style="height:100%;">
             </iframe>
         </div>
-        <div class="col-sm-5 d-flex justify-content-around">
-            <a href="@item.Link"><small>@item.Link</small></a>
+        <div class="col-sm-3 d-flex justify-content-around">
+            <p><i class="fas fa-hashtag" style="font-size: 0.75rem; color:black;"></i><strong>@item.Index</strong></p> 
+            <a href="https://youtu.be/@item.Link"><small>https://youtu.be/@item.Link</small></a>
         </div>
-        <div class="col-sm-2 d-flex justify-content-around justify-sm-content-end">
-            <div class="row">
-                <div class="col">
+        <div class="col-sm-4 d-flex justify-content-around justify-sm-content-end">
+            <div class="row w-100">
+                <div class="col-6">
+                    @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Max())
+                    {
+
+                        <a asp-action="Up" asp-route-index="@item.Index">
+                            <i class="fas fa-chevron-up" style="font-size: 1rem; color:black;"></i>
+                        </a>
+
+                    }
+                    @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Min())
+                    {
+
+                        <a asp-action="Down" asp-route-index="@item.Index">
+                            <i class="fas fa-chevron-down" style="font-size: 1rem; color:black;"></i>
+                        </a>
+
+                    }
+                </div>
+
+                <div class="col-6">
                     <a asp-action="Delete" asp-route-id="@item.VideoID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.VideoID"><i class="fas fa-tools m-md-2 m-5" style="font-size: 1rem; color:black;"></i></a>
                 </div>
-                <div class="col">
-                    <i class="fas fa-chevron-up" style="font-size: 1rem; color:black;"></i>
-                </div>
-                <div class="col">
-                    <i class="fas fa-chevron-down" style="font-size: 1rem; color:black;"></i>
-                </div>
+
             </div>
         </div>
     </div>

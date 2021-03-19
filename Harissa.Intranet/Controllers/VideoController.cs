@@ -6,6 +6,7 @@ using Harissa.Data;
 using Harissa.Data.Data;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -14,6 +15,51 @@ namespace Harissa.Intranet.Controllers
         public VideoController(ILogger<HomeController> logger, HarissaContext context)
         : base(logger, context)
         {
+        }
+
+        public async Task<IActionResult> Up(int index)
+        {
+            var videoList = await _context.Videos.ToListAsync();
+            Video videoUp = videoList.FirstOrDefault(f => f.Index == index);
+            var nextList = videoList.Where(w => w.Index > videoUp.Index).Select(s => s.Index);
+            
+            if(nextList.Count() == 0)
+                return RedirectToAction("Index");
+            
+            int indexNext = nextList.Min();
+            Video videoDown = videoList.FirstOrDefault(f => f.Index == indexNext);
+            List<Video> vlist = swapPlaces(videoUp, videoDown);
+            _context.Update(vlist[0]);
+            _context.Update(vlist[1]);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+        public async Task<IActionResult> Down(int index)
+        {
+            var videoList = await _context.Videos.ToListAsync();
+            Video videoDown = videoList.FirstOrDefault(f => f.Index == index);
+            var nextList = videoList.Where(w => w.Index < videoDown.Index).Select(s => s.Index);
+            
+            if(nextList.Count() == 0)
+                return RedirectToAction("Index");
+            
+            int indexNext = nextList.Max();
+            Video videoUp = videoList.FirstOrDefault(f => f.Index == indexNext);
+            List<Video> vlist = swapPlaces(videoUp, videoDown);
+            _context.Update(vlist[0]);
+            _context.Update(vlist[1]);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Index");
+        }
+
+        private List<Video> swapPlaces(Video x, Video y)
+        {
+            int z = x.Index;
+            x.Index = y.Index;
+            y.Index = z;
+            return new List<Video> { x, y };
         }
 
         private void naviPack()
@@ -27,7 +73,7 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
-            ViewBag.VideoList = await _context.Videos.ToListAsync();
+            ViewBag.VideoList = await _context.Videos.OrderByDescending(o => o.Index).ToListAsync();
             return View();
         }
 
@@ -37,9 +83,16 @@ namespace Harissa.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VideoID,Link")] Video video)
         {
+            
             if (ModelState.IsValid)
             {
-                int length = _context.Videos.Count() + 1;
+                
+                video.Link = video.Link.Replace("https://", "");
+                video.Link = video.Link.Replace("www.", "");
+                video.Link = video.Link.Replace("youtu.be/", "");
+                video.Link = video.Link.Replace("youtube.com/watch?v=", "");
+
+                video.Index = _context.Videos.Count() + 1;
                 _context.Add(video);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -51,6 +104,8 @@ namespace Harissa.Intranet.Controllers
         // GET: Video/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            naviPack();
+            ViewBag.Path += " /Edit";
             if (id == null)
             {
                 return NotFound();
