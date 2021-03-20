@@ -2,8 +2,9 @@
 
 @await Html.PartialAsync("TopNavi")
 @using Harissa.Data.Data
+
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -18,47 +19,45 @@
     </div>
 </div>
 
-
 @foreach (var item in ViewBag.VideoList as List<Video>)
 {
-    <div class="row my-4">
+    <div class="row my-5 p-2 my-md-4">
 
-        <div class="col-sm-5 d-flex justify-content-around justify-sm-content-strat">
+        <div class="col-md-5 d-flex justify-content-md-start justify-content-around">
             <iframe src="https://www.youtube.com/embed/@item.Link" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen style="height:100%;">
+                    allowfullscreen style="width:100%;">
             </iframe>
         </div>
-        <div class="col-sm-3 d-flex justify-content-around">
-            <p><i class="fas fa-hashtag" style="font-size: 0.75rem; color:black;"></i><strong>@item.Index</strong></p> 
-            <a href="https://youtu.be/@item.Link"><small>https://youtu.be/@item.Link</small></a>
-        </div>
-        <div class="col-sm-4 d-flex justify-content-around justify-sm-content-end">
-            <div class="row w-100">
-                <div class="col-6">
-                    @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Max())
-                    {
-
-                        <a asp-action="Up" asp-route-index="@item.Index">
-                            <i class="fas fa-chevron-up" style="font-size: 1rem; color:black;"></i>
-                        </a>
-
-                    }
-                    @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Min())
-                    {
-
-                        <a asp-action="Down" asp-route-index="@item.Index">
-                            <i class="fas fa-chevron-down" style="font-size: 1rem; color:black;"></i>
-                        </a>
-
-                    }
+        <div class="col-md-7">
+            <div class="row no-gutters">
+                <div class="col-md-8 d-flex justify-content-md-around justify-content-between">
+                    <h3><i class="fas fa-hashtag" style="font-size: 1.5rem; color:black;"></i><span class="font-italic">@item.Index</span></h3>
+                    <a href="https://youtu.be/@item.Link"><small>https://youtu.be/@item.Link</small></a>
                 </div>
+                <div class="col-md-4 d-flex justify-content-sm-around justify-content-end">
+                    <div class="row w-100">
+                        <div class="col-sm-6 text-center">
+                            @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Max())
+                            {
+                                <a asp-action="Up" asp-route-index="@item.Index">
+                                    <i class="fas fa-chevron-up m-2" style="font-size: 1rem; color:black;"></i>
+                                </a>
+                            }
+                            @if (item.Index != (ViewBag.VideoList as List<Video>).Select(s => s.Index).Min())
+                            {
+                                <a asp-action="Down" asp-route-index="@item.Index">
+                                    <i class="fas fa-chevron-down m-2" style="font-size: 1rem; color:black;"></i>
+                                </a>
+                            }
+                        </div>
+                        <div class="col-sm-6 text-center">
+                            <a asp-action="Delete" asp-route-id="@item.VideoID"><i class="fas fa-trash m-2" style="font-size: 1rem; color:black;"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.VideoID"><i class="fas fa-tools m-2" style="font-size: 1rem; color:black;"></i></a>
+                        </div>
 
-                <div class="col-6">
-                    <a asp-action="Delete" asp-route-id="@item.VideoID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
-                    <a asp-action="Edit" asp-route-id="@item.VideoID"><i class="fas fa-tools m-md-2 m-5" style="font-size: 1rem; color:black;"></i></a>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
