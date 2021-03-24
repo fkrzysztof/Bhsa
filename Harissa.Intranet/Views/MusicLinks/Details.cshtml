@@ -1,0 +1,37 @@
+﻿@model Harissa.Data.Data.MusicLink
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>MusicLink</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LinkToAlbum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LinkToAlbum)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MusicPlatform)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MusicPlatform.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Music)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Music.IFrame)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MusicLinkID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

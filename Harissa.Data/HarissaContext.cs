@@ -22,6 +22,9 @@ namespace Harissa.Data
         public DbSet<MediaPatronage> MediaPatronages { get; set; }
         public DbSet<PrivacyPolicy> PrivacyPolicies { get; set; }
         public DbSet<Video> Videos { get; set; }
+        public DbSet<Music> Musics { get; set; }
+        public DbSet<MusicPlatform> MusicPlatforms { get; set; }
+        public DbSet<MusicLink> MusicLinks { get; set; }
 
     }
 }

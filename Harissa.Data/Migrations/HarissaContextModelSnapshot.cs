@@ -117,6 +117,77 @@ namespace Harissa.Data.Migrations
                     b.ToTable("MediaPatronages");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.Music", b =>
+                {
+                    b.Property<int>("MusicID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Cover")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IFrame")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Year")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("MusicID");
+
+                    b.ToTable("Musics");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.MusicLink", b =>
+                {
+                    b.Property<int>("MusicLinkID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LinkToAlbum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MusicID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MusicPlatformID")
+                        .HasColumnType("int");
+
+                    b.HasKey("MusicLinkID");
+
+                    b.HasIndex("MusicID");
+
+                    b.HasIndex("MusicPlatformID");
+
+                    b.ToTable("MusicLinks");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.MusicPlatform", b =>
+                {
+                    b.Property<int>("MusicPlatformID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MusicPlatformID");
+
+                    b.ToTable("MusicPlatforms");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.News", b =>
                 {
                     b.Property<int>("NewsID")
@@ -227,6 +298,25 @@ namespace Harissa.Data.Migrations
                     b.ToTable("Videos");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.MusicLink", b =>
+                {
+                    b.HasOne("Harissa.Data.Data.Music", "Music")
+                        .WithMany("MusicLinks")
+                        .HasForeignKey("MusicID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Harissa.Data.Data.MusicPlatform", "MusicPlatform")
+                        .WithMany("MusicLinks")
+                        .HasForeignKey("MusicPlatformID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Music");
+
+                    b.Navigation("MusicPlatform");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.PrivacyPolicy", b =>
                 {
                     b.HasOne("Harissa.Data.Data.PageSettings", "pageSettings")
@@ -247,6 +337,16 @@ namespace Harissa.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("pageSettings");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.Music", b =>
+                {
+                    b.Navigation("MusicLinks");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.MusicPlatform", b =>
+                {
+                    b.Navigation("MusicLinks");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
