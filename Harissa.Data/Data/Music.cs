@@ -16,7 +16,7 @@ namespace Harissa.Data.Data
         [Required]
         public string Title { get; set; }
         [Required]
-        public DateTime Year { get; set; }
+        public int DateOfPublication { get; set; }
         [NotMapped]
         public  IFormFile NewCover { get; set; }
         public string Cover { get; set; }

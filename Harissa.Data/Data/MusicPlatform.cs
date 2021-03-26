@@ -15,6 +15,5 @@ namespace Harissa.Data.Data
         [NotMapped]
         public IFormFile NewIcon { get; set; }
         public ICollection<MusicLink> MusicLinks { get; set; }
-
     }
 }

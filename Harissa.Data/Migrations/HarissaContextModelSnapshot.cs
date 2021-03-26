@@ -127,6 +127,9 @@ namespace Harissa.Data.Migrations
                     b.Property<string>("Cover")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("DateOfPublication")
+                        .HasColumnType("int");
+
                     b.Property<string>("IFrame")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -134,9 +137,6 @@ namespace Harissa.Data.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("MusicID");
 

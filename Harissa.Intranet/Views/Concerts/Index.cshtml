@@ -10,7 +10,7 @@
                 <h5><i class="fas fa-plus-circle m-2" style="font-size: 1.5rem; color:black;"></i>Create</h5>
             </div>
             <div class="col-6 text-right">
-                <a href="#" id="hideCreate"><i class="fas fa-sort-down m-2" style="font-size: 2.0rem; color:black;"></i></a>
+                <a href="#" class="hideButton"><i class="fas fa-sort-down m-2" style="font-size: 2.0rem; color:black;"></i></a>
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
 @*CREATE*@
 <form asp-action="Create" enctype="multipart/form-data">
     <div class="row align-items-end">
-        <div class="col-md-4 formCreate">
+        <div class="col-md-4 hideElement">
             <div class="form-group">
                 @{
                     string getimg = new CloudAccess().GetImg(null);
@@ -108,34 +108,7 @@
     }
 </div>
 
-<script>
-    //create
-    $(".formCreate").hide();
-    $("#createButton").on("click", function (e) {
-        e.preventDefault();
-        $(".formCreate").slideDown();
-    });
-    $("#hideCreate").on("click", function () {
-        $(".formCreate").slideToggle();
-    });
-    //delete
-    //$(".deleteButton").on("click", function (e) {
-    //    e.preventDefault();    
-    //    let data = $(this).data("id");
-    //    console.log("data =" + data);
-    //let rezult = confirm("delete item?");
-    //    if (rezult == true) {
-            
-    //        $.post("/Concerts/DeleteJS", { id: data }, function () {
-    //            location.reload(true);
-    //        });
-            
-    //}
-    //});
-
-
-</script>
-
+<script src="~/js/hideDiv.js"></script>
 <script src="~/js/photoPreview.js"></script>
 
 

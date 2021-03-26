@@ -7,22 +7,31 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
+using Harissa.Data.HelperClass;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class MusicController : Controller
+    public class MusicController : BaseClassController
     {
-        private readonly HarissaContext _context;
-
-        public MusicController(HarissaContext context)
+        public MusicController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
+        }
+
+        private void naviPack()
+        {
+            ViewBag.Path = "Music";
+            ViewBag.Icon = "fas fa-volume-up";
+            logo();
         }
 
         // GET: Music
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Musics.ToListAsync());
+            naviPack();
+            return View(await _context.Musics.Include(i => i.MusicLinks).ThenInclude(m => m.MusicPlatform).ToListAsync());
         }
 
         // GET: Music/Details/5
@@ -55,17 +64,23 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(/*[Bind("MusicID,IFrame,Title,Year,Cover")]*/ Music music, string[]LinkToAlbum)
+        public async Task<IActionResult> Create([Bind("MusicID,IFrame,Title,DateOfPublication,NewCover")] Music music, string[]LinkToAlbum)
         {
             if (ModelState.IsValid)
             {
+                List<MusicLink> musicLinkList = new List<MusicLink>();
+
                 for (int i = 0; i < LinkToAlbum.Length; i++)
                 {
-                    _context.MusicLinks.Add( new MusicLink { LinkToAlbum = LinkToAlbum[i],   });
-                //_context.MusicLinks.Add(new MusicLink { LinkToAlbum = LinkToAlbum[i] });
-            }
-                
-                //_context.Add(music);
+                    musicLinkList.Add(new MusicLink {
+                        MusicPlatformID =  Convert.ToInt32(LinkToAlbum[i]),
+                        LinkToAlbum = LinkToAlbum[++i],
+                    }) ;
+                    music.MusicLinks = musicLinkList;
+                    _context.Musics.Add(music);
+                }
+                music.Cover = new CloudAccess().AddPic(music.NewCover, "Cover");
+                _context.Add(music);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -93,7 +108,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MusicID,IFrame,Title,Year,Cover")] Music music)
+        public async Task<IActionResult> Edit(int id, [Bind("MusicID,IFrame,Title,DateOfPublication,Cover")] Music music)
         {
             if (id != music.MusicID)
             {

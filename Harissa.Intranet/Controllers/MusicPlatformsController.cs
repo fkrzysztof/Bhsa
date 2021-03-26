@@ -8,21 +8,29 @@ using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
 using Harissa.Data.HelperClass;
+using Harissa.Intranet.Controllers.Abstract;
+using Microsoft.Extensions.Logging;
 
 namespace Harissa.Intranet.Controllers
 {
-    public class MusicPlatformsController : Controller
+    public class MusicPlatformsController : BaseClassController
     {
-        private readonly HarissaContext _context;
-
-        public MusicPlatformsController(HarissaContext context)
+        public MusicPlatformsController(ILogger<HomeController> logger, HarissaContext context)
+        : base(logger, context)
         {
-            _context = context;
+        }
+
+        private void naviPack()
+        {
+            ViewBag.Path = "Music";
+            ViewBag.Icon = "fas fa-volume-up";
+            logo();
         }
 
         // GET: MusicPlatforms
         public async Task<IActionResult> Index()
         {
+            naviPack();
             return View(await _context.MusicPlatforms.ToListAsync());
         }
 

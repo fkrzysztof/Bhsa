@@ -1,54 +1,63 @@
 ﻿@model IEnumerable<Harissa.Data.Data.Music>
-
+@using Harissa.Data.HelperClass
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IFrame)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Year)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cover)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IFrame)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cover)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.MusicID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.MusicID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.MusicID">Delete</a>
-            </td>
-        </tr>
+@await Html.PartialAsync("TopNavi")
+
+
+<div class="row mb-4">
+    <div class="col-12">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Albums</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Index" asp-controller="MusicPlatforms">Music Platforms</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row mt-5">
+        <div class="col-md-4">
+            @Html.DisplayFor(modelItem => item.IFrame)
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-4">
+                    @{
+                        string getimg = new CloudAccess().GetImg(item.Cover);
+                        <img src="@getimg" class="img-fluid rounded" />
+                    }
+                </div>
+                <div class="col-md-6">
+                    <h2 class="display-3">@Html.DisplayFor(modelItem => item.Title)</h2> <h4 class="display-4">@Html.DisplayFor(modelItem => item.DateOfPublication)</h4>
+                </div>
+                <div class="col-md-2">
+                    <a asp-action="Edit" asp-route-id="@item.MusicID"><i class="fas fa-tools m-md-2 m-5" style="font-size: 1rem; color:black;"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.MusicID"><i class="fas fa-trash m-md-2 m-5" style="font-size: 1rem; color:black;"></i></a>
+                </div>
+            </div>
+            <div class="row mt-2">
+                @{
+                    string imgLink;
+                    foreach (var itemLink in item.MusicLinks)
+                    {
+                        <div class="col-md-12 mt-3">
+                            @{imgLink = new CloudAccess().GetImg(itemLink.MusicPlatform.Icon);}
+                            <img src="@imgLink" class="mr-2" style="max-width:40px;" />
+                            <small><a href="#">@itemLink.LinkToAlbum</a></small>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <hr />
 }
-    </tbody>
-</table>
