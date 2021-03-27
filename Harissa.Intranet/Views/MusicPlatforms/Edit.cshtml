@@ -5,13 +5,14 @@
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@await Html.PartialAsync("TopNavi")
 
 <form asp-action="Edit" asp-controller="MusicPlatforms" enctype="multipart/form-data">
     <input type="hidden" asp-for="MusicPlatformID" />
+    <input type="hidden" asp-for="Icon" />
     <div class="row">
         <div class="col-md-6">
-            @{ string img = new CloudAccess().GetImg(null);}
+            @{ string img = new CloudAccess().GetImg(Model.Icon);}
             <img src="@img" class="imgPreview img-thumbnail" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -21,6 +22,11 @@
             </div>
         </div>
         <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="UrlArtist" class="control-label"></label>
+                <input asp-for="UrlArtist" class="form-control" />
+                <span asp-validation-for="UrlArtist" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />

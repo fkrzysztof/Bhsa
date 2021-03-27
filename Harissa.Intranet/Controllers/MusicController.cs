@@ -31,6 +31,7 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> Index()
         {
             naviPack();
+            ViewBag.Action = "Create";
             return View(await _context.Musics.Include(i => i.MusicLinks).ThenInclude(m => m.MusicPlatform).ToListAsync());
         }
 
@@ -72,6 +73,12 @@ namespace Harissa.Intranet.Controllers
 
                 for (int i = 0; i < LinkToAlbum.Length; i++)
                 {
+                    if (LinkToAlbum[i + 1] == null)
+                    {
+                        i++;
+                        continue;
+                    }
+
                     musicLinkList.Add(new MusicLink {
                         MusicPlatformID =  Convert.ToInt32(LinkToAlbum[i]),
                         LinkToAlbum = LinkToAlbum[++i],
@@ -161,7 +168,16 @@ namespace Harissa.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var music = await _context.Musics.FindAsync(id);
+            var music = _context.Musics.Include(i => i.MusicLinks).FirstOrDefault(w => w.MusicID == id);
+            if(music == null)
+                return NotFound();
+
+            foreach (var itemLinks in music.MusicLinks)
+            {
+                _context.MusicLinks.Remove(itemLinks);
+            }
+
+            new CloudAccess().Remove(music.Cover);
             _context.Musics.Remove(music);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

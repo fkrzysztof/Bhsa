@@ -22,3 +22,6 @@ dalej ViewBag.SelectListSocialMediaEdit
 social media zmiana na cloud
 
 poprawic newsy - brak zdjecia blad..
+
+
+dodac dynamicznie platformy w edit

@@ -12,6 +12,8 @@ namespace Harissa.Data.Data
         [Required]
         public string Name { get; set; }
         public string Icon { get; set; }
+        [DataType(DataType.Url)]
+        public string UrlArtist { get; set; }
         [NotMapped]
         public IFormFile NewIcon { get; set; }
         public ICollection<MusicLink> MusicLinks { get; set; }

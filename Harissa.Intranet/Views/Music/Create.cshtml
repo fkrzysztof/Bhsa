@@ -11,9 +11,20 @@
 
 <h4>Music</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @{ string img = new CloudAccess().GetImg(null);}
+                <img src="@img" class="imgPreview img-thumbnail" />
+                <label asp-for="NewCover" class="control-label"></label>
+                <input asp-for="NewCover" type="file" class="form-control" />
+                <span asp-validation-for="NewCover" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IFrame" class="control-label"></label>
@@ -30,38 +41,38 @@
                 <input asp-for="DateOfPublication" min="2000" class="form-control" />
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="NewCover" class="control-label"></label>
-                <input asp-for="NewCover" type="file" class="form-control" />
-                <span asp-validation-for="NewCover" class="text-danger"></span>
-            </div>
+        </div>
 
-            <hr />
-            @{ 
+        <hr />
+
+        <div class="col-12 mt-4">
+            @{
                 string getimg;
             }
-           @foreach (var item in @ViewBag.MusicPlatfomrs as List<MusicPlatform>)
-           {
-            <input type="hidden" name="LinkToAlbum[]" value="@item.MusicPlatformID" />
-            <div class="form-group">
-                @{
-                    getimg = new CloudAccess().GetImg(item.Icon);
-                }
-                <img src="@getimg" class="img-fluid rounded" />
-                <label asp-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="control-label"></label>
-                <input name="LinkToAlbum[]" class="form-control" />
-                <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span>
-            </div>
+            @foreach (var item in @ViewBag.MusicPlatfomrs as List<MusicPlatform>)
+            {
+                <input type="hidden" name="LinkToAlbum[]" value="@item.MusicPlatformID" />
+                <div class="form-row mx-2">
+                    <div class="col-2 d-flex align-items-center">
+                        @{
+                            getimg = new CloudAccess().GetImg(item.Icon);
+                        }
+                        <img src="@getimg" class="img-fluid" style="max-width:40px;"  /><span class="m-lg-3">@item.Name</span>
+                    </div>
+                    <div class="col-10">
+                        @*<label class="control-label">@item.Name</label>*@
+                        <input name="LinkToAlbum[]" class="form-control" />
+                        <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span>
+                    </div>
+                </div>
             }
             <hr />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </form>
+        </div>
+
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+<script src="~/js/photoPreview.js"></script>

@@ -183,6 +183,9 @@ namespace Harissa.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UrlArtist")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MusicPlatformID");
 
                     b.ToTable("MusicPlatforms");

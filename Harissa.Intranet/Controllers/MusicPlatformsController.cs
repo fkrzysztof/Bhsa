@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Harissa.Data;
 using Harissa.Data.Data;
@@ -34,34 +31,11 @@ namespace Harissa.Intranet.Controllers
             return View(await _context.MusicPlatforms.ToListAsync());
         }
 
-        // GET: MusicPlatforms/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var musicPlatform = await _context.MusicPlatforms
-                .FirstOrDefaultAsync(m => m.MusicPlatformID == id);
-            if (musicPlatform == null)
-            {
-                return NotFound();
-            }
-
-            return View(musicPlatform);
-        }
-
-        // GET: MusicPlatforms/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         // POST: MusicPlatforms/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MusicPlatformID,Name,NewIcon")] MusicPlatform musicPlatform)
+        public async Task<IActionResult> Create([Bind("MusicPlatformID,Name,NewIcon,UrlArtist")] MusicPlatform musicPlatform)
         {
             if (ModelState.IsValid)
             {
@@ -70,12 +44,15 @@ namespace Harissa.Intranet.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(musicPlatform);
+            return View("Index",musicPlatform);
         }
 
         // GET: MusicPlatforms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            naviPack();
+            ViewBag.Path += " / Edit";
+            ViewBag.Action = "Back";
             if (id == null)
             {
                 return NotFound();
@@ -94,7 +71,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MusicPlatformID,Name,Icon")] MusicPlatform musicPlatform)
+        public async Task<IActionResult> Edit(int id, [Bind("MusicPlatformID,Name,Icon,UrlArtist,NewIcon")] MusicPlatform musicPlatform)
         {
             if (id != musicPlatform.MusicPlatformID)
             {
@@ -105,6 +82,7 @@ namespace Harissa.Intranet.Controllers
             {
                 try
                 {
+                    musicPlatform.Icon = new CloudAccess().ChangeItem(musicPlatform.Icon ,musicPlatform.NewIcon, "Music");
                     _context.Update(musicPlatform);
                     await _context.SaveChangesAsync();
                 }
@@ -148,6 +126,7 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var musicPlatform = await _context.MusicPlatforms.FindAsync(id);
+            new CloudAccess().Remove(musicPlatform.Icon);
             _context.MusicPlatforms.Remove(musicPlatform);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
