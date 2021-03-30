@@ -7,11 +7,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
+@await Html.PartialAsync("TopNavi")
 
-<h4>Music</h4>
-<hr />
 <form asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
 
         <div class="col-md-6">
@@ -25,7 +24,6 @@
         </div>
 
         <div class="col-md-6">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IFrame" class="control-label"></label>
                 <input asp-for="IFrame" class="form-control" />
@@ -52,23 +50,23 @@
             @foreach (var item in @ViewBag.MusicPlatfomrs as List<MusicPlatform>)
             {
                 <input type="hidden" name="LinkToAlbum[]" value="@item.MusicPlatformID" />
-                <div class="form-row mx-2">
-                    <div class="col-2 d-flex align-items-center">
+                <div class="form-row mt-4">
+                    <div class="col-md-2 d-flex align-items-center">
                         @{
                             getimg = new CloudAccess().GetImg(item.Icon);
                         }
-                        <img src="@getimg" class="img-fluid" style="max-width:40px;"  /><span class="m-lg-3">@item.Name</span>
+                        <img src="@getimg" class="img-fluid my-2" style="max-width:30px;" />
+                        <span class="m-lg-3 ml-2">@item.Name</span>
                     </div>
-                    <div class="col-10">
-                        @*<label class="control-label">@item.Name</label>*@
+                    <div class="col-md-10 d-flex align-items-center">
                         <input name="LinkToAlbum[]" class="form-control" />
-                        <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span>
+                        <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span> @*!!!*@
                     </div>
                 </div>
             }
             <hr />
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group text-right">
+                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
             </div>
         </div>
 

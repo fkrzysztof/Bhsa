@@ -56,6 +56,9 @@ namespace Harissa.Intranet.Controllers
         // GET: Music/Create
         public IActionResult Create()
         {
+            naviPack();
+            ViewBag.Action = "Back";
+            ViewBag.Path += " / Create";
             ViewBag.MusicPlatfomrs = _context.MusicPlatforms.ToList();
             return View();
         }
@@ -69,23 +72,28 @@ namespace Harissa.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<MusicLink> musicLinkList = new List<MusicLink>();
+                //List<MusicLink> musicLinkList = new List<MusicLink>();
 
-                for (int i = 0; i < LinkToAlbum.Length; i++)
-                {
-                    if (LinkToAlbum[i + 1] == null)
-                    {
-                        i++;
-                        continue;
-                    }
+                //for (int i = 0; i < LinkToAlbum.Length; i++)
+                //{
+                //    if (LinkToAlbum[i + 1] == null)
+                //    {
+                //        i++;
+                //        continue;
+                //    }
 
-                    musicLinkList.Add(new MusicLink {
-                        MusicPlatformID =  Convert.ToInt32(LinkToAlbum[i]),
-                        LinkToAlbum = LinkToAlbum[++i],
-                    }) ;
-                    music.MusicLinks = musicLinkList;
-                    _context.Musics.Add(music);
-                }
+                //    musicLinkList.Add(new MusicLink {
+                //        MusicPlatformID =  Convert.ToInt32(LinkToAlbum[i]),
+                //        LinkToAlbum = LinkToAlbum[++i],
+                //    }) ;
+                //    music.MusicLinks = musicLinkList;
+                //    _context.Musics.Add(music);
+                //}
+
+                music.MusicLinks = addMuiscList(LinkToAlbum);
+                _context.Musics.Add(music);
+
+
                 music.Cover = new CloudAccess().AddPic(music.NewCover, "Cover");
                 _context.Add(music);
                 await _context.SaveChangesAsync();
@@ -93,6 +101,31 @@ namespace Harissa.Intranet.Controllers
             }
             return View(music);
         }
+
+
+        private List<MusicLink> addMuiscList(string[] MLinks)
+        {
+            List<MusicLink> musicLinkList = new List<MusicLink>();
+
+            for (int i = 0; i < MLinks.Length; i++)
+            {
+                if (MLinks[i + 1] == null)
+                {
+                    i++;
+                    continue;
+                }
+
+                musicLinkList.Add(new MusicLink
+                {
+                    MusicPlatformID = Convert.ToInt32(MLinks[i]),
+                    LinkToAlbum = MLinks[++i],
+                });
+            }
+            //music.MusicLinks = musicLinkList;
+            //_context.Musics.Add(music);
+            return musicLinkList;
+        }
+
 
         // GET: Music/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -102,7 +135,30 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
-            var music = await _context.Musics.FindAsync(id);
+            var musicLinks = await _context.MusicLinks.Where(w => w.MusicID == id).ToListAsync();
+            var musicplatforms = await _context.MusicPlatforms
+                .Where(w => musicLinks.Select(s => s.MusicPlatformID).Contains(w.MusicPlatformID) == false)
+                .ToListAsync();
+
+            //foreach (var item in musicplatforms)
+            //{
+            //    if (musicLinks.Select(s => s.MusicPlatformID).Contains(item.MusicPlatformID))
+            //    {
+            //        musicplatforms.Remove(item);
+            //    }
+            //}
+
+            ViewBag.MusicPlatfomrs = musicplatforms.ToList();
+            
+            naviPack();
+            ViewBag.Action = "Back";
+            ViewBag.Path += " / Edit";
+
+            var music = await _context.Musics
+                .Include(i => i.MusicLinks)
+                .ThenInclude(m => m.MusicPlatform)
+                .FirstOrDefaultAsync(f => f.MusicID == id);
+
             if (music == null)
             {
                 return NotFound();
@@ -115,17 +171,26 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("MusicID,IFrame,Title,DateOfPublication,Cover")] Music music)
+        public async Task<IActionResult> Edit(int id, /*[Bind("MusicID,IFrame,Title,DateOfPublication,Cover,MusicLinks")]*/ Music music, string[] LinkToAlbum)
         {
             if (id != music.MusicID)
             {
                 return NotFound();
             }
 
+            var servMusic = _context.MusicLinks.FirstOrDefault(f => f.MusicID == id);
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    #region MusicPlatforms
+                    var toDelete = _context.MusicLinks.Where(w => w.MusicID == id);
+                    _context.MusicLinks.RemoveRange(toDelete);
+                    music.MusicLinks = addMuiscList(LinkToAlbum);
+                    
+                    #endregion
+
                     _context.Update(music);
                     await _context.SaveChangesAsync();
                 }

@@ -1,22 +1,34 @@
 ﻿@model Harissa.Data.Data.Music
+@using Harissa.Data.Data
+@using Harissa.Data.HelperClass
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+@await Html.PartialAsync("TopNavi")
 
-<h4>Music</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="MusicID" />
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Cover" />
+    <input type="hidden" asp-for="MusicID" />
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @{ string img = new CloudAccess().GetImg(Model.Cover);}
+                <img src="@img" class="imgPreview img-thumbnail" />
+                <label asp-for="NewCover" class="control-label"></label>
+                <input asp-for="NewCover" type="file" class="form-control" />
+                <span asp-validation-for="NewCover" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="col-md-6">
             <div class="form-group">
                 <label asp-for="IFrame" class="control-label"></label>
-                <input asp-for="IFrame" class="form-control" />
+                <input asp-for="IFrame" class="form-control iframe" />
                 <span asp-validation-for="IFrame" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -26,22 +38,83 @@
             </div>
             <div class="form-group">
                 <label asp-for="DateOfPublication" class="control-label"></label>
-                <input asp-for="DateOfPublication" class="form-control" />
+                <input asp-for="DateOfPublication" min="2000" class="form-control" />
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Cover" class="control-label"></label>
-                <input asp-for="Cover" class="form-control" />
-                <span asp-validation-for="Cover" class="text-danger"></span>
+        </div>
+
+        <hr />
+
+        <div class="col-12 mt-4">
+            @{
+                string getimg;
+            }
+
+            @foreach (var item in Model.MusicLinks)
+            {
+                <div class="form-row mt-4">
+                    <div class="col-md-2 d-flex align-items-center">
+                        @{
+                            getimg = new CloudAccess().GetImg(item.MusicPlatform.Icon);
+                        }
+                        <img src="@getimg" class="img-fluid my-2" style="max-width:30px;" />
+                        <span class="m-lg-3 ml-2">@item.MusicPlatform.Name</span>
+                    </div>
+                    <div class="col-md-10 d-flex align-items-center">
+                        <input type="hidden" name="LinkToAlbum[]" value="@item.MusicPlatformID" />
+                        <input class="form-control" name="LinkToAlbum[]" value="@item.LinkToAlbum" />
+                        <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span>
+                        <a asp-action="Delete" asp-route-id="#" class="hideElement"><i class="fas fa-trash ml-2" style="font-size: 1rem; color:black;"></i></a>
+                    </div>
+                </div>
+            }
+            @*new*@
+            @foreach (var item in ViewBag.MusicPlatfomrs as List<MusicPlatform>)
+            {
+                <div class="form-row mt-4">
+                    <div class="col-md-2 d-flex align-items-center">
+                        @{
+                            getimg = new CloudAccess().GetImg(item.Icon);
+                        }
+                        <img src="@getimg" class="img-fluid my-2" style="max-width:30px;" />
+                        <span class="m-lg-3 ml-2">@item.Name</span>
+                    </div>
+                    <div class="col-md-10 d-flex align-items-center">
+                        <input type="hidden" name="LinkToAlbum[]" value="@item.MusicPlatformID" />
+                        <input class="form-control" name="LinkToAlbum[]" />
+                        <span asp-validation-for="MusicLinks.FirstOrDefault().LinkToAlbum" class="text-danger"></span>
+                        <a asp-action="Delete" asp-route-id="#" class="hideElement"><i class="fas fa-trash ml-2" style="font-size: 1rem; color:black;"></i></a>
+                    </div>
+                </div>
+            }
+            <hr />
+            <div class="form-group text-right">
+                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
     </div>
-</div>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<script src="~/js/photoPreview.js"></script>
 
+<script>
+    $(".hideElement").on("click", function (e) {
+        e.preventDefault();
+        let inputs = $(this).siblings("input");
+        $(this).parent().parent().fadeOut("slow", function () {
+            inputs.val("");
+        });
+    });
+
+    //$(".iframe").on("change", function () {
+    //    let str = $(this).val();
+    //    var regex = /<img.*?src='(.*?)'/;
+    //    var src = regex.exec(str)[1];
+
+    //    console.log(src);
+    //});
+
+
+
+</script>
