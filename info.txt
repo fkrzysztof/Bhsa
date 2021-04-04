@@ -2,3 +2,4 @@
 
 
 embed do poprawki
+dodac walidacje adresu  youtube

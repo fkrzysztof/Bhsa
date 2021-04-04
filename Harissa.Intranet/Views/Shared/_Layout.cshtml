@@ -48,40 +48,40 @@
                 <span class="sr-only">(current)</span>
             </a>
         </li>*@
-                    <li class="nav-item active">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "News" ? "active" : "")">
                         <a class="nav-link" asp-controller="News" asp-action="Index">
                             <i class="far fa-comment-alt m-2" style="font-size: 1rem;"></i>News
                         </a>
 
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "PageSettings" ? "active" : "")">
                         <a class="nav-link" asp-controller="PageSettings" asp-action="Index">
                             <i class="fas fa-cogs m-2" style="font-size: 1rem;"></i>Page Settings
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Bio" ? "active" : "")">
                         <a class="nav-link" asp-controller="Bio" asp-action="Index">
                             <i class="fas fa-book-open m-2" style="font-size: 1rem;"></i>Bio
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Contact" ? "active" : "")">
                         <a class="nav-link" asp-controller="Contact" asp-action="Index">
                             <i class="fas fa-phone-alt m-2" style="font-size: 1rem;"></i>Contact
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Concerts" ? "active" : "")">
                         <a class="nav-link" asp-controller="Concerts" asp-action="Index">
                             <i class="far fa-calendar-alt m-2" style="font-size: 1rem;"></i>Concerts/Events
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Video" ? "active" : "")">
                         <a class="nav-link" asp-controller="Video" asp-action="Index">
                             <i class="fab fa-youtube m-2" style="font-size: 1rem;"></i>Video
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @(ViewContext.RouteData.Values["Controller"].ToString() == "Music" ? "active" : "")">
                         <a class="nav-link" asp-controller="Music" asp-action="Index">
                             <i class="fas fa-volume-up m-2" style="font-size: 1rem;"></i>Music
                         </a>

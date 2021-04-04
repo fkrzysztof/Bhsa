@@ -16,9 +16,9 @@
     </div>
 </div>
 @*CREATE*@
-<form asp-action="Create" enctype="multipart/form-data">
+<form asp-action="Create" enctype="multipart/form-data" class="hideElement">
     <div class="row align-items-end">
-        <div class="col-md-4 hideElement">
+        <div class="col-md-4">
             <div class="form-group">
                 @{
                     string getimg = new CloudAccess().GetImg(null);

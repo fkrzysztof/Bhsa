@@ -10,6 +10,7 @@ using Harissa.Data.Data;
 using Harissa.Data.HelperClass;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
+using System.Text.RegularExpressions;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -68,7 +69,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MusicID,IFrame,Title,DateOfPublication,NewCover")] Music music, string[]LinkToAlbum)
+        public async Task<IActionResult> Create([Bind("MusicID,IFrame,Title,DateOfPublication,NewCover")] MusicCreate music, string[]LinkToAlbum)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +90,14 @@ namespace Harissa.Intranet.Controllers
                 //    music.MusicLinks = musicLinkList;
                 //    _context.Musics.Add(music);
                 //}
+
+
+                Regex regSrc = new Regex("src=[\"'](.+?)(spotify.com|tidal.com|deezer.com|youtube.com)(.+?)[\"']", RegexOptions.IgnoreCase);
+                Match rezult = regSrc.Match(music.IFrame);
+                string src = rezult.Value;
+                src = src.Replace("\"", "");
+                src = src.Replace("src=", "");
+                music.IFrame = src;
 
                 music.MusicLinks = addMuiscList(LinkToAlbum);
                 _context.Musics.Add(music);
@@ -171,7 +180,7 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, /*[Bind("MusicID,IFrame,Title,DateOfPublication,Cover,MusicLinks")]*/ Music music, string[] LinkToAlbum)
+        public async Task<IActionResult> Edit(int id, [Bind("MusicID,IFrame,Title,DateOfPublication,Cover,NewCover,MusicLinks")] Music music, string[] LinkToAlbum)
         {
             if (id != music.MusicID)
             {
@@ -188,9 +197,12 @@ namespace Harissa.Intranet.Controllers
                     var toDelete = _context.MusicLinks.Where(w => w.MusicID == id);
                     _context.MusicLinks.RemoveRange(toDelete);
                     music.MusicLinks = addMuiscList(LinkToAlbum);
-                    
                     #endregion
 
+                    if (music.NewCover != null)
+                    {
+                        music.Cover = new CloudAccess().ChangeItem(music.Cover, music.NewCover, "Cover");
+                    }
                     _context.Update(music);
                     await _context.SaveChangesAsync();
                 }
