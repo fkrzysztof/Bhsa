@@ -22,18 +22,10 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Path = "Page Settings";
-            ViewBag.Icon = "fas fa-cogs";
-            logo();
-        }
-
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
             ViewBag.SelectListSocialMediaEdit = new SelectList(_context.SocialMedias.ToList(), "SocialMediaID","Name");
-            naviPack();
             var rezult = await _context.PageSettings
                 .Include(i => i.socialMedias)
                 .Include(i => i.privacyPolicy)
@@ -99,8 +91,6 @@ namespace Harissa.Intranet.Controllers
 
         public async Task<IActionResult> EditSocialMedias(int id)
         {
-            naviPack();
-            ViewBag.Path += " / Edit";
             return View(await _context.SocialMedias.FirstOrDefaultAsync(f => f.SocialMediaID == id));
         }
 

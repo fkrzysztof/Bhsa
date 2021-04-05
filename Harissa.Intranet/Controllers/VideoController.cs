@@ -62,17 +62,9 @@ namespace Harissa.Intranet.Controllers
             return new List<Video> { x, y };
         }
 
-        private void naviPack()
-        {
-            ViewBag.Icon = "fab fa-youtube";
-            ViewBag.Path = "Video";
-            logo();
-        }
-
         // GET: Video
         public async Task<IActionResult> Index()
         {
-            naviPack();
             ViewBag.VideoList = await _context.Videos.OrderByDescending(o => o.Index).ToListAsync();
             return View();
         }
@@ -104,8 +96,6 @@ namespace Harissa.Intranet.Controllers
         // GET: Video/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            naviPack();
-            ViewBag.Path += " /Edit";
             if (id == null)
             {
                 return NotFound();

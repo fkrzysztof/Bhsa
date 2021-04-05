@@ -1,8 +1,8 @@
 ﻿using Harissa.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Harissa.Intranet.Controllers.Abstract
 {
@@ -16,13 +16,5 @@ namespace Harissa.Intranet.Controllers.Abstract
             _logger = logger;
             _context = context;
         }
-
-        protected void logo()
-        {
-            ViewBag.Logo = _context.PageSettings.First().Logo;
-        }
-
     }
-
-    
 }

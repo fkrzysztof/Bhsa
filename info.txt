@@ -3,3 +3,5 @@
 
 embed do poprawki
 dodac walidacje adresu  youtube
+
+do wymazania caly navi pack()

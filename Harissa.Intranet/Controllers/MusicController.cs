@@ -21,18 +21,9 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Path = "Music";
-            ViewBag.Icon = "fas fa-volume-up";
-            logo();
-        }
-
         // GET: Music
         public async Task<IActionResult> Index()
         {
-            naviPack();
-            ViewBag.Action = "Create";
             return View(await _context.Musics.Include(i => i.MusicLinks).ThenInclude(m => m.MusicPlatform).ToListAsync());
         }
 
@@ -57,9 +48,6 @@ namespace Harissa.Intranet.Controllers
         // GET: Music/Create
         public IActionResult Create()
         {
-            naviPack();
-            ViewBag.Action = "Back";
-            ViewBag.Path += " / Create";
             ViewBag.MusicPlatfomrs = _context.MusicPlatforms.ToList();
             return View();
         }
@@ -73,25 +61,6 @@ namespace Harissa.Intranet.Controllers
         {
             if (ModelState.IsValid)
             {
-                //List<MusicLink> musicLinkList = new List<MusicLink>();
-
-                //for (int i = 0; i < LinkToAlbum.Length; i++)
-                //{
-                //    if (LinkToAlbum[i + 1] == null)
-                //    {
-                //        i++;
-                //        continue;
-                //    }
-
-                //    musicLinkList.Add(new MusicLink {
-                //        MusicPlatformID =  Convert.ToInt32(LinkToAlbum[i]),
-                //        LinkToAlbum = LinkToAlbum[++i],
-                //    }) ;
-                //    music.MusicLinks = musicLinkList;
-                //    _context.Musics.Add(music);
-                //}
-
-
                 Regex regSrc = new Regex("src=[\"'](.+?)(spotify.com|tidal.com|deezer.com|youtube.com)(.+?)[\"']", RegexOptions.IgnoreCase);
                 Match rezult = regSrc.Match(music.IFrame);
                 string src = rezult.Value;
@@ -101,7 +70,6 @@ namespace Harissa.Intranet.Controllers
 
                 music.MusicLinks = addMuiscList(LinkToAlbum);
                 _context.Musics.Add(music);
-
 
                 music.Cover = new CloudAccess().AddPic(music.NewCover, "Cover");
                 _context.Add(music);
@@ -130,8 +98,7 @@ namespace Harissa.Intranet.Controllers
                     LinkToAlbum = MLinks[++i],
                 });
             }
-            //music.MusicLinks = musicLinkList;
-            //_context.Musics.Add(music);
+
             return musicLinkList;
         }
 
@@ -159,10 +126,6 @@ namespace Harissa.Intranet.Controllers
 
             ViewBag.MusicPlatfomrs = musicplatforms.ToList();
             
-            naviPack();
-            ViewBag.Action = "Back";
-            ViewBag.Path += " / Edit";
-
             var music = await _context.Musics
                 .Include(i => i.MusicLinks)
                 .ThenInclude(m => m.MusicPlatform)

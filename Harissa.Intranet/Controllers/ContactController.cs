@@ -18,23 +18,12 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Path = "Contact";
-            ViewBag.Icon = "fas fa-phone-alt";
-            logo();
-        }
-
         // GET: Contact
         public async Task<IActionResult> Index()
         {
-            naviPack();
             ViewBag.ContactList = await _context.Contacts.ToListAsync();
             return View();
         }
-
-                                                     //po cacel edit widac co bylo edytowane orazdiv nie jest wylaczony
-
 
         // POST: Contact/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

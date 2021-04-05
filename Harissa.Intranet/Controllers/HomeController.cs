@@ -4,6 +4,8 @@ using Microsoft.Extensions.Logging;
 using Harissa.Intranet.Models;
 using Harissa.Intranet.Controllers.Abstract;
 using Harissa.Data;
+using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -13,10 +15,18 @@ namespace Harissa.Intranet.Controllers
         public HomeController(ILogger<HomeController> logger, HarissaContext context)
         : base(logger, context)
         {
+
+        }
+
+        private void logo()
+        {
+            string logo = _context.PageSettings.First().Logo;
+            HttpContext.Session.SetString("Logo", logo);
         }
 
         public IActionResult Index()
         {
+            logo();
             return View();
         }
 

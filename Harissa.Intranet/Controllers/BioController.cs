@@ -16,16 +16,8 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Icon = "fas fa-book-open";
-            ViewBag.Path = "Bio";
-            logo();
-        }
-
         public async Task<IActionResult> Index()
         {
-            naviPack();
             var bio = await _context.Bio.FirstOrDefaultAsync();
             if (bio == null)
             {

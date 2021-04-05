@@ -1,15 +1,52 @@
-﻿<div class="row">
+﻿@{
+    string pageName = ViewContext.RouteData.Values["Controller"].ToString();
+    string action = ViewContext.RouteData.Values["Action"].ToString();
+    string icon = "";
+
+    switch (pageName)
+    {
+
+        case "News":
+            icon = "far fa-comment-alt";
+            break;
+        case "Bio":
+            icon = "fas fa-book-open";
+            break;
+        case "Concerts":
+            icon = "far fa-calendar-alt";
+            break;
+        case "Contact":
+            icon = "fas fa-phone-alt";
+            break;
+        case "Music":
+            icon = "fas fa-volume-up";
+            break;
+        case "MusicPlatforms":
+            icon = "fas fa-volume-up";
+            break;
+        case "PageSettings":
+            icon = "fas fa-cogs";
+            break;
+        case "Video":
+            icon = "fab fa-youtube";
+            break;
+    }
+}
+
+
+
+<div class="row">
     <div class="col-sm-6 text-left">
-        <h1 class="display-5"><i class="@ViewBag.Icon m-2" style="font-size: 2.5rem;"></i> @ViewBag.Path</h1>
+        <h1 class="display-5"><i class="@icon m-2" style="font-size: 2.5rem;"></i> @pageName @(action == "Index" ? "" : " / " + action) </h1>
     </div>
     <div class="col-sm-6 text-right">
         @{
-            if (ViewBag.Action == "Create")
+            if (action == "Index" && (pageName == "News" || pageName == "Music"))
             {
                 <a asp-action="Create"><i id="createButton" class="fas fa-plus-circle" style="font-size:2rem; color:black;"></i></a>
             }
-            else if (ViewBag.Action == "Back")
-            {
+            else if (action != "Index")
+            { 
                 <a asp-action="Index"><i class="fas fa-arrow-circle-left" style="font-size:2rem; color:black;"></i></a>
             }
         }

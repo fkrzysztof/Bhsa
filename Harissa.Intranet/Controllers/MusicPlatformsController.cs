@@ -17,17 +17,9 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Path = "Music";
-            ViewBag.Icon = "fas fa-volume-up";
-            logo();
-        }
-
         // GET: MusicPlatforms
         public async Task<IActionResult> Index()
         {
-            naviPack();
             return View(await _context.MusicPlatforms.ToListAsync());
         }
 
@@ -50,9 +42,6 @@ namespace Harissa.Intranet.Controllers
         // GET: MusicPlatforms/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            naviPack();
-            ViewBag.Path += " / Edit";
-            ViewBag.Action = "Back";
             if (id == null)
             {
                 return NotFound();
@@ -67,8 +56,6 @@ namespace Harissa.Intranet.Controllers
         }
 
         // POST: MusicPlatforms/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("MusicPlatformID,Name,Icon,UrlArtist,NewIcon")] MusicPlatform musicPlatform)

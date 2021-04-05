@@ -17,18 +17,10 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Icon = "far fa-calendar-alt";
-            logo();
-        }
 
         // GET: Concerts
         public async Task<IActionResult> Index()
         {
-            naviPack();
-            ViewBag.Action = "";
-            ViewBag.Path = "Concerts";
             ViewBag.ConcertList = await _context.Concerts.ToListAsync();
             return View();
         }
@@ -58,10 +50,6 @@ namespace Harissa.Intranet.Controllers
             {
                 return NotFound();
             }
-
-            naviPack();
-            ViewBag.Action = "Back";
-            ViewBag.Path = "Concerts / Edit";
 
             var concert =  await _context.Concerts.FindAsync(id);
 
@@ -113,16 +101,10 @@ namespace Harissa.Intranet.Controllers
         // GET: Concerts/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            naviPack();
-            ViewBag.Path = "Concerts / Delete";
-            ViewBag.Action = "Back";
             if (id == null)
             {
                 return NotFound();
             }
-
-            naviPack();
-
 
             var concert = await _context.Concerts
                 .FirstOrDefaultAsync(m => m.ConcertID == id);

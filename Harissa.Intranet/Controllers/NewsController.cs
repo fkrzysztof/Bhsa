@@ -18,18 +18,9 @@ namespace Harissa.Intranet.Controllers
         {
         }
 
-        private void naviPack()
-        {
-            ViewBag.Path = "News";
-            ViewBag.Icon = "far fa-comment-alt";
-            logo();
-        }
-
         // GET: News
         public async Task<IActionResult> Index()
         {
-            naviPack();
-            ViewBag.Action = "Create";
             return View(await _context.News.ToListAsync());
         }        
         
@@ -37,9 +28,6 @@ namespace Harissa.Intranet.Controllers
         // GET: News/Create
         public IActionResult Create()
         {
-            naviPack();
-            ViewBag.Path += "/ Create";
-            ViewBag.Action = "Back";
             return View();
         }
 
@@ -69,10 +57,6 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
-            naviPack();
-            ViewBag.Path += "/ Edit";
-            ViewBag.Action = "Back";
-
             var news = await _context.News.FindAsync(id);
             if (news == null)
             {
@@ -83,8 +67,6 @@ namespace Harissa.Intranet.Controllers
         }
 
         // POST: News/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication,FormFileItem")] News news)
@@ -129,9 +111,6 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
             
-            naviPack();
-            ViewBag.Path += "/ Edit";
-            ViewBag.Action = "Back";
             ViewBag.Message = "Are you sure you want to delete this ?";
 
             var news = await _context.News.FirstOrDefaultAsync(m => m.NewsID == id);
@@ -139,7 +118,6 @@ namespace Harissa.Intranet.Controllers
             {
                 return NotFound();
             }
-            //ViewBag.Img = new CloudAccess().GetImg(news.MediaItem);
             return View(news);
         }
 
