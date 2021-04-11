@@ -1,4 +1,5 @@
 ﻿using Harissa.Data.Data;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Harissa.Data
 {
-    public class HarissaContext : DbContext
+    public class HarissaContext : IdentityDbContext
     {
         public HarissaContext(DbContextOptions<HarissaContext> options) : base(options)
         {

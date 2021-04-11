@@ -7,6 +7,7 @@ using Harissa.Data.Data;
 using System;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -19,6 +20,7 @@ namespace Harissa.Intranet.Controllers
         }
 
         // GET: Contact
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             ViewBag.ContactList = await _context.Contacts.ToListAsync();

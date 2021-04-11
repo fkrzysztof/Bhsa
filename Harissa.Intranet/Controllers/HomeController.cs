@@ -27,7 +27,8 @@ namespace Harissa.Intranet.Controllers
         public IActionResult Index()
         {
             logo();
-            return View();
+            //return View();
+            return RedirectToAction("Index", "News");
         }
 
         public IActionResult Privacy()
