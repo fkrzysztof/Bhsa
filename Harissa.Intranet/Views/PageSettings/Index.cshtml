@@ -11,7 +11,7 @@
 
 <div class="row">
     @*NoPicture*@
-    <div class="col-lg-4 col-md-6 mt-2 mb-2">
+    <div class="col-lg-6 col-md-6 mt-2 mb-2">
         <div class="card shadow h-100"  style="min-height:396px;">
             <div class="card-header bg-white">
                 <h6>Background when no picture</h6>
@@ -25,7 +25,6 @@
                         @{
                             if (Model != null)
                             {
-                                @*<label class="control-label">@ps.NoPicture</label>*@
                                 string getimg = new CloudAccess().GetImg(@Model.NoPicture);
                                 @:<img src="@getimg" class="img-fluid img-thumbnail imgPreview" />
                             }
@@ -35,10 +34,13 @@
                             }
                         }
                     </div>
-                    <div class="form-group text-right h-25">
-                        <input asp-for="@Model.NoPictureNewFile" type="file" class="form-control newMediaItem" />
+                    <div class="form-group h-25">
+                        <div class="custom-file">
+                            <input type="file" asp-for="@Model.NoPictureNewFile" class="custom-file-input newMediaItem" id="customFilePic">
+                            <label class="custom-file-label" for="customFilePic">Choose file</label>
+                        </div>
                         <span asp-validation-for="@Model.NoPictureNewFile" class="text-danger"></span>
-                        <input type="submit" value="Save" class="btn btn-primary btn-sm mt-1" />
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm mt-1 float-right" />
                     </div>
                 </form>
             </div>
@@ -47,7 +49,7 @@
 
 
     @*Logo*@
-    <div class="col-lg-4 col-md-6 mt-2 mb-2">
+    <div class="col-lg-6 col-md-6 mt-2 mb-2">
         <div class="card shadow h-100" style="min-height:396px;">
             <div class="card-header bg-white">
                 <h6>Edit Logo</h6>
@@ -71,10 +73,13 @@
                         }
 
                     </div>
-                    <div class="form-group text-right h-25">
-                        <input asp-for="@Model.LogoNewFile" type="file" class="form-control newMediaItem" />
+                    <div class="form-group h-25">
+                        <div class="custom-file">
+                            <input type="file" asp-for="@Model.LogoNewFile" class="custom-file-input newMediaItem" id="customFileLogo">
+                            <label class="custom-file-label" for="customFileLogo">Choose file</label>
+                        </div>
                         <span asp-validation-for="@Model.LogoNewFile" class="text-danger"></span>
-                        <input type="submit" value="Save" class="btn btn-primary btn-sm mt-1" />
+                        <input type="submit" value="Save" class="btn btn-primary btn-sm mt-1 float-right" />
                     </div>
                 </form>
             </div>
@@ -113,7 +118,11 @@
                             </div>
                             <div class="form-group">
                                 <label asp-for="@Model.socialMedias.FirstOrDefault().NewIcon" class="control-label"></label>
-                                <input asp-for="@Model.socialMedias.FirstOrDefault().NewIcon" value="" class="form-control newMediaItem" />
+                                @*<input asp-for="@Model.socialMedias.FirstOrDefault().NewIcon" value="" class="form-control-file mt-2 newMediaItem" />*@
+                                <div class="custom-file">
+                                    <input type="file" asp-for="@Model.socialMedias.FirstOrDefault().NewIcon" class="custom-file-input newMediaItem" id="customFile">
+                                    <label class="custom-file-label" for="customFile">Choose file</label>
+                                </div>
                                 <span asp-validation-for="@Model.socialMedias.FirstOrDefault().NewIcon" class="text-danger"></span>
                             </div>
                         </div>

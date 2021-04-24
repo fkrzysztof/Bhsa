@@ -15,7 +15,10 @@
                     string getimg = new CloudAccess().GetImg(Model.MediaItem);
                 }
                 <img src="@getimg" class="imgPreview rounded img-thumbnail" />
-                <input asp-for="FormFileItem" class="form-control newMediaItem" />
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="FormFileItem" class="custom-file-input newMediaItem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
 

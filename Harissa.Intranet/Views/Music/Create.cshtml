@@ -11,14 +11,19 @@
 
 <form asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row">
+    <div class="row align-items-start">
 
         <div class="col-md-6">
             <div class="form-group">
                 @{ string img = new CloudAccess().GetImg(null);}
                 <img src="@img" class="imgPreview img-thumbnail" />
-                <label asp-for="NewCover" class="control-label"></label>
-                <input asp-for="NewCover" type="file" class="form-control" />
+                @*<input asp-for="NewCover" type="file" class="form-control-file mt-2" />*@
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="NewCover" class="custom-file-input newMediaItem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+
+
                 <span asp-validation-for="NewCover" class="text-danger"></span>
             </div>
         </div>
@@ -41,7 +46,7 @@
             </div>
         </div>
 
-        <hr />
+        <div class="col-12"><hr /></div>
 
         <div class="col-12 mt-4">
             @{

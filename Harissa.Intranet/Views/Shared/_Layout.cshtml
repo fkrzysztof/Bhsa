@@ -1,5 +1,4 @@
 ﻿@using Harissa.Data.HelperClass
-@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +32,7 @@
         <div class="container">
             <a class="navbar-brand" href="#">
                 @{
-                    string getimg = new CloudAccess().GetImg(Context.Session.GetString("Logo"));
+                    string getimg = new CloudAccess().GetLogo();
                     @:<img src="@getimg" style="max-height:80px;" />
                 }
             </a>

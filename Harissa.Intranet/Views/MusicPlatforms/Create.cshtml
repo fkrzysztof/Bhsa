@@ -14,8 +14,10 @@
             <img src="@img" class="imgPreview img-thumbnail" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="NewIcon" class="control-label"></label>
-                <input asp-for="NewIcon" class="form-control newMediaItem" />
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="NewIcon" class="custom-file-input newMediaItem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
                 <span asp-validation-for="NewIcon" class="text-danger"></span>
             </div>
         </div>

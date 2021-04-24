@@ -54,7 +54,7 @@ namespace Harissa.Intranet.Controllers
                     if (pageSettings == null)
                     {
                         //dodanie
-                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "PageSettings", true);
+                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "noPictureFile");
                            _context.Add(pageSettings);
                     }
                     else
@@ -66,7 +66,7 @@ namespace Harissa.Intranet.Controllers
                             new CloudAccess().Remove(pageSettings.NoPicture);
                         }
                         
-                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "PageSettings", true);
+                        pageSettings.NoPicture = new CloudAccess().AddPic(NoPictureNewFile, "noPictureFile");
                         _context.Update(pageSettings);
                     }
                     await _context.SaveChangesAsync();

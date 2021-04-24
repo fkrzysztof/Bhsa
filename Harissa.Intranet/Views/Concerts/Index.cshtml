@@ -20,11 +20,16 @@
     <div class="row align-items-end">
         <div class="col-md-4">
             <div class="form-group">
-                @{
-                    string getimg = new CloudAccess().GetImg(null);
-                }
-                <img src="@getimg" class="imgPreview w-75 rounded mb-3 img-thumbnail" />
-                <input asp-for="FormFileItem" class="form-control newMediaItem" />
+                <div class="d-flex border align-items-center justify-content-center">
+                    @{
+                        string getimg = new CloudAccess().GetImg(null);
+                    }
+                    <img src="@getimg" class="imgPreview w-75" />
+                </div>
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="FormFileItem" class="custom-file-input newMediaItem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
         </div>

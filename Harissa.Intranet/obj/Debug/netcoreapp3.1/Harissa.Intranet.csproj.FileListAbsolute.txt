@@ -440,3 +440,9 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\Index.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\_Layout.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LoginLayout.cshtml.g.cs

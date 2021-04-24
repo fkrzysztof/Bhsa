@@ -15,35 +15,24 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = 
+            account = account = 
             cloudinary = new Cloudinary(account);
         }
 
-        public string AddPic(IFormFile formFile, string folderName, bool noImgPicture = false)
+        public string AddPic(IFormFile formFile, string folderName)
         {
             ImageUploadParams uploadParams;
             string filename = formFile.FileName.Split('.')[0];
-            if (noImgPicture == true)
+            uploadParams = new ImageUploadParams()
             {
-                uploadParams = new ImageUploadParams()
-                {
-                    Tags = "noPictureFile",
-                    Overwrite = true,
-                    File = new FileDescription(filename, formFile.OpenReadStream()),
-                    Folder = folderName
-                };
-            }
-            else
-            {
-                uploadParams = new ImageUploadParams()
-                {
-                    UseFilename = true,
-                    UniqueFilename = true,
-                    Overwrite = false,
-                    File = new FileDescription(filename, formFile.OpenReadStream()),
-                    Folder = folderName
-                };
-            }
+                UseFilename = true,
+                UniqueFilename = true,
+                Overwrite = false,
+                File = new FileDescription(filename, formFile.OpenReadStream()),
+                Folder = folderName,
+                Tags = folderName
+
+            };
             var uploadResult = cloudinary.Upload(uploadParams);
             JToken token = JObject.Parse(uploadResult.JsonObj.ToString());
             return Convert.ToString(token.SelectToken("public_id"));
@@ -62,20 +51,52 @@ namespace Harissa.Data.HelperClass
 
         public string GetImg(string img)
         {
-            if (!string.IsNullOrEmpty(img))
-                return cloudinary.Api.UrlImgUp.BuildUrl(img);
+            if (string.IsNullOrEmpty(img))
+                return noPic();
+            string rezult = cloudinary.ListResourcesByPublicIds(new[] { img }).Resources[0].Url.ToString();
+            if (string.IsNullOrEmpty(rezult))
+               return noPic();
             else
-            {
-                var listResourcesByTagParams = new ListResourcesByTagParams()
-                {
-                    Tag = " noPictureFile ",
-                    MaxResults = 1
-                };
-                var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
-                return listResourcesResult.Resources[0].Url.ToString();
+               return rezult;
+        }
 
-                //zmienic reszte na takie
+
+        private string noPic()
+        {
+            //var listResourcesByTagParams = new ListResourcesByTagParams()
+            //{
+            //    Tag = " noPictureFile ",
+            //    MaxResults = 1
+            //};
+            //var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
+            //return listResourcesResult.Resources[0].Url.ToString();
+            return GetPicByTag("noPictureFile")[0].ToString();
+        }
+
+
+        public string GetLogo()
+        {
+            return GetPicByTag("Logo")[0];
+        }
+        public List<string> GetPicByTag(string tag)
+        {
+            var rezult = cloudinary.ListResourcesByTag(tag).Resources;
+            return getRezult(rezult);
+        }
+
+        private List<string> getRezult(Resource[] resource)
+        {
+            List<string> list = new List<String>();
+            string temp;
+            foreach (var item in resource)
+            {
+                temp = item.Url.ToString();
+                if (!string.IsNullOrEmpty(temp))
+                    list.Add(temp);
+                else
+                    list.Add(noPic());
             }
+            return list;
         }
 
         public string ChangeItem(string oldItem, IFormFile newItem, string folderName)

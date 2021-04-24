@@ -7,15 +7,19 @@
 
 @await Html.PartialAsync("TopNavi")
 <form asp-action="Create" enctype="multipart/form-data">
-    <div class="row">
+    <div class="row align-items-end">
         <div class="col-md-6">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label"></label>
-               
+
                 @{ string img = new CloudAccess().GetImg(null);}
                 <img src="@img" class="imgPreview img-thumbnail" />
-                <input asp-for="FormFileItem" type="file" class="form-control newMediaItem" />
+                <div class="custom-file mt-3">
+                    <input type="file" asp-for="FormFileItem" class="custom-file-input newMediaItem" id="customFile">
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                </div>
+
                 <span asp-validation-for="FormFileItem" class="text-danger"></span>
             </div>
         </div>
@@ -27,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
-                <textarea asp-for="Message" class="form-control" rows="3" cols="3"></textarea>
+                <textarea asp-for="Message" class="form-control" rows="8" cols="3"></textarea>
                 <span asp-validation-for="Message" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,6 +39,8 @@
                 <input asp-for="DateOfPublication" class="form-control" />
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
             </div>
+        </div>
+        <div class="col-12 text-md-right">
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-dark" />
             </div>
