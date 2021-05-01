@@ -156,18 +156,18 @@
                     @foreach (var item in Model.socialMedias)
                     {
                         <div class="row align-items-center mt-2 mb-2">
-                            <div class="col-3 text-left">
+                            <div class="col-2 col-sm-1 text-left">
                                 @{
                                     string smImg = new CloudAccess().GetImg(item.Icon);
                                     @:<img src="@smImg" style="width:30px;" />
                                 }
                             </div>
-                            <div class="col-6 text-center">
+                            <div class="col-8 col-sm-10 text-left">
                                 @Html.DisplayFor(modelItem => item.Name)
                                 <small>@Html.DisplayFor(modelItem => item.Link)</small>
                                
                             </div>
-                            <div class="col-3 text-right">
+                            <div class="col-2 col-sm-1 text-right">
                                 <a asp-action="DeleteSocialMedias" asp-route-id="@item.SocialMediaID"><i class="fas fa-trash" style="font-size: 1rem; color:black;"></i></a>
                                 <a asp-action="EditSocialMedias" asp-route-id="@item.SocialMediaID" data-id="@item.SocialMediaID" data-icon="@item.Icon" data-name="@item.Name" data-link="@item.Link"><i class="fas fa-tools" style="font-size: 1rem; color:black;"></i></a>
                             </div>

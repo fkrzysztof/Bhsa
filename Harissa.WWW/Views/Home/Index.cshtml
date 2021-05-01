@@ -3,9 +3,8 @@
     bool sideLR = true;
 }
 @using Harissa.Data.HelperClass
-    <section class="page-section" id="mainBody1">
-        <div class="container featured-text">
-            <h4 class="text-white">News</h4>
+
+           
             @foreach (var item in ViewBag.News as List<Harissa.Data.Data.News>)
             {
                 string getimg = new CloudAccess().GetImg(item.MediaItem);
@@ -20,7 +19,7 @@
                                 <div class="d-flex h-100">
                                     <div class="project-text w-100 my-auto text-center text-lg-left">
                                         <h4 class="text-white">@item.Title</h4>
-                                        <p class="mb-0 text-white-50">@item.Message</p>
+                                        <p class="mb-0 text-white-50 text-justify text-sm-left">@item.Message</p>
                                         <hr class="d-none d-lg-block mb-0 ml-0" />
                                     </div>
                                 </div>
@@ -38,7 +37,7 @@
                                 <div class="d-flex h-100">
                                     <div class="project-text w-100 my-auto text-center text-lg-right">
                                         <h4 class="text-white">@item.Title</h4>
-                                        <p class="mb-0 text-white-50">@item.Message</p>
+                                        <p class="mb-0 text-white-50 text-justify text-sm-right">@item.Message</p>
                                         <hr class="d-none d-lg-block mb-0 mr-0" />
                                     </div>
                                 </div>
@@ -49,5 +48,4 @@
                 sideLR = !sideLR;
             }
 
-        </div>
-    </section>
+

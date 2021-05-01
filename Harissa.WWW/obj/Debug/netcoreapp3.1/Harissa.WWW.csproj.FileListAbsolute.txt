@@ -388,3 +388,5 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\bin\Debug
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\bin\Debug\netcoreapp3.1\SendGrid.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Harissa.WWW.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Music\Index.cshtml.g.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Concert\Index.cshtml.g.cs

@@ -159,14 +159,15 @@ sup {
 }
 
 a {
-  color: #fed136;
-  text-decoration: none;
-  background-color: transparent;
+    color: #64a19d;
+    text-decoration: none;
+    background-color: transparent;
 }
-a:hover {
-  color: #e6b301;
-  text-decoration: underline;
-}
+
+    a:hover {
+        color: 0.5rem solid #64a19d;
+        text-decoration: underline;
+    }
 
 a:not([href]):not([class]) {
   color: inherit;
@@ -2437,9 +2438,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-primary {
-  color: #fff;
-  background-color: #fed136;
-  border-color: #fed136;
+    color: #fff;
+    background-color: #64a19d;
+    border-color: #fed136;
 }
 .btn-primary:hover {
   color: #fff;
@@ -2452,11 +2453,11 @@ fieldset:disabled a.btn {
   border-color: #fec503;
   box-shadow: 0 0 0 0.2rem rgba(254, 216, 84, 0.5);
 }
-.btn-primary.disabled, .btn-primary:disabled {
-  color: #fff;
-  background-color: #fed136;
-  border-color: #fed136;
-}
+    .btn-primary.disabled, .btn-primary:disabled {
+        color: #fff;
+        background-color: #64a19d;
+        border-color: #64a19d;
+    }
 .btn-primary:not(:disabled):not(.disabled):active, .btn-primary:not(:disabled):not(.disabled).active, .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #fec503;
@@ -3937,11 +3938,11 @@ input[type=button].btn-block {
 .nav-pills .nav-link {
   border-radius: 0.25rem;
 }
-.nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #fed136;
-}
+    .nav-pills .nav-link.active,
+    .nav-pills .show > .nav-link {
+        color: #fff;
+        background-color: #64a19d;
+    }
 
 .nav-fill > .nav-link,
 .nav-fill .nav-item {
@@ -4586,14 +4587,14 @@ input[type=button].btn-block {
 }
 
 .page-link {
-  position: relative;
-  display: block;
-  padding: 0.5rem 0.75rem;
-  margin-left: -1px;
-  line-height: 1.25;
-  color: #fed136;
-  background-color: #fff;
-  border: 1px solid #dee2e6;
+    position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #64a19d;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
 }
 .page-link:hover {
   z-index: 2;
@@ -4618,10 +4619,10 @@ input[type=button].btn-block {
   border-bottom-right-radius: 0.25rem;
 }
 .page-item.active .page-link {
-  z-index: 3;
-  color: #fff;
-  background-color: #fed136;
-  border-color: #fed136;
+    z-index: 3;
+    color: #fff;
+    background-color: #64a19d;
+    border-color: #fed136;
 }
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -5054,12 +5055,12 @@ a.badge-dark:focus, a.badge-dark.focus {
   pointer-events: none;
   background-color: #fff;
 }
-.list-group-item.active {
-  z-index: 2;
-  color: #fff;
-  background-color: #fed136;
-  border-color: #fed136;
-}
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #64a19d;
+        border-color: #fed136;
+    }
 .list-group-item + .list-group-item {
   border-top-width: 0;
 }
@@ -10001,7 +10002,7 @@ p {
 }
 
 .page-section {
-  padding: 6rem 0;
+  padding: 4rem 0; /*z 6*/
 }
 .page-section h2.section-heading {
   font-size: 2.5rem;
@@ -10018,8 +10019,8 @@ p {
 
 @media (min-width: 768px) {
   section {
-    padding: 9rem 0;
-  }
+    padding: 4rem 0; /*z 9*/
+  } 
 }
 ::-moz-selection {
   background: #fed136;
@@ -10061,26 +10062,26 @@ img::-moz-selection {
 }
 
 #mainNav {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  background-color: #212529;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #0000005e;
 }
 #mainNav .navbar-toggler {
   padding: 0.75rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 0.75rem;
+  font-size: 2rem;
   color: #fff;
   text-transform: uppercase;
-  background-color: #fed136;
+  /*background-color: #fed136;*/
   border: 0;
 }
-#mainNav .navbar-brand {
-  color: #fed136;
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-weight: 700;
-  letter-spacing: 0.0625em;
-  text-transform: uppercase;
-}
+    #mainNav .navbar-brand {
+        color: #64a19d;
+        font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-weight: 700;
+        letter-spacing: 0.0625em;
+        text-transform: uppercase;
+    }
 #mainNav .navbar-brand img {
   height: 1.5rem;
 }
@@ -10090,9 +10091,9 @@ img::-moz-selection {
   color: #fff;
   letter-spacing: 0.0625em;
 }
-#mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
-  color: #fed136;
-}
+    #mainNav .navbar-nav .nav-item .nav-link.active, #mainNav .navbar-nav .nav-item .nav-link:hover {
+        color: #64a19d;
+    }
 
 @media (min-width: 992px) {
   #mainNav {
@@ -10110,11 +10111,11 @@ img::-moz-selection {
     height: 2rem;
     transition: height 0.3s ease-in-out;
   }
-  #mainNav.navbar-shrink {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background-color: #212529;
-  }
+    #mainNav.navbar-shrink {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        background-color: #000000d6;
+    }
   #mainNav.navbar-shrink .navbar-brand {
     font-size: 1.25em;
   }
@@ -10130,15 +10131,16 @@ img::-moz-selection {
   }
 }
 header.masthead {
-  padding-top: 10.5rem;
-  padding-bottom: 6rem;
-  text-align: center;
-  color: #fff;
-  background-image: url("../assets/img/header-bg.jpg");
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-position: top center; /*zmiana z center center*/
-  background-size: cover;
+    /*padding-top: 10.5rem;*/
+    padding-top: 15.5rem;
+    padding-bottom: 6rem;
+    text-align: center;
+    color: #fff;
+    background-image: url("../assets/img/header-bg.jpg");
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: top center; /*zmiana z center center*/
+    background-size: cover;
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;

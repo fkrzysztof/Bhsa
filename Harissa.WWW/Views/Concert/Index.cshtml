@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Harissa.Data.Data.Concert>
+@using Harissa.Data.HelperClass
+
+<div class="row d-flex justify-content-center">
+    @foreach (var item in Model)
+    {
+        <div class="col-sm-8 my-4">
+            <div class="card h-100 w-100 shadow footer-background text-white">
+                @{
+                    string getCloudimg = new CloudAccess().GetImg(item.MediaItem);
+                }
+                <img src="@getCloudimg" class="card-img-top" />
+                <div class="text-center my-2">
+                    @item.Name<br />
+                    @item.Date<br />
+                    <address>@item.Address</address>
+                    @item.Description<br />
+                    @item.Link<br />
+                    @item.Price<br />
+                </div>
+            </div>
+        </div>
+    }
+</div>

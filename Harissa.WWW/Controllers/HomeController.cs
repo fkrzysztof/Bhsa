@@ -27,10 +27,12 @@ namespace Harissa.WWW.Controllers
 
         public IActionResult Index()
         {
+            @ViewBag.Page = "News";
             //dodac warunek do aktualnej daty
             List<News> newsList = _context.News.ToList();
             ViewBag.News = newsList;
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
+            ViewBag.Contact = _context.Contacts.ToList();
             return View();
         }
         public IActionResult Video()
@@ -39,6 +41,7 @@ namespace Harissa.WWW.Controllers
             List<News> newsList = _context.News.ToList();
             ViewBag.News = newsList;
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
+            ViewBag.MusicPlatforms = _context.MusicPlatforms.ToList();
             return View();
         }
 

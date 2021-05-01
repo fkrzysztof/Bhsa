@@ -15,7 +15,7 @@ namespace Harissa.Data.HelperClass
 
         public CloudAccess()
         {
-            account = account = 
+            account = 
             cloudinary = new Cloudinary(account);
         }
 
@@ -60,19 +60,10 @@ namespace Harissa.Data.HelperClass
                return rezult;
         }
 
-
         private string noPic()
         {
-            //var listResourcesByTagParams = new ListResourcesByTagParams()
-            //{
-            //    Tag = " noPictureFile ",
-            //    MaxResults = 1
-            //};
-            //var listResourcesResult = cloudinary.ListResources(listResourcesByTagParams);
-            //return listResourcesResult.Resources[0].Url.ToString();
             return GetPicByTag("noPictureFile")[0].ToString();
         }
-
 
         public string GetLogo()
         {

@@ -1,10 +1,16 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using Harissa.Data.HelperClass
+@using Harissa.Data.Data
+
+
+@foreach (var item in ViewBag.VideoList as List<Video>)
+{
+        <!-- Project One Row-->
+        <div class="row justify-content-center no-gutters my-5">
+            <div class="col-lg-8">
+                <iframe class="embed-responsive" style="min-height: 350px;" src="https://www.youtube.com/embed/@item.Link" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen>
+                </iframe>
+            </div>
+        </div>
 }
-
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/videoseries?list=KI7qhfhZGDk&list=PL39eYNHqXjGN0hqjQNiryx2E2CU7500xY" frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen></iframe>
-
