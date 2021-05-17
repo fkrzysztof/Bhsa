@@ -17,6 +17,7 @@ namespace Harissa.WWW.Controllers
 
         public async Task<IActionResult> Index()
         {
+            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
             ViewBag.Page = "Teledyski";
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             ViewBag.Contact = _context.Contacts.ToList();

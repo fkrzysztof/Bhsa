@@ -21,7 +21,7 @@ namespace Harissa.Intranet.Controllers
         // GET: News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.ToListAsync());
+            return View(await _context.News.OrderByDescending(o => o.DateOfPublication).ToListAsync());
         }        
         
 

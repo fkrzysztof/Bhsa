@@ -21,7 +21,7 @@ namespace Harissa.Intranet.Controllers
         // GET: Concerts
         public async Task<IActionResult> Index()
         {
-            ViewBag.ConcertList = await _context.Concerts.ToListAsync();
+            ViewBag.ConcertList = await _context.Concerts.OrderByDescending(o => o.Date).ToListAsync();
             return View();
         }
 

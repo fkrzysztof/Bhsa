@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Harissa.WWW.Models;
-using Facebook;
-using System.Text.Json;
-using Harissa.Data.HelperClass;
 using Harissa.Data;
 using Harissa.Data.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Harissa.WWW.Controllers
 {
@@ -25,29 +22,45 @@ namespace Harissa.WWW.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        private void AllPages()
         {
-            @ViewBag.Page = "News";
+            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
+            ViewBag.SocialMedia = _context.SocialMedias.ToList();
+            ViewBag.Contact = _context.Contacts.ToList();
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            ViewBag.Page = "News";
+            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
+            var ps = await _context.PageSettings.FirstOrDefaultAsync();
             //dodac warunek do aktualnej daty
-            List<News> newsList = _context.News.ToList();
+            List<News> newsList = _context.News.OrderByDescending(o => o.DateOfPublication).ToList();
             ViewBag.News = newsList;
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             ViewBag.Contact = _context.Contacts.ToList();
-            return View();
+            return View(ps);
         }
-        public IActionResult Video()
-        {
-            //dodac warunek do aktualnej daty
-            List<News> newsList = _context.News.ToList();
-            ViewBag.News = newsList;
-            ViewBag.SocialMedia = _context.SocialMedias.ToList();
-            ViewBag.MusicPlatforms = _context.MusicPlatforms.ToList();
-            return View();
-        }
+        //public IActionResult Video()
+        //{
+        //    //dodac warunek do aktualnej daty
+        //    List<News> newsList = _context.News.ToList();
+        //    ViewBag.News = newsList;
+        //    ViewBag.SocialMedia = _context.SocialMedias.ToList();
+        //    ViewBag.MusicPlatforms = _context.MusicPlatforms.ToList();
+        //    return View();
+        //}
 
-        public IActionResult Privacy()
+        //public IActionResult Www()
+        //{
+        //    AllPages();
+        //    return View(_context.PageSettings.FirstOrDefault());
+        //}
+        public async Task<IActionResult> Privacy()
         {
-            return View();
+            ViewBag.Page = "Prywatność";
+            AllPages();
+            return View(await _context.PageSettings.Include(i => i.privacyPolicy).FirstOrDefaultAsync());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

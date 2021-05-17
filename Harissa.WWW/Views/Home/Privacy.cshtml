@@ -1,44 +1,14 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
+﻿@model Harissa.Data.Data.PageSettings
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-<!-- Services-->
-<section class="page-section" id="services">
-    <div class="container">
-        <h2>serwis</h2>
-
-    </div>
-</section>
-<!-- Portfolio Grid-->
-<section class="page-section bg-light" id="portfolio">
-    <div class="container">
-        <h2>portfolio</h2>
-
-    </div>
-</section>
-<!-- About-->
-<section class="page-section" id="about">
-    <div class="container">
-
-    </div>
-</section>
-<!-- Team-->
-<section class="page-section bg-light" id="team">
-    <div class="container">
-
-    </div>
-</section>
-<!-- Clients-->
-<div class="py-5">
-    <div class="container">
-
+<div class="row">
+    <div class="col-12 text-justify text-white formatNewLine">
+        <i class="fas fa-quote-left float-left"></i>
+        @Model.privacyPolicy.Text
+        <i class="fas fa-quote-right float-right"></i>
     </div>
 </div>
-<!-- Contact-->
-<section class="page-section" id="contact">
-    <div class="container">
-
-    </div>
-</section>

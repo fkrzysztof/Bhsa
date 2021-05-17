@@ -78,7 +78,6 @@ namespace Harissa.Intranet.Controllers
             
             if (ModelState.IsValid)
             {
-                
                 video.Link = video.Link.Replace("https://", "");
                 video.Link = video.Link.Replace("www.", "");
                 video.Link = video.Link.Replace("youtu.be/", "");

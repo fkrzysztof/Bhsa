@@ -22,10 +22,11 @@ namespace Harissa.WWW.Controllers
         // GET: Music
         public async Task<IActionResult> Index()
         {
-            @ViewBag.Page = "Muzyka";
+            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
+            ViewBag.Page = "Muzyka";
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             ViewBag.Contact = _context.Contacts.ToList();
-            return View(await _context.Musics.Include(i => i.MusicLinks).ThenInclude(m => m.MusicPlatform).ToListAsync());
+            return View(await _context.Musics.Include(i => i.MusicLinks).ThenInclude(m => m.MusicPlatform).OrderByDescending(o => o.DateOfPublication).ToListAsync());
         }
     }
 }

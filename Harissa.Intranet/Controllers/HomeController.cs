@@ -6,6 +6,7 @@ using Harissa.Intranet.Controllers.Abstract;
 using Harissa.Data;
 using Microsoft.AspNetCore.Http;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -18,17 +19,11 @@ namespace Harissa.Intranet.Controllers
 
         }
 
-        private void logo()
-        {
-            string logo = _context.PageSettings.First().Logo;
-            HttpContext.Session.SetString("Logo", logo);
-        }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
-            logo();
-            //return View();
-            return RedirectToAction("Index", "News");
+            //return RedirectToAction("Index", "News");
+            return View();
         }
 
         public IActionResult Privacy()
@@ -36,10 +31,10 @@ namespace Harissa.Intranet.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

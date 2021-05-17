@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Harissa.Data.Data.Contact>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row text-white">
+    @foreach (var itemContact in Model)
+    {
+            <address class="col-12 text-center">
+                <strong>@itemContact.Name</strong><br />
+                @itemContact.Email<br />
+                @itemContact.Phone
+            </address>
+    }
+</div>

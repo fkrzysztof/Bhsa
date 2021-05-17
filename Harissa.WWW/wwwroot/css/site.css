@@ -83,3 +83,27 @@ html {
 .footer-background {
     background-color: #0c0c0c;
 }
+
+.color-link {
+    color: #64a19d;
+}
+
+.formatNewLine {
+    white-space: pre-wrap;
+}
+
+.music-cover-background {
+    position: absolute;
+    width: 1000px;
+    height: 350px;
+    background-origin: content-box;
+    background-position: center;
+    background-size: auto;
+    filter: blur(1.5rem);
+    z-index: -1;
+    opacity: 0.2;
+}
+
+
+
+

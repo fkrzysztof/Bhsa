@@ -1,0 +1,28 @@
+﻿@model Harissa.Data.Data.PrivacyPolicy
+@{
+    ViewData["Title"] = "PrivacyPolicy";
+}
+@await Html.PartialAsync("TopNavi")
+@await Html.PartialAsync("PageSettingsTopNavi")
+<div class="row">
+    <div class="col-12">
+        <h5 class="mt-5">Privacy Policy</h5>
+        <hr />
+    </div>
+    <div class="col-12 mt-2 mb-2">
+        <div class="card shadow">
+            <div class="card-body">
+                <form asp-action="PrivacyPolicyEdit" method="post">
+                    <input type="hidden" asp-for="PageSettingsID" />
+                    <input type="hidden" asp-for="PrivacyPolicyID" />
+                    <textarea class="form-control" rows="25" asp-for="Text"></textarea>
+                    <span asp-validation-for="Text" class="text-danger"></span>
+                    <div class="form-group text-right bt-3">
+                        <input type="submit" value="save" class="btn btn-primary btn-sm mt-2" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

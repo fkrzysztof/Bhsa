@@ -18,9 +18,11 @@ namespace Harissa.WWW.Controllers
         // GET: Concert
         public async Task<IActionResult> Index()
         {
+            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
+            ViewBag.Page = "Koncerty / Wydarzenia";
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             ViewBag.Contact = _context.Contacts.ToList();
-            return View(await _context.Concerts.ToListAsync());
+            return View(await _context.Concerts.OrderByDescending(o => o.Date).ToListAsync());
         }
     }
 }

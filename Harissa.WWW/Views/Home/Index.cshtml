@@ -1,51 +1,51 @@
-﻿@{
+﻿@model Harissa.Data.Data.PageSettings
+@{
     ViewData["Title"] = "Home Page";
     bool sideLR = true;
 }
 @using Harissa.Data.HelperClass
 
-           
-            @foreach (var item in ViewBag.News as List<Harissa.Data.Data.News>)
-            {
-                string getimg = new CloudAccess().GetImg(item.MediaItem);
+@foreach (var item in ViewBag.News as List<Harissa.Data.Data.News>)
+{
+    string getimg = new CloudAccess().GetImg(item.MediaItem);
 
-                if (sideLR == true)
-                {
-                    <!-- Project One Row-->
-                    <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
-                        <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
-                        <div class="col-lg-6 p-4">
-                            <div class="bg-black text-center h-100 project">
-                                <div class="d-flex h-100">
-                                    <div class="project-text w-100 my-auto text-center text-lg-left">
-                                        <h4 class="text-white">@item.Title</h4>
-                                        <p class="mb-0 text-white-50 text-justify text-sm-left">@item.Message</p>
-                                        <hr class="d-none d-lg-block mb-0 ml-0" />
-                                    </div>
-                                </div>
-                            </div>
+    if (sideLR == true)
+    {
+        <!-- Project One Row-->
+        <div class="row justify-content-center no-gutters mb-5 mb-lg-0">
+            <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
+            <div class="col-lg-6 p-4">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-left">
+                            <h4 class="text-white">@item.Title</h4>
+                            <p class="mb-0 text-white-50 text-justify text-sm-left">@item.Message</p>
+                            <hr class="d-none d-lg-block mb-0 ml-0" />
                         </div>
                     </div>
-                }
-                else
-                {
-                    <!-- Project Two Row-->
-                    <div class="row justify-content-center no-gutters">
-                        <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
-                        <div class="col-lg-6 p-4 order-lg-first">
-                            <div class="bg-black text-center h-100 project">
-                                <div class="d-flex h-100">
-                                    <div class="project-text w-100 my-auto text-center text-lg-right">
-                                        <h4 class="text-white">@item.Title</h4>
-                                        <p class="mb-0 text-white-50 text-justify text-sm-right">@item.Message</p>
-                                        <hr class="d-none d-lg-block mb-0 mr-0" />
-                                    </div>
-                                </div>
-                            </div>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Project Two Row-->
+        <div class="row justify-content-center no-gutters">
+            <div class="col-lg-6"><img class="img-fluid" src="@getimg" alt="" /></div>
+            <div class="col-lg-6 p-4 order-lg-first">
+                <div class="bg-black text-center h-100 project">
+                    <div class="d-flex h-100">
+                        <div class="project-text w-100 my-auto text-center text-lg-right">
+                            <h4 class="text-white">@item.Title</h4>
+                            <p class="mb-0 text-white-50 text-justify text-sm-right">@item.Message</p>
+                            <hr class="d-none d-lg-block mb-0 mr-0" />
                         </div>
                     </div>
-                }
-                sideLR = !sideLR;
-            }
+                </div>
+            </div>
+        </div>
+    }
+    sideLR = !sideLR;
+}
 
 

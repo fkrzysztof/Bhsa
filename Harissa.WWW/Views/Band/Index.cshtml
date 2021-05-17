@@ -1,0 +1,14 @@
+﻿@model Harissa.Data.Data.Bio
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-12 text-justify text-white formatNewLine">
+        <i class="fas fa-quote-left float-left"></i>
+        @Model.Text
+        <i class="fas fa-quote-right float-right"></i>
+    </div>
+</div>

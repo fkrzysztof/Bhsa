@@ -25,28 +25,35 @@ namespace Harissa.Intranet.Controllers
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
-            ViewBag.SelectListSocialMediaEdit = new SelectList(_context.SocialMedias.ToList(), "SocialMediaID","Name");
-            var rezult = await _context.PageSettings
-                .Include(i => i.socialMedias)
-                .Include(i => i.privacyPolicy)
-                .FirstOrDefaultAsync();
-            if (rezult.privacyPolicy == null)
+            var rezult = await _context.PageSettings.FirstOrDefaultAsync();
+            return View(rezult);
+        }
+
+        // GET: PrivacyPolicy
+        public async Task<IActionResult> PrivacyPolicy()
+        {
+            var rezult = await _context.PrivacyPolicies.FirstOrDefaultAsync();
+            if (rezult.Text == null)
             {
                 _context.PrivacyPolicies.Add(new PrivacyPolicy() { PageSettingsID = rezult.PageSettingsID, Text = "Napisz.." });
                 _context.SaveChanges();
             }
-            return View(rezult);
+            return View("PrivacyPolicy", rezult);
+        }
+        
+        // GET: SocialMedia
+        public async Task<IActionResult> SocialMedia()
+        {
+            var rezult = await _context.SocialMedias.ToListAsync();
+            return View("SocialMedia", rezult);
         }
 
 
         //Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Index([Bind("NoPictureNewFile")] IFormFile ps)
         public async Task<IActionResult> Index(IFormFile NoPictureNewFile)
         {
-            //if (ModelState.IsValid)
-            //{
                 var pageSettings = await _context.PageSettings.FirstOrDefaultAsync();
                 try
                 {
@@ -85,8 +92,6 @@ namespace Harissa.Intranet.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            //}
-            //return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> EditSocialMedias(int id)
@@ -125,14 +130,14 @@ namespace Harissa.Intranet.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("SocialMedia");
             }
-            return View(); //nie wraca sm
+            return View(); 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateSocialMedias([Bind("Name,Link,NewIcon")] SocialMedia sm)
+        public async Task<IActionResult> CreateSocialMedias([Bind("Name,Link,NewIcon")] SocialMediaCreate sm)
         {
             sm.Icon = new CloudAccess().AddPic(sm.NewIcon, "SocialMedia");
             if (ModelState.IsValid)
@@ -156,9 +161,9 @@ namespace Harissa.Intranet.Controllers
                 }
 
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("SocialMedia");
             }
-            return View(); // nie wraca sm
+            return View(); 
         }
 
         [HttpPost]
@@ -181,7 +186,7 @@ namespace Harissa.Intranet.Controllers
             new CloudAccess().Remove(socialMedia.Icon);
             _context.SocialMedias.Remove(socialMedia);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("SocialMedia");
         }
 
 
@@ -189,11 +194,6 @@ namespace Harissa.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PrivacyPolicyEdit([Bind("PrivacyPolicyID,PageSettingsID,Text")] PrivacyPolicy privacyPolicy)
         {
-            //if (id != privacyPolicy.PrivacyPolicyID)
-            //{
-            //    return NotFound();
-            //}
-
             if (ModelState.IsValid)
             {
                 try
@@ -212,11 +212,61 @@ namespace Harissa.Intranet.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            return View();
+            return RedirectToAction("PrivacyPolicy");
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> HeaderTextEdit(string headerText)
+        {
+            var ps = await _context.PageSettings.FirstOrDefaultAsync();
+            if(!string.IsNullOrEmpty(headerText))
+            {
+                ps.HeaderText = headerText;
+                _context.Update(ps);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> IframeIndexPage(string IframeVideo, string IframeTitle, string IframeText)
+        {
+            if (ModelState.IsValid)
+            {
+                PageSettings ps = await _context.PageSettings.FirstOrDefaultAsync();
+                try
+                {
+                    IframeVideo = IframeVideo.Replace("https://", "");
+                    IframeVideo = IframeVideo.Replace("www.", "");
+                    IframeVideo = IframeVideo.Replace("youtu.be/", "");
+                    IframeVideo = IframeVideo.Replace("youtube.com/watch?v=", "");
+
+                    ps.IframeVideo = IframeVideo;
+                    ps.IframeTitle = IframeTitle;
+                    ps.IframeText = IframeText;
+
+                    _context.PageSettings.Update(ps);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PageSettingsExists(ps.PageSettingsID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction("Index");
+        }
 
 
         private bool SocialMediasExists(int id)
@@ -230,6 +280,6 @@ namespace Harissa.Intranet.Controllers
         private bool PrivacyPolicyExists(int id)
         {
             return _context.PrivacyPolicies.Any(e => e.PageSettingsID == id);
-        }        
+        }                  
     }
 }

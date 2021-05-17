@@ -23,5 +23,11 @@ namespace Harissa.Data.Data
         [Display(Name = "Image")]
         [Required]
         public IFormFile LogoNewFile { get; set; }
+        [DataType(DataType.Url)]
+        [RegularExpression(".*(youtube.com|https://youtu.be).*")]
+        public string IframeVideo { get; set; }
+        public string IframeTitle { get; set; }
+        public string IframeText { get; set; }
+        public string HeaderText { get; set; }
     }
 }
