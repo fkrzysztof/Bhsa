@@ -22,8 +22,8 @@ namespace Harissa.Intranet.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
-            //return RedirectToAction("Index", "News");
-            return View();
+            return RedirectToAction("Index", "News");
+            //return View();
         }
 
         public IActionResult Privacy()

@@ -76,10 +76,10 @@ namespace Harissa.Intranet.Controllers
         }
 
 
-        public async Task<ActionResult> ListJS([Bind("ContactID,Email,Phone,Name")] Contact contact)
+        public async Task<ActionResult> ListJS()
         {
-            var query = await _context.Contacts
-                .Select(s => new { contactID = s.ContactID, email = s.Email, phone = s.Phone, name = s.Name }).ToListAsync();
+            var query = await _context.NewsMediaCollections
+                .Select(s => new { media = s.MediaItem }).ToListAsync();
             return Json(query);
         }
 

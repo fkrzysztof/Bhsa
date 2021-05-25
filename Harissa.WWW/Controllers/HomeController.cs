@@ -35,7 +35,7 @@ namespace Harissa.WWW.Controllers
             ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
             var ps = await _context.PageSettings.FirstOrDefaultAsync();
             //dodac warunek do aktualnej daty
-            List<News> newsList = _context.News.OrderByDescending(o => o.DateOfPublication).ToList();
+            List<News> newsList = _context.News.Include(i => i.NewsMediaCollections).OrderByDescending(o => o.DateOfPublication).ToList();
             ViewBag.News = newsList;
             ViewBag.SocialMedia = _context.SocialMedias.ToList();
             ViewBag.Contact = _context.Contacts.ToList();

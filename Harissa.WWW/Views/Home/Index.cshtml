@@ -20,6 +20,24 @@
                         <div class="project-text w-100 my-auto text-center text-lg-left">
                             <h4 class="text-white">@item.Title</h4>
                             <p class="mb-0 text-white-50 text-justify text-sm-left">@item.Message</p>
+
+
+                            <div class="row">
+                                <div class="col-3 col-sm-2">
+                                    @if (item.NewsMediaCollections != null)
+                                    {
+                                        string x; //new CloudAccess().GetImg(item.NewsMediaCollections.ElementAt(0).MediaItem);
+                                        foreach (var newsMediaItem in item.NewsMediaCollections)
+                                        {
+                                            x = new CloudAccess().GetImg(newsMediaItem.MediaItem);
+                                            <img scr="@x"  style="min-height:50px;" />
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+
+
                             <hr class="d-none d-lg-block mb-0 ml-0" />
                         </div>
                     </div>
@@ -38,6 +56,21 @@
                         <div class="project-text w-100 my-auto text-center text-lg-right">
                             <h4 class="text-white">@item.Title</h4>
                             <p class="mb-0 text-white-50 text-justify text-sm-right">@item.Message</p>
+                            
+                            <div class="row">
+                                <div class="col-3 col-sm-2">
+                                    @if (item.NewsMediaCollections != null)
+                                    {
+                                        string x; //new CloudAccess().GetImg(item.NewsMediaCollections.ElementAt(0).MediaItem);
+                                        foreach (var newsMediaItem in item.NewsMediaCollections)
+                                        {
+                                            x = new CloudAccess().GetImg(newsMediaItem.MediaItem);
+                                            <img scr="@x" class="img-fluid" />
+                                        }
+                                    }
+                                </div>
+                            </div>
+
                             <hr class="d-none d-lg-block mb-0 mr-0" />
                         </div>
                     </div>

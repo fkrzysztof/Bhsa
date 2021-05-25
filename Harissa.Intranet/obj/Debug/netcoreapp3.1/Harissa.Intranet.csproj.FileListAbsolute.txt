@@ -197,7 +197,6 @@ C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Concerts\Delete.cshtml.g.cs
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\PageSettings\EditSocialMedias.cshtml.g.cs
 C:\Users\Ja\Documents\Programowanie\Harissa WWW\Bhsa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Razor\Views\Video\Index.cshtml.g.cs
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.csprojAssemblyReference.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\staticwebassets\Harissa.Intranet.StaticWebAssets.Manifest.cache
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\staticwebassets\Harissa.Intranet.StaticWebAssets.xml
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.RazorAssemblyInfo.cache
@@ -375,3 +374,6 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\SendGrid.dll
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Intranet\obj\Debug\netcoreapp3.1\Harissa.Intranet.csprojAssemblyReference.cache

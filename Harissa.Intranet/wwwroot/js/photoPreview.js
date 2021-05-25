@@ -17,7 +17,6 @@ $(document).ready(function() {
     //});
 
     fileinput.on("change", function (event) {
-        //let $form = $(this).closest("form");
         let $output = $(this).closest("form").find(".imgPreview");
         $output.fadeOut("slow").hide();
         let input = event.target;

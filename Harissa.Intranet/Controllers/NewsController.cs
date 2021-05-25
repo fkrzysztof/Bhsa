@@ -8,6 +8,7 @@ using Harissa.Data.HelperClass;
 using Microsoft.AspNetCore.Http;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace Harissa.Intranet.Controllers
 {
@@ -21,7 +22,7 @@ namespace Harissa.Intranet.Controllers
         // GET: News
         public async Task<IActionResult> Index()
         {
-            return View(await _context.News.OrderByDescending(o => o.DateOfPublication).ToListAsync());
+            return View(await _context.News.Include(i => i.NewsMediaCollections).OrderByDescending(o => o.DateOfPublication).ToListAsync());
         }        
         
 
@@ -36,13 +37,28 @@ namespace Harissa.Intranet.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewsID,Title,Message,DateOfPublication,FormFileItem")] News news)
+        public async Task<IActionResult> Create([Bind("NewsID,Title,Message,DateOfPublication,FormFileItem")] News news, IFormFile[] newsMediaCollectionItem)
         {
             if (ModelState.IsValid)
             {
-                news.MediaItem = new CloudAccess().AddPic(news.FormFileItem, "News");
+
+                if(news.FormFileItem != null)
+                {
+                    news.MediaItem = new CloudAccess().AddPic(news.FormFileItem, "News");
+                }
+
+                if(newsMediaCollectionItem != null)
+                {
+                    List<NewsMediaCollection> newsMediaList = new List<NewsMediaCollection>();
+                    foreach (var item in newsMediaCollectionItem)
+                    {
+                        newsMediaList.Add(new NewsMediaCollection() { MediaItem = new CloudAccess().AddPic(item, "News") });
+                    }
+                    news.NewsMediaCollections = newsMediaList;
+                }
                 _context.Add(news);
                 await _context.SaveChangesAsync();
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -57,7 +73,7 @@ namespace Harissa.Intranet.Controllers
                 return NotFound();
             }
 
-            var news = await _context.News.FindAsync(id);
+            var news = await _context.News.Include(i => i.NewsMediaCollections).FirstOrDefaultAsync(f => f.NewsID == id);
             if (news == null)
             {
                 return NotFound();
@@ -69,7 +85,7 @@ namespace Harissa.Intranet.Controllers
         // POST: News/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication,FormFileItem")] News news)
+        public async Task<IActionResult> Edit(int id, [Bind("NewsID,MediaItem,Title,Message,DateOfPublication,FormFileItem")] News news, IFormFile[] newsMediaCollectionItem)
         {
             if (id != news.NewsID)
             {
@@ -83,6 +99,25 @@ namespace Harissa.Intranet.Controllers
                     if (news.FormFileItem != null)
                     {
                         news.MediaItem = new CloudAccess().ChangeItem(news.MediaItem, news.FormFileItem, "News");
+                    }
+                    if (newsMediaCollectionItem != null)
+                    {
+                        if(news.NewsMediaCollections != null)
+                        {
+                            foreach (var item in newsMediaCollectionItem)
+                            {
+                                news.NewsMediaCollections.Add(new NewsMediaCollection() { MediaItem = new CloudAccess().AddPic(item, "News") });
+                            }
+                        }
+                        else
+                        {
+                            List<NewsMediaCollection> newsMediaList = new List<NewsMediaCollection>();
+                            foreach (var item in newsMediaCollectionItem)
+                            {
+                                newsMediaList.Add(new NewsMediaCollection() { MediaItem = new CloudAccess().AddPic(item, "News") });
+                            }
+                            news.NewsMediaCollections = newsMediaList;
+                        }
                     }
                     _context.Update(news);
                     await _context.SaveChangesAsync();
@@ -126,13 +161,49 @@ namespace Harissa.Intranet.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var news = await _context.News.FindAsync(id);
+            var news = await _context.News
+                .Include(i => i.NewsMediaCollections)
+                .FirstOrDefaultAsync(f => f.NewsID == id);
             new CloudAccess().Remove(news.MediaItem);
+            new CloudAccess().Remove(news.NewsMediaCollections.Select(s => s.MediaItem).ToList());
             _context.News.Remove(news);
             await _context.SaveChangesAsync();
 
             return RedirectToAction(nameof(Index));
         }
+
+        //public async Task<ActionResult> NewsMediaItems()
+        //{
+        //    var query = await _context.NewsMediaCollections
+        //        .Select(s => new { publicId = s.MediaItem }).ToArrayAsync();
+        //    return Json(query);
+        //}
+
+        [HttpPost]
+        public async Task<bool> RemoveJS(int id)
+        {
+            if (id < 0)
+                return false;
+            var newsMedia = await _context.NewsMediaCollections.FindAsync(id);
+            var query = _context.NewsMediaCollections.Remove(newsMedia).State.ToString();
+            if (query != "Deleted")
+            {
+                return false;
+            }
+            else
+                await _context.SaveChangesAsync();
+            return true;
+        }
+
+
+        public async Task<ActionResult> ImgToModalNews(int id)
+        {
+            var query = await _context.NewsMediaCollections
+                .Where(w => w.NewsID == id)
+                .Select(s => new { publicId = s.MediaItem }).ToArrayAsync();
+            return Json(query);
+        }
+
 
         private bool NewsExists(int id)
         {

@@ -13,7 +13,7 @@
             <input type="hidden" asp-for="NewsID" />
             <input type="hidden" asp-for="MediaItem" />
             <div class="form-group">
-                @{ string img = new CloudAccess().GetImg(null);}
+                @{ string img = new CloudAccess().GetImg(Model.MediaItem);}
                 <img src="@img" class="imgPreview img-thumbnail" />
                 <div class="custom-file mt-3">
                     <input type="file" asp-for="FormFileItem" class="custom-file-input newMediaItem" id="customFile">
@@ -41,13 +41,40 @@
             </div>
         </div>
 
-        <div class="col-12 text-left">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 mt-4">
+                    <label class="control-label">News Photos</label>
+                    <hr />
+                </div>
+                @foreach (var newsMediaItem in Model.NewsMediaCollections)
+                {
+                    <div class="col-md-3 m-2 text-center shadow-sm">
+                        <img src="@(new CloudAccess().GetImg(newsMediaItem.MediaItem))" class="h-100" style="max-height:150px;" />
+                        @*<input type="file" name="newsMediaCollectionItem" value="@newsMediaItem.MediaItem" class="form-control" />*@
+                        <a asp-action="Delete" asp-route-id="NewsID" class="removeButton" data-id="@newsMediaItem.NewsMediaCollectionID"><i class="fas fa-trash m-4" style="font-size: 1rem; color:black;"></i></a>
+                    </div>
+                }
+                <div class="col-12">
+                    <div class="form-group">
+                        <label class="control-label">Add photos <i class="fas fa-plus-circle" style="font-size:1.5rem; color:black;"></i></label>
+                        <div class="custom-file mt-3">
+                            <input type="file" multiple name="NewsMediaCollectionItem" class="custom-file-input">
+                            <label class="custom-file-label">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 text-right mt-5">
             <button type="submit" class="btn btn-outline-dark">Save</button>
         </div>
 
     </div>
 </form>
 
+<script src="~/js/news.js"></script>
 
 <script src="~/js/photoPreview.js">
 </script>
@@ -55,3 +82,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

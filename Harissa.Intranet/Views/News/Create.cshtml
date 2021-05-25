@@ -1,4 +1,4 @@
-﻿@model Harissa.Data.Data.NewsCreate
+﻿@model Harissa.Data.Data.News
 @using Harissa.Data.HelperClass
 @{
     //ViewData["Title"] = "test";
@@ -38,6 +38,15 @@
                 <label asp-for="DateOfPublication" class="control-label"></label>
                 <input asp-for="DateOfPublication" class="form-control" />
                 <span asp-validation-for="DateOfPublication" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="form-group">
+                <label class="control-label"></label>
+                <div class="custom-file mt-3">
+                    <input type="file" multiple name="NewsMediaCollectionItem" class="custom-file-input">
+                    <label class="custom-file-label">Choose file</label>
+                </div>
             </div>
         </div>
         <div class="col-12 text-md-right">

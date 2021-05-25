@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,5 +20,9 @@ namespace Harissa.Data.Data
         public DateTime DateOfPublication { get; set; }
         [NotMapped]
         public IFormFile FormFileItem { get; set; }
+
+        public ICollection<NewsMediaCollection> NewsMediaCollections  { get; set; }
+
+
     }
 }

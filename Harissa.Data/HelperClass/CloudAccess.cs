@@ -48,6 +48,18 @@ namespace Harissa.Data.HelperClass
             };
             cloudinary.DeleteResources(delResParams);
         }
+        
+        public void Remove(List<string> listID)
+        {
+            var delResParams = new DelResParams()
+            {
+                PublicIds = listID,
+                KeepOriginal = false,
+                Invalidate = true
+            };
+            cloudinary.DeleteResources(delResParams);
+        }
+
 
         public string GetImg(string img)
         {

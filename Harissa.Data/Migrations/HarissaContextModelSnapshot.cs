@@ -217,6 +217,26 @@ namespace Harissa.Data.Migrations
                     b.ToTable("News");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.NewsMediaCollection", b =>
+                {
+                    b.Property<int>("NewsMediaCollectionID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("MediaItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NewsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("NewsMediaCollectionID");
+
+                    b.HasIndex("NewsID");
+
+                    b.ToTable("NewsMediaCollections");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
                 {
                     b.Property<int>("PageSettingsID")
@@ -528,6 +548,17 @@ namespace Harissa.Data.Migrations
                     b.Navigation("MusicPlatform");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.NewsMediaCollection", b =>
+                {
+                    b.HasOne("Harissa.Data.Data.News", "News")
+                        .WithMany("NewsMediaCollections")
+                        .HasForeignKey("NewsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("News");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.PrivacyPolicy", b =>
                 {
                     b.HasOne("Harissa.Data.Data.PageSettings", "pageSettings")
@@ -609,6 +640,11 @@ namespace Harissa.Data.Migrations
             modelBuilder.Entity("Harissa.Data.Data.MusicPlatform", b =>
                 {
                     b.Navigation("MusicLinks");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.News", b =>
+                {
+                    b.Navigation("NewsMediaCollections");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
