@@ -89,7 +89,7 @@
             console.log("to jest:" + news);
             console.log("to jest index:" + index);
             let dataColl;
-            $.getJSON("/News/ImgToModalNews", { id: news }, function (data) {
+            $.getJSON("/Home/ImgToModalNews", { id: news }, function (data) {
                 dataColl = data;
                 const myGallery = cloudinary.galleryWidget({
                     container: "#my-gallery",

@@ -20,11 +20,13 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="~/theme/css/styles.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
 </head>
 
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="position: fixed; top: 0; right: 0; left: 0; z-index: 50;" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" asp-action="Index" asp-controller="Home"><img src="~/theme/assets/img/navbar-logo.svg" alt="" style="height: 50px;" /></a>
             <a href="#" data-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,11 +57,11 @@
             <div class="container">
                 <!-- Featured Project Row-->
                 <div class="row align-items-center no-gutters mb-1 mb-lg-5">
-                    <div class="col-xl-8 col-lg-7">
+                    <div class="col-xl-8 col-lg-7 pr-4">
                         <iframe class="embed-responsive" style="min-height: 350px;" src="https://www.youtube.com/embed/@Model.IframeVideo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <div class="col-xl-4 col-lg-5">
-                        <div class="featured-text text-justify text-md-left">
+                        <div class="featured-text-left pl-4 text-justify text-md-left">
                             <h4 class="text-white text-center text-md-left">@Model.IframeTitle</h4>
                             <p class="text-white-50 mb-0 text-justify text-md-left">
                                 @Model.IframeText
@@ -73,7 +75,7 @@
 
     <section class="page-section" id="mainBody1">
         <div class="container  featured-text">
-            <h3 class="text-white text-left">@ViewBag.Page</h3>
+            <h2 class="text-white text-left pl-4 featured-text-head-left">@ViewBag.Page</h2>
             @RenderBody()  @*RenderBody RenderBody RenderBody RenderBody RenderBody RenderBody RenderBody*@
         </div>
     </section>
@@ -82,7 +84,8 @@
     <div class="container">
         <div class="row">
             <div class="col-4"></div>
-            <div class="col-8" style="background-color: #64a19d; min-height:0.5rem;"></div>
+            @*<div class="col-8" style="background-color: #64a19d; min-height:0.5rem;"></div>*@
+            <div class="col-8 featured-text-top"></div>
         </div>
     </div>
     <footer class="footer py-4 footer-background">
@@ -104,13 +107,12 @@
                     <a asp-controller="Home" asp-action="Privacy">Prywatność</a>
                     @*<a asp-controller="Home" asp-action="Www"></a>*@
                 </div>
-                <div class="col-lg-6 my-3 text-center">
+                <div class="col-lg-6 my-3 d-flex justify-content-center">
                     @{
-                        string imgMedia;
                         foreach (var item in ViewBag.SocialMedia as List<SocialMedia>)
                         {
-                            imgMedia = new CloudAccess().GetImg(item.Icon);
-                            <a class="btn btn-dark btn-social mx-2" title="@item.Name" href="@item.Link"><img src="@imgMedia" class="img-fluid"></a>
+                            <a title="@item.Name" href="@item.Link"><img src="@(new CloudAccess().GetImg(item.Icon))" class="m-1" style="height:35px;"></a>
+
                         }
                     }
                 </div>
@@ -129,6 +131,9 @@
     <script src="~/theme/assets/mail/contact_me.js"></script>
     <!-- Core theme JS-->
     <script src="~/theme/js/scripts.js"></script>
+
+
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>

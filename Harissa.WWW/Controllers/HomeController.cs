@@ -68,5 +68,14 @@ namespace Harissa.WWW.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public async Task<ActionResult> ImgToModalNews(int id)
+        {
+            var query = await _context.NewsMediaCollections
+                .Where(w => w.NewsID == id)
+                .Select(s => new { publicId = s.MediaItem }).ToArrayAsync();
+            return Json(query);
+        }
+
     }
 }

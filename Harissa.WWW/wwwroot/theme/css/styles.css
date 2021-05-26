@@ -2945,6 +2945,17 @@ input[type=button].btn-block {
   overflow: hidden;
   transition: height 0.35s ease;
 }
+
+.featured-text-top {
+    /*padding-right:  2rem;*/
+    border-top: 0.1rem solid #64a19d;
+}
+
+.featured-text-head-left {
+    /*padding-left: 2rem;*/
+    border-left: 0.1rem solid #64a19d;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .collapsing {
     transition: none;
@@ -2997,9 +3008,9 @@ input[type=button].btn-block {
 
 
 /*Dodane*/
-.featured-text {
+/*.featured-text {
     padding: 2rem;
-}
+}*/
 /*Dodane konic*/
 
 .dropdown-menu-left {
@@ -3037,10 +3048,18 @@ input[type=button].btn-block {
 @media (min-width: 992px) {
 
     /*Dodane*/
-    .featured-text {
-        padding: 0 0 0 2rem;
-        border-left: 0.5rem solid #64a19d;
+
+    .featured-text-left {
+        /*padding-left: 2rem;*/
+        border-left: 0.1rem solid #64a19d;
     }
+
+    .featured-text-right {
+        /*padding-right:  2rem;*/
+        border-right: 0.1rem solid #64a19d;
+    }
+
+
     /*Dodane koniec*/
 
   .dropdown-menu-lg-left {
