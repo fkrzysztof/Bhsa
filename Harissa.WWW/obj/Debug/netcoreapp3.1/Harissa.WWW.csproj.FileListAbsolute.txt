@@ -202,7 +202,6 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Contact\Index.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Home\Video.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Music\Index.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.WWW\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Layout-copy.cshtml.g.cs

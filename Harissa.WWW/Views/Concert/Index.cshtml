@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Harissa.Data.Data.Concert>
 @using Harissa.Data.HelperClass
 
+@{
+    ViewData["Title"] = "Koncerty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @foreach (var item in Model)
 {

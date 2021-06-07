@@ -1,16 +1,18 @@
 ﻿@using Harissa.Data.HelperClass
 @using Harissa.Data.Data
-
+@{
+    ViewData["Title"] = "Teledyski";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
 @foreach (var item in ViewBag.VideoList as List<Video>)
 {
-        <!-- Project One Row-->
-        <div class="row justify-content-center no-gutters my-5">
-            <div class="col-lg-8">
-                <iframe class="embed-responsive" style="min-height: 350px;" src="https://www.youtube.com/embed/@item.Link" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                </iframe>
-            </div>
+    <div class="row justify-content-center no-gutters my-5">
+        <div class="col-lg-8">
+            <iframe class="embed-responsive" style="min-height: 350px;" src="https://www.youtube.com/embed/@item.Link" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+            </iframe>
         </div>
+    </div>
 }
