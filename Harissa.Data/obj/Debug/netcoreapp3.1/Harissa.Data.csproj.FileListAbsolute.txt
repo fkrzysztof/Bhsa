@@ -17,3 +17,4 @@ C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debu
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.pdb
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.runtimeconfig.json
 C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\bin\Debug\netcoreapp3.1\Harissa.Data.runtimeconfig.dev.json
+C:\Users\krzys\Documents\Programowanie\Harissa WWW\Harissa\Harissa.Data\obj\Debug\netcoreapp3.1\Harissa.Data.csprojAssemblyReference.cache

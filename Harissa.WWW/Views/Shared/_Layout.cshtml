@@ -58,12 +58,12 @@
 
     <!-- Masthead-->
 
-    <header class="masthead">
+    <header class="masthead" style="background-image: url('@(new CloudAccess().GetImg(ViewBag.Head))');">
     </header>
 
-    <script>
+    @*<script>
         $(".masthead").css("background-image", "url('@(new CloudAccess().GetImg(ViewBag.Head))')");
-    </script>
+    </script>*@
 
     @if (ViewContext.RouteData.Values["Controller"].ToString() == "Home")
     {
