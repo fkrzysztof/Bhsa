@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@using Harissa.Data.HelperClass
+
+<form asp-action="AddImgCollection" asp-controller="PageSettings" method="post" enctype="multipart/form-data" class="h-100 w-100">
+    <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-12 mt-4">
+                        <label class="control-label">Photos</label>
+                        <hr />
+                    </div>
+                    @if (ViewBag.ImgCollection != null)
+                    {
+                        @foreach (var MediaItem in ViewBag.ImgCollection as List<string>)
+                        {
+                            <div class="col-md-3 m-2 text-center shadow-sm">
+                                <img src="@(new CloudAccess().GetImg(MediaItem))" class="h-100" style="max-height:150px;" />
+                                <!-- dodac akcje c#-->
+                                <a asp-action="DeleteImg" class="removeButton" data-id="@MediaItem"><i class="fas fa-trash m-4" style="font-size: 1rem; color:black;"></i></a>
+                                @*<a asp-action="DeleteImg" asp-route-id="NewsID" class="removeButton" data-id="@MediaItem"><i class="fas fa-trash m-4" style="font-size: 1rem; color:black;"></i></a>*@
+                            </div>
+                        }
+                     }
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="control-label">Add photos <i class="fas fa-plus-circle" style="font-size:1.5rem; color:black;"></i></label>
+                                <div class="custom-file my-3">
+                                    <input type="file" multiple name="imgCollection" id="filesInput" class="custom-file-input">
+                                    <label class="custom-file-label">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+      
+        <div class="col-12 text-right mt-1">
+            <button type="submit" class="btn btn-outline-dark">Save</button>
+        </div>
+
+    </div>
+</form>
+
+<script src="~/js/multipleInput.js"></script>
+<script src="~/js/removeImg.js"></script>

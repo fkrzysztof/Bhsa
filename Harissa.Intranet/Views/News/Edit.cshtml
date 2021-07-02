@@ -51,7 +51,6 @@
                 {
                     <div class="col-md-3 m-2 text-center shadow-sm">
                         <img src="@(new CloudAccess().GetImg(newsMediaItem.MediaItem))" class="h-100" style="max-height:150px;" />
-                        @*<input type="file" name="newsMediaCollectionItem" value="@newsMediaItem.MediaItem" class="form-control" />*@
                         <a asp-action="Delete" asp-route-id="NewsID" class="removeButton" data-id="@newsMediaItem.NewsMediaCollectionID"><i class="fas fa-trash m-4" style="font-size: 1rem; color:black;"></i></a>
                     </div>
                 }

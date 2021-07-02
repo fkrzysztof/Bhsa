@@ -25,7 +25,8 @@ namespace Harissa.Intranet.Controllers
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
-            var rezult = await _context.PageSettings.FirstOrDefaultAsync();
+            var rezult = await _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync();
+            ViewBag.ImgCollection = _context.PageSettings.FirstOrDefaultAsync().Result.HeadImgs.Select(s => s.HeadMediaItem).ToList();
             return View(rezult);
         }
 
@@ -268,6 +269,60 @@ namespace Harissa.Intranet.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddImgCollection(IFormFile[] imgCollection)
+        {
+            if (ModelState.IsValid)
+            {
+                var ps = await _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync();
+
+                if (imgCollection != null)
+                {
+                    if(ps.HeadImgs == null)
+                    {
+                        ps.HeadImgs = new List<HeadImg>();
+                        //List<HeadImg> headImg = new List<HeadImg>();
+                        //ps.HeadImgs = headImg;
+                    }
+                    else
+                    {
+                        foreach (var item in imgCollection)
+                        {
+                            ps.HeadImgs.Add(new HeadImg() { HeadMediaItem = new CloudAccess().AddPic(item, "HeadImg") });
+                        }
+                    }
+                    _context.PageSettings.Update(ps);
+                    await _context.SaveChangesAsync();
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            //return View();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+        public async Task<bool> RemoveJS(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+                return false;
+            var media = await _context.HeadImgs.FirstOrDefaultAsync(f => f.HeadMediaItem == id);
+            var query = _context.HeadImgs.Remove(media).State.ToString();
+            if (query != "Deleted")
+            {
+                return false;
+            }
+            else
+            {
+                await _context.SaveChangesAsync();
+                new CloudAccess().Remove(id);
+                return true;
+            }
+            }
 
         private bool SocialMediasExists(int id)
         {

@@ -90,6 +90,26 @@ namespace Harissa.Data.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.HeadImg", b =>
+                {
+                    b.Property<int>("HeadImgID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("HeadMediaItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PageSettingsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("HeadImgID");
+
+                    b.HasIndex("PageSettingsID");
+
+                    b.ToTable("HeadImgs");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.IndexPage", b =>
                 {
                     b.Property<int>("IndexPageID")
@@ -476,10 +496,12 @@ namespace Harissa.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -516,10 +538,12 @@ namespace Harissa.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -527,6 +551,17 @@ namespace Harissa.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Harissa.Data.Data.HeadImg", b =>
+                {
+                    b.HasOne("Harissa.Data.Data.PageSettings", "PageSettings")
+                        .WithMany("HeadImgs")
+                        .HasForeignKey("PageSettingsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PageSettings");
                 });
 
             modelBuilder.Entity("Harissa.Data.Data.MusicLink", b =>
@@ -649,6 +684,8 @@ namespace Harissa.Data.Migrations
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
                 {
+                    b.Navigation("HeadImgs");
+
                     b.Navigation("privacyPolicy");
 
                     b.Navigation("socialMedias");

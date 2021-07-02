@@ -31,6 +31,11 @@ namespace Harissa.WWW.Controllers
 
         public async Task<IActionResult> Index()
         {
+            var rand = new System.Random();
+            int min = 0;
+            int max = _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync().Result.HeadImgs.Count();
+            int randRezult = rand.Next(min,max);
+            ViewBag.Head = _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync().Result.HeadImgs.ElementAt(randRezult).HeadMediaItem; 
             ViewBag.Page = "News";
             ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
             var ps = await _context.PageSettings.FirstOrDefaultAsync();
@@ -41,21 +46,7 @@ namespace Harissa.WWW.Controllers
             ViewBag.Contact = _context.Contacts.ToList();
             return View(ps);
         }
-        //public IActionResult Video()
-        //{
-        //    //dodac warunek do aktualnej daty
-        //    List<News> newsList = _context.News.ToList();
-        //    ViewBag.News = newsList;
-        //    ViewBag.SocialMedia = _context.SocialMedias.ToList();
-        //    ViewBag.MusicPlatforms = _context.MusicPlatforms.ToList();
-        //    return View();
-        //}
 
-        //public IActionResult Www()
-        //{
-        //    AllPages();
-        //    return View(_context.PageSettings.FirstOrDefault());
-        //}
         public async Task<IActionResult> Privacy()
         {
             ViewBag.Page = "Prywatność";
@@ -69,13 +60,13 @@ namespace Harissa.WWW.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public async Task<ActionResult> ImgToModalNews(int id)
-        {
-            var query = await _context.NewsMediaCollections
-                .Where(w => w.NewsID == id)
-                .Select(s => new { publicId = s.MediaItem }).ToArrayAsync();
-            return Json(query);
-        }
+        //public async Task<ActionResult> ImgToModalNews(int id)
+        //{
+        //    var query = await _context.NewsMediaCollections
+        //        .Where(w => w.NewsID == id)
+        //        .Select(s => new { publicId = s.MediaItem }).ToArrayAsync();
+        //    return Json(query);
+        //}
 
     }
 }
