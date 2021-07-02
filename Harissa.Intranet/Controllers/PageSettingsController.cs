@@ -275,7 +275,7 @@ namespace Harissa.Intranet.Controllers
         public async Task<IActionResult> AddImgCollection(IFormFile[] imgCollection)
         {
             if (ModelState.IsValid)
-            {
+            {  
                 var ps = await _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync();
 
                 if (imgCollection != null)
@@ -283,8 +283,6 @@ namespace Harissa.Intranet.Controllers
                     if(ps.HeadImgs == null)
                     {
                         ps.HeadImgs = new List<HeadImg>();
-                        //List<HeadImg> headImg = new List<HeadImg>();
-                        //ps.HeadImgs = headImg;
                     }
                     else
                     {
@@ -300,7 +298,6 @@ namespace Harissa.Intranet.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            //return View();
             return RedirectToAction(nameof(Index));
         }
 
