@@ -30,5 +30,6 @@ namespace Harissa.Data.Data
         public string IframeText { get; set; }
         public string HeaderText { get; set; }
         public ICollection<HeadImg> HeadImgs { get; set; }
+        public ICollection<FooterImg> FooterImgs { get; set; }
     }
 }

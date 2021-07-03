@@ -28,6 +28,7 @@ namespace Harissa.Data
         public DbSet<MusicLink> MusicLinks { get; set; }
         public DbSet<NewsMediaCollection> NewsMediaCollections { get; set; }
         public DbSet<HeadImg> HeadImgs { get; set; }
+        public DbSet<FooterImg> FooterImgs { get; set; }
 
     }
 }

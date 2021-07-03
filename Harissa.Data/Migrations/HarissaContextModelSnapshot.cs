@@ -90,6 +90,26 @@ namespace Harissa.Data.Migrations
                     b.ToTable("Contacts");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.FooterImg", b =>
+                {
+                    b.Property<int>("FooterImgID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("FooterImgItem")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PageSettingsID")
+                        .HasColumnType("int");
+
+                    b.HasKey("FooterImgID");
+
+                    b.HasIndex("PageSettingsID");
+
+                    b.ToTable("FooterImgs");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.HeadImg", b =>
                 {
                     b.Property<int>("HeadImgID")
@@ -553,6 +573,17 @@ namespace Harissa.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("Harissa.Data.Data.FooterImg", b =>
+                {
+                    b.HasOne("Harissa.Data.Data.PageSettings", "PageSettings")
+                        .WithMany("FooterImgs")
+                        .HasForeignKey("PageSettingsID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PageSettings");
+                });
+
             modelBuilder.Entity("Harissa.Data.Data.HeadImg", b =>
                 {
                     b.HasOne("Harissa.Data.Data.PageSettings", "PageSettings")
@@ -684,6 +715,8 @@ namespace Harissa.Data.Migrations
 
             modelBuilder.Entity("Harissa.Data.Data.PageSettings", b =>
                 {
+                    b.Navigation("FooterImgs");
+
                     b.Navigation("HeadImgs");
 
                     b.Navigation("privacyPolicy");

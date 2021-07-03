@@ -152,9 +152,20 @@
     </div>
 </div>
 
+@*Head background*@
+<div class="col-12 mt-4">
+    <h6>Header ackground</h6>
+    <hr />
+</div>
+@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionHead" } })
 
-<!-- background -->
-@await Html.PartialAsync("AddShowEditImgCollection")
-
+@*Footer background*@
+<div class="col-12 mt-4">
+    <h6>Footer ackground</h6>
+    <hr />
+</div>
+@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionFotter" } })
 
 <script src="~/js/photoPreview.js"></script>
+<script src="~/js/multipleInput.js"></script>
+<script src="~/js/removeImg.js"></script>

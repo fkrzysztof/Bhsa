@@ -272,7 +272,7 @@ namespace Harissa.Intranet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddImgCollection(IFormFile[] imgCollection)
+        public async Task<IActionResult> AddImgCollectionHead(IFormFile[] imgCollection)
         {
             if (ModelState.IsValid)
             {  
@@ -289,6 +289,37 @@ namespace Harissa.Intranet.Controllers
                         foreach (var item in imgCollection)
                         {
                             ps.HeadImgs.Add(new HeadImg() { HeadMediaItem = new CloudAccess().AddPic(item, "HeadImg") });
+                        }
+                    }
+                    _context.PageSettings.Update(ps);
+                    await _context.SaveChangesAsync();
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddImgCollectionFotter(IFormFile[] imgCollection)
+        {
+            if (ModelState.IsValid)
+            {  
+                var ps = await _context.PageSettings.Include(i => i.FooterImgs).FirstOrDefaultAsync();
+
+                if (imgCollection != null)
+                {
+                    if(ps.FooterImgs == null)
+                    {
+                        ps.FooterImgs = new List<FooterImg>();
+                    }
+                    else
+                    {
+                        foreach (var item in imgCollection)
+                        {
+                            ps.FooterImgs.Add(new FooterImg() { FooterImgItem = new CloudAccess().AddPic(item, "FooterImg") });
                         }
                     }
                     _context.PageSettings.Update(ps);

@@ -1,9 +1,7 @@
 ﻿using Harissa.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System.Data.Entity;
 
 namespace Harissa.Intranet.Controllers.Abstract
 {
