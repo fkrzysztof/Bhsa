@@ -1,27 +1,25 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Harissa.Data;
+using Harissa.WWW.Controllers.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Harissa.WWW.Controllers
 {
-    public class VideoController : Controller
+    public class VideoController : AbstractController
     {
-        private readonly HarissaContext _context;
-
         public VideoController(HarissaContext context)
+        :base(context)
         {
-            _context = context;
         }
 
         public async Task<IActionResult> Index()
         {
-            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
+            Start();
             ViewBag.Page = "Teledyski";
-            ViewBag.SocialMedia = _context.SocialMedias.ToList();
-            ViewBag.Contact = _context.Contacts.ToList();
             ViewBag.VideoList = await _context.Videos.OrderByDescending(o => o.Index).ToListAsync();
+           
             return View();
         }
     }

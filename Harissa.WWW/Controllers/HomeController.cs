@@ -8,49 +8,35 @@ using Harissa.WWW.Models;
 using Harissa.Data;
 using Harissa.Data.Data;
 using Microsoft.EntityFrameworkCore;
+using Harissa.WWW.Controllers.Abstract;
 
 namespace Harissa.WWW.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AbstractController
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly HarissaContext _context;
 
         public HomeController(ILogger<HomeController> logger, HarissaContext context)
+        :base(context)
         {
             _logger = logger;
-            _context = context;
-        }
-
-        private void AllPages()
-        {
-            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
-            ViewBag.SocialMedia = _context.SocialMedias.ToList();
-            ViewBag.Contact = _context.Contacts.ToList();
         }
 
         public async Task<IActionResult> Index()
         {
-            var rand = new System.Random();
-            int min = 0;
-            int max = _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync().Result.HeadImgs.Count();
-            int randRezult = rand.Next(min,max);
-            ViewBag.Head = _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync().Result.HeadImgs.ElementAt(randRezult).HeadMediaItem; 
+            Start();
             ViewBag.Page = "News";
-            ViewBag.HeaderText = _context.PageSettings.FirstOrDefault().HeaderText;
             var ps = await _context.PageSettings.FirstOrDefaultAsync();
             //dodac warunek do aktualnej daty
             List<News> newsList = _context.News.Include(i => i.NewsMediaCollections).OrderByDescending(o => o.DateOfPublication).ToList();
             ViewBag.News = newsList;
-            ViewBag.SocialMedia = _context.SocialMedias.ToList();
-            ViewBag.Contact = _context.Contacts.ToList();
+
             return View(ps);
         }
 
         public async Task<IActionResult> Privacy()
         {
             ViewBag.Page = "Prywatność";
-            AllPages();
             return View(await _context.PageSettings.Include(i => i.privacyPolicy).FirstOrDefaultAsync());
         }
 

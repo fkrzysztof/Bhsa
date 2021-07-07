@@ -9,7 +9,6 @@ using Harissa.Data.HelperClass;
 using System.Collections.Generic;
 using Harissa.Intranet.Controllers.Abstract;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Harissa.Intranet.Controllers
@@ -25,8 +24,11 @@ namespace Harissa.Intranet.Controllers
         // GET: PageSettings
         public async Task<IActionResult> Index()
         {
-            var rezult = await _context.PageSettings.Include(i => i.HeadImgs).FirstOrDefaultAsync();
-            ViewBag.ImgCollection = _context.PageSettings.FirstOrDefaultAsync().Result.HeadImgs.Select(s => s.HeadMediaItem).ToList();
+            var rezult = await _context.PageSettings
+                .Include(i => i.HeadImgs)
+                .Include(i => i.FooterImgs)
+                .FirstOrDefaultAsync();
+
             return View(rezult);
         }
 
@@ -303,7 +305,7 @@ namespace Harissa.Intranet.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddImgCollectionFotter(IFormFile[] imgCollection)
+        public async Task<IActionResult> AddImgCollectionFooter(IFormFile[] imgCollection)
         {
             if (ModelState.IsValid)
             {  
@@ -334,12 +336,14 @@ namespace Harissa.Intranet.Controllers
 
 
         [HttpPost]
-        public async Task<bool> RemoveJS(string id)
+        public async Task<bool> RemoveJSHead(string id)
         {
             if (string.IsNullOrEmpty(id))
                 return false;
+
             var media = await _context.HeadImgs.FirstOrDefaultAsync(f => f.HeadMediaItem == id);
             var query = _context.HeadImgs.Remove(media).State.ToString();
+
             if (query != "Deleted")
             {
                 return false;
@@ -350,7 +354,28 @@ namespace Harissa.Intranet.Controllers
                 new CloudAccess().Remove(id);
                 return true;
             }
+        }
+
+        [HttpPost]
+        public async Task<bool> RemoveJSFooter(string id)
+        {
+            if (string.IsNullOrEmpty(id) == true)
+                return false;
+
+            var media = await _context.FooterImgs.FirstOrDefaultAsync(f => f.FooterImgItem == id);
+            var query = _context.FooterImgs.Remove(media).State.ToString();
+
+            if (query != "Deleted")
+            {
+                return false;
             }
+            else
+            {
+                await _context.SaveChangesAsync();
+                new CloudAccess().Remove(id);
+                return true;
+            }
+        }
 
         private bool SocialMediasExists(int id)
         {

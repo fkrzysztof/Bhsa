@@ -58,13 +58,11 @@
 
     <!-- Masthead-->
 
-    <header class="masthead" style="background-image: url('@(new CloudAccess().GetImg(ViewBag.Head))');">
+    <header class="masthead" style="background-image: url('@( string.IsNullOrEmpty(ViewBag.Head)? "" : new CloudAccess().GetImg(ViewBag.Head))');">
+        <div class="container">
+            <div class="masthead-heading text-uppercase" style="position: absolute; margin-left: auto; margin-right: auto; left: 0; right: 0; text-align: center;">@ViewBag.HeaderText</div>
+        </div>
     </header>
-
-    @*<script>
-        $(".masthead").css("background-image", "url('@(new CloudAccess().GetImg(ViewBag.Head))')");
-    </script>*@
-
     @if (ViewContext.RouteData.Values["Controller"].ToString() == "Home")
     {
         <section class="page-section" id="mainBody">
@@ -102,7 +100,8 @@
             <div class="col-8 featured-text-top"></div>
         </div>
     </div>
-    <footer class="footer py-4 footer-background" style="background-position: center; background-image: url('../theme/assets/img/harissaFooter1.jpg')">
+
+    <footer class="footer py-4 footer-background" style="background-position: center; background-image: url('@(string.IsNullOrEmpty(ViewBag.Footer)? "" :  new CloudAccess().GetImg(ViewBag.Footer))')">
         <div class="container">
             <div class="row text-white-50">
                 @foreach (var itemContact in ViewBag.Contact as List<Contact>)

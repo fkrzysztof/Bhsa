@@ -154,17 +154,17 @@
 
 @*Head background*@
 <div class="col-12 mt-4">
-    <h6>Header ackground</h6>
+    <h4>Header background</h4>
     <hr />
 </div>
-@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionHead" } })
+@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionHead" }, { "Gallery", Model.HeadImgs.Select(s => s.HeadMediaItem).ToList() },{ "Type","Head" } })
 
-@*Footer background*@
+Footer background
 <div class="col-12 mt-4">
-    <h6>Footer ackground</h6>
+    <h4>Footer background</h4>
     <hr />
 </div>
-@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionFotter" } })
+@await Html.PartialAsync("AddShowEditImgCollection", new ViewDataDictionary(ViewData) { { "Action", "AddImgCollectionFooter" }, { "Gallery", Model.FooterImgs.Select(s => s.FooterImgItem).ToList() },{ "Type","Footer" } })
 
 <script src="~/js/photoPreview.js"></script>
 <script src="~/js/multipleInput.js"></script>
